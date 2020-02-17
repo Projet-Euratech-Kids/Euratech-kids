@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="EuraTech'Kids : coding, robotique, créativité, mettez vos enfants à l'heure du numérique !
+        La pédagogie est axée sur le jeu, la découverte et la création. Une approche ludique est essentielle
+        pour développer la curiosité, libérer la créativité et susciter l'intérêt de chaque enfant de 5 à 15 ans.">
+        <meta name="keywords" content="Euratech'Kids, Euratechnologies, ateliers coding Lille, ateliers robotique Lille, ateliers coding vacances, ateliers robotique vacances, atelier coding mercredi, atelier robotique mercredi, atelier coding et robotique en semaine, coding, robotique, Lille, ateliers gratuits">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}Euratech'kids!{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+            {{ include('_footer.html.twig') }}
+        {% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+            <script src="{{ asset('js/main.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

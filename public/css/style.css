@@ -1,0 +1,572 @@
+html {
+    line-height: 1.8em;
+    letter-spacing: .1em;
+}
+
+h1, h2, h3, h4 {
+    color: #f0ad4e !important;
+}
+
+/*Header et menu */
+header {
+    background-color: #DBF3F5;
+    padding: 5px;
+    height: 100px;
+    /*overflow: hidden;*/
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin-bottom: 2em;
+    z-index: 50;
+}
+header span {
+    border: 1px solid white;
+    margin: 5px;
+}
+
+/* au click MDP */
+#avatar {
+	width: 140px;
+	height: 140px;
+	border: 3px solid rgb(78,103,169);
+	border-radius: 50%;
+    overflow: hidden;
+}
+
+#roulette {
+	position: relative;
+    left: -4px;
+    top: -6px;
+	width: 145px;
+	height: 280px;
+	background: url("../images/emoji/roulette3.png")center no-repeat;
+}
+
+@-webkit-keyframes rotationMdp {  
+from {  
+    -webkit-transform: rotate(0deg);  
+}  
+to {  
+    -webkit-transform: rotate(180deg);  
+    } 
+}
+
+@-webkit-keyframes rotationMdpBlur {  
+from {  
+    -webkit-transform: rotate(180deg);  
+}  
+to {  
+    -webkit-transform: rotate(360deg);  
+    } 
+}
+
+/* Menu de navigation */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    background-color: #DBF3F5;
+    overflow-x: hidden;
+    padding-top: 60px; 
+    transition: 0.5s;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: .8s;
+}
+.sidenav a:hover{
+    color: rgb(78,103,169);
+}
+
+
+/* Position du bouton fermer */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+}
+.topnav {
+    background-color: black;
+    z-index: 1;
+    position: relative;
+    top: 17px;
+    width: 65px;
+}
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    padding: 14px 16px;
+    cursor: pointer;
+}
+a svg{
+  transition: all 1s ease;
+}
+a svg:hover{
+    transform:rotate(180deg);
+}
+
+/* Logo */
+#logo {
+    width: 13em;
+    position: relative;
+    right: 30px;
+}
+
+/*button inscription connexion*/
+.button {
+    float: right;
+    position: relative;
+    bottom: 3em;
+
+}
+
+/* body */
+
+/*section 1 img */
+
+.position{
+    position: relative;
+    padding: 0 !important;
+}
+
+#top-image{
+    border-radius: 0 !important;
+}
+
+#ombre {
+    text-shadow: 1px 1px 1px black;
+    height: 50vh;
+}
+
+#ombre div{
+    position: absolute;
+    top: 50%; 
+    left: 50% !important; /* à 50%/50% du parent référent */
+    transform: translate(-50%, -50%);
+}
+
+/*section 2 programme */
+
+.card {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.card-footer{
+    background-color: transparent !important;
+}
+
+#btn {
+    position: relative;
+    top: 3em;
+}
+
+/*section 3 planning */
+#planning img {
+    width: 100%;
+}
+#planning i { /* logo fleche */ 
+    position: relative;
+    /*top: 14px;*/
+}
+/* timeline */
+.timeline {
+    list-style: none;
+    padding: 20px 0 20px;
+    position: relative;
+}
+
+.timeline:before {
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 3px;
+    background-color: #eeeeee;
+    margin-left: -1.5px;
+}
+
+.timeline > li {
+    margin-bottom: 20px;
+    position: relative;
+}
+.timeline > li:before,
+.timeline > li:after {
+    content: " ";
+    display: table;
+}
+.timeline > li:after {
+    clear: both;
+}
+.timeline > li:before,
+.timeline > li:after {
+    content: " ";
+    display: table;
+}
+.timeline > li:after {
+    clear: both;
+}
+.timeline > li > .timeline-panel {
+    float: left;
+    border: 1px solid #d4d4d4;
+    border-radius: 2px;
+    padding: 20px;
+    position: relative;
+    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+    text-align: center;
+}
+.timeline > li.timeline-inverted + li:not(.timeline-inverted),
+.timeline > li:not(.timeline-inverted) + li.timeline-inverted {
+  margin-top: -260px;
+}
+  
+.timeline > li:not(.timeline-inverted) {
+  padding-right:90px;
+}
+  
+.timeline > li.timeline-inverted {
+  padding-left:90px;
+}
+.timeline > li > .timeline-panel:before {
+    position: absolute;
+    top: 26px;
+    right: -15px;
+    display: inline-block;
+    border-top: 15px solid transparent;
+    border-left: 15px solid #ccc;
+    border-right: 0 solid #ccc;
+    border-bottom: 15px solid transparent;
+    content: " ";
+}
+.timeline > li > .timeline-panel:after {
+    position: absolute;
+    top: 27px;
+    right: -14px;
+    display: inline-block;
+    border-top: 14px solid transparent;
+    border-left: 14px solid #fff;
+    border-right: 0 solid #fff;
+    border-bottom: 14px solid transparent;
+    content: " ";
+}
+.timeline > li > .timeline-badge {
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.4em;
+    text-align: center;
+    position: absolute;
+    top: 16px;
+    margin-left: -25px;
+    background-color: #999999;
+    border-top-right-radius: 50%;
+    border-top-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+.timeline > li.timeline-inverted > .timeline-panel {
+    float: right;
+}
+.timeline > li.timeline-inverted > .timeline-panel:before {
+    border-left-width: 0;
+    border-right-width: 15px;
+    left: -15px;
+    right: auto;
+}
+.timeline > li.timeline-inverted > .timeline-panel:after {
+    border-left-width: 0;
+    border-right-width: 14px;
+    left: -14px;
+    right: auto;
+}
+.timeline-badge.primary {
+    background-color: #2e6da4 !important;
+}
+.timeline-badge.success {
+    background-color: #3f903f !important;
+}
+.timeline-badge.warning {
+    background-color: #f0ad4e !important;
+}
+.timeline-badge.purple {
+    background-color: #9C4E95 !important;
+}
+.timeline-badge.danger {
+    background-color: #d9534f !important;
+}
+.timeline-badge.info {
+    background-color: #5bc0de !important;
+}
+.timeline-title {
+    margin-top: 0;
+    color: inherit;
+}
+.timeline-body > p,
+.timeline-body > ul {
+    margin-bottom: 0;
+}
+.timeline-body > p + p {
+    margin-top: 5px;
+}
+
+/* section 4 separator */
+#separatorImg {
+    background-image: url(../img/img_parallax_secondpictures.jpg);
+    min-height: 400px;
+    min-width: auto;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/* section 5 Ecole */
+
+
+
+/* section 6 galerie d'image */
+#galery img {
+    width: 100%;
+    transition: .5s;
+}
+#galery img:hover{
+    transform: scale(1.1);
+}
+
+/* section 6 Newsletters */
+#separatorImgNewsletter {
+    background-image: url(../img/20191113_093326.jpg);
+    min-height: 400px;
+    min-width: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    text-shadow: 1px 1px 1px black;
+}
+
+.caption{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(39, 88, 92, 0.6);
+    padding: 0 !important;
+    text-align: left !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: auto !important;
+    position: absolute;
+}
+
+#newsletter {
+    position: absolute;
+    top: 50%; 
+    left: 50% !important;
+    transform: translate(-50%, -50%);
+}
+
+
+/* section 7 Contact */
+#contact {
+    overflow: hidden;
+    background-color: #DBF3F5;
+    border-radius: 50% 50% 0% 0% / 5% 5% 0% 0%;
+    transition: .2s;
+}
+
+#contact:hover {
+    background-color: rgba(219, 243, 245, 0.70);
+}
+
+/* footer */
+#eura{
+    width: 15em;
+}
+#lille{
+    width: 5em;
+}
+
+/* media */
+@media screen and (max-width: 1200px){
+    #btn {
+        position: relative;
+        top: 4.5em;
+    }
+}
+
+@media screen and (max-width: 991px){
+    .card {
+        margin-top: 15px;
+    }
+    #btn {
+        position: relative;
+        top: 0em;
+    }
+}
+
+@media screen and (max-width: 970px) {
+    #buttons-h{
+        display: none;
+    }
+
+    #buttons{
+        visibility: visible;
+    }
+
+    #programmes .container{
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
+
+    #ombre h2{
+        font-size: 1.5rem;
+    }
+    
+    #ombre p{
+    font-size: .8rem;
+    }
+
+    .position{
+        top: 6em;
+    }
+
+    #pedagogy{
+        margin-top: 4em;
+    }
+}
+
+@media screen and (min-width: 971px) {
+    #buttons{
+        display: none;
+    }
+
+    #buttons-h{
+        visibility: visible;
+    }
+
+    .position{
+        top: 0;
+    }
+
+    #pedagogy{
+        margin-top: 0;
+    }
+}
+
+@media screen and (max-width: 720px){
+    ul.timeline:before, .timeline > li > .timeline-badge {
+        left: 90%;
+    }
+
+    .timeline > li > .timeline-panel {
+        width: 100%;
+    }
+    #separatorImg{
+        display: none;
+    }
+}
+
+/* media timeline */
+@media screen and (min-width: 721px){
+    ul.timeline:before, .timeline > li > .timeline-badge {
+        left: 50%;
+    }
+    .timeline > li > .timeline-panel {
+        width: 50%;
+    }
+    #programmes .card{
+        transition: .5s;
+    }
+    
+    #programmes .card:hover{
+        transform: scale(1.1);
+    }
+
+    #programmes .container-fluid{
+        padding-right: 5rem;
+        padding-left: 5rem;
+    }
+}
+
+
+
+/* btn style euratech */
+.text-eura{
+    color: rgb(78,103,169);
+}
+
+.btn-eura{
+    color: white !important;
+    background-color: rgb(78,103,169) !important;
+}
+
+.btn-eura:hover{
+    color: white !important;
+    background-color: rgb(62, 81, 133) !important;
+}
+
+.btn-outline-eura{
+    color: rgb(78,103,169)  !important;
+    border-color: rgb(78,103,169) !important;
+}
+
+.btn-outline-eura:hover {
+    background-color: rgb(78,103,169) !important;
+    color: white !important;
+}
+
+
+/* PAGE MEMBRE */
+
+/*jumbotron*/
+/*#jumbo {*/
+/*    max-width: 80%;*/
+/*}*/
+.MenuMembre {
+    display: none;
+}
+#topNavMembre {
+    display: none;
+}
+#return {
+    float: left;
+    position: relative;
+    top: 30px;
+}
+#logoMembre {
+    width: 13em;
+    position: relative;
+    right: 76px;
+}
+@media screen and (max-width: 860px){
+    .MenuMembre {
+        display: block;
+    }
+    #menuFixed{
+        display: none;
+    }
+    #topNavMembre {
+        display: block;
+    }
+    #jumbo {
+        max-width: 100%;
+    }
+    #return {
+        display: none;
+    }
+}
+@media screen and (max-width: 500px){
+    #logoMembre {
+        position: relative;
+        right: 40px;
+    }
+}
