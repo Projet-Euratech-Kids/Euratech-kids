@@ -35,7 +35,7 @@ class AppFixtures extends Fixture
       $faker = \Faker\Factory::create('fr_FR');
 
       // Créer les catégories
-      $plainCategories = ['Programme Explorateurs 5-7ans', 'Programme Concepteurs 8-12ans', 'Programme Développeurs 13-15ans'];
+      $plainCategories = ['Programme Explorateurs 5-7ans', 'Programme Concepteurs 8-12ans', 'Programme Développeurs 13-15ans', 'Vacances'];
       $categories = [];
       $programs = [];
 
@@ -59,6 +59,7 @@ class AppFixtures extends Fixture
           $this->passwordEncoder->encodePassword($user, 'test')
         );
         $user->setRoles($roles);
+        $user->setLastname($faker->lastName);
         $manager->persist($user);
         $users[] = $user;
       }
