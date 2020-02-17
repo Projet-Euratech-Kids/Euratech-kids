@@ -86,7 +86,7 @@
     <!-- Fin - Top Image -->
 
     <!-- Modal Connexion -->
-    <div class="modal fade" id="connexion" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="connexion" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <form method="POST" action="{{ path('login') }}">
@@ -124,7 +124,7 @@
     <!-- Fin - Modal Connexion -->
 
     <!-- Modal Inscription -->
-    <div class="modal fade" id="inscription" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="inscription" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <form method="POST">
@@ -135,29 +135,15 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="email">Adresse mail</label>
-                            <input type="email" class="form-control" name="email" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">Nous ne partagerons jamais cette adresse avec quelqu'un d'autre.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="nom">Votre nom</label>
-                            <input type="text" class="form-control" name="nom">
-                        </div>
-                        <div class="form-group">
-                            <label for="tel">Votre téléphone</label>
-                            <input type="tel" class="form-control" name="tel" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" aria-describedby="telHelp">
-                            <small style="letter-spacing:0 ;" id="telHelp" class="form-text text-muted">Exemple: 0612345678</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="enfant">Nombre d'enfants</label>
-                            <input type="number" class="form-control" name="enfant">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Mot de passe</label>
-                            <input type="password" class="form-control" name="password">
-                        </div>
-                    </div>
+
+                        {{ form_start(registrationForm) }}
+                        {{ form_row(registrationForm.mail) }}
+                        {{ form_row(registrationForm.lastname) }}
+                        {{ form_row(registrationForm.plainPassword) }}
+                        {{ form_row(registrationForm.agreeTerms) }}
+
+                        <button class="btn">Register</button>
+                        {{ form_end(registrationForm) }}
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fermer</button>
                         <button type="submit" class="btn btn-eura">S'inscrire</button>

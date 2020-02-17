@@ -5,10 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields={"mail"}, message="There is already an account with this mail")
  */
 class User implements UserInterface
 {
@@ -38,6 +40,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Kids", mappedBy="user", orphanRemoval=true)
      */
     private $kids;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lastname;
 
     public function __construct()
     {
@@ -73,9 +80,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getRoles(): ?array
+    public function getRoles(): array
     {
-        return $this->roles;
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles);
+//        return $this->roles;
     }
 
     public function setRoles(array $roles): self
@@ -141,5 +151,17 @@ class User implements UserInterface
   }
   public function __toString(){
     return $this->getMail();
+  }
+
+  public function getLastname(): ?string
+  {
+      return $this->lastname;
+  }
+
+  public function setLastname(string $lastname): self
+  {
+      $this->lastname = $lastname;
+
+      return $this;
   }
 }
