@@ -1,7 +1,8 @@
 /* fonction pour ajout input enfant */
 function myFunction() {
-    document.getElementById("cible").style.display="block";
-  }
+    // document.getElementById("cible").style.display="block";
+    $('#cible').toggle('slow');
+}
             
             
 $(document).ready(function () {

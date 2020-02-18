@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MemberController extends AbstractController
 {
     /**
-     * @Route("/member/{lastname}", name="member")
+     * @Route("/member/{id}", name="member")
      * @IsGranted("ROLE_USER")
      */
     public function index(ProgramRepository $programRepository,
@@ -58,7 +58,7 @@ class MemberController extends AbstractController
             $entityManager->flush();
             $this->addFlash('addkids','Votre enfant a bien etait ajoute.');
 
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('member', ["id" => $addKids->getUser()->getId()]);
         }
 
         return $this->render('member/index.html.twig', [
@@ -83,6 +83,6 @@ class MemberController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('index');
+        return $this->redirectToRoute('member', ["id" => $kids->getUser()->getId()]);
     }
 }

@@ -45,7 +45,7 @@ easy_admin:
                 fields:
                     - { property: 'name' }
                     - { property: 'user' }
-                    - { property: 'birthday' }
+                    - { property: 'birthday', type: 'App\Form\CustomDateType' }
                     - { property: 'programs' }
 #        - App\Entity\Workshop
         Workshop:
