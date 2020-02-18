@@ -14,7 +14,7 @@
         {% if app.user %}
 
         <div class="button ml-3 mr-5">
-        <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-outline-eura dropdown-toggle btn-n" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{ app.user.lastname }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -36,7 +36,7 @@
                         <div id="buttons" class="py-3 text-right">
                             {% if app.user %}
                                 <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ app.user.mail }}
+                                    {{ app.user.lastname }}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     {% if is_granted('ROLE_ADMIN') %}
