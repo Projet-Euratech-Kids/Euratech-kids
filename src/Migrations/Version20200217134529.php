@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200217125750 extends AbstractMigration
+final class Version20200217134529 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -27,12 +27,13 @@ final class Version20200217125750 extends AbstractMigration
         $this->addSql('CREATE TABLE kids_program (kids_id INT NOT NULL, program_id INT NOT NULL, INDEX IDX_9B29B45EB71E5B2E (kids_id), INDEX IDX_9B29B45E3EB8070A (program_id), PRIMARY KEY(kids_id, program_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE program (id INT AUTO_INCREMENT NOT NULL, category_id INT NOT NULL, name VARCHAR(255) NOT NULL, description LONGTEXT DEFAULT NULL, registration DATE DEFAULT NULL, startdate DATE NOT NULL, enddate DATE DEFAULT NULL, INDEX IDX_92ED778412469DE2 (category_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, mail VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, roles JSON NOT NULL, lastname VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE workshop (id INT AUTO_INCREMENT NOT NULL, category_id INT NOT NULL, title VARCHAR(255) NOT NULL, description LONGTEXT NOT NULL, article LONGTEXT NOT NULL, INDEX IDX_9B6F02C412469DE2 (category_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE kids ADD CONSTRAINT FK_42F8D194A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE kids_program ADD CONSTRAINT FK_9B29B45EB71E5B2E FOREIGN KEY (kids_id) REFERENCES kids (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE kids_program ADD CONSTRAINT FK_9B29B45E3EB8070A FOREIGN KEY (program_id) REFERENCES program (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE program ADD CONSTRAINT FK_92ED778412469DE2 FOREIGN KEY (category_id) REFERENCES category (id)');
+        $this->addSql('ALTER TABLE workshop ADD category_id INT NOT NULL');
         $this->addSql('ALTER TABLE workshop ADD CONSTRAINT FK_9B6F02C412469DE2 FOREIGN KEY (category_id) REFERENCES category (id)');
+        $this->addSql('CREATE INDEX IDX_9B6F02C412469DE2 ON workshop (category_id)');
     }
 
     public function down(Schema $schema) : void
@@ -50,6 +51,7 @@ final class Version20200217125750 extends AbstractMigration
         $this->addSql('DROP TABLE kids_program');
         $this->addSql('DROP TABLE program');
         $this->addSql('DROP TABLE user');
-        $this->addSql('DROP TABLE workshop');
+        $this->addSql('DROP INDEX IDX_9B6F02C412469DE2 ON workshop');
+        $this->addSql('ALTER TABLE workshop DROP category_id');
     }
 }

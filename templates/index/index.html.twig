@@ -34,7 +34,7 @@
                     {% if is_granted('ROLE_ADMIN') %}
                         <a class="dropdown-item" href="{{ path('easyadmin') }}">Administrer</a>
                     {% endif %}
-                    <a class="dropdown-item" href="{{ path('member') }}">Réservations</a>
+                    <a class="dropdown-item" href="{{ path('member',{'lastname': app.user.lastname}) }}">Réservations</a>
                     <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
                 </div>
             {% else %}
@@ -432,7 +432,7 @@
                         </div><br>
                         {% if program.category.name != "Vacances" %}
                             {% if app.user %}
-                                <a href="{{ path('member') }}"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
+                                <a href="{{ path('member',{'lastname': app.user.lastname}) }}"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
                             {% else %}
                                 <a data-toggle="modal" data-target="#connexion"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
                             {% endif %}
@@ -460,7 +460,7 @@
                         </div><br>
                         {% if program.category.name != "Vacances" %}
                             {% if app.user %}
-                                <a href="{{ path('member') }}"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
+                                <a href="{{ path('member',{'lastname': app.user.lastname}) }}"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
                             {% else %}
                                 <a data-toggle="modal" data-target="#connexion"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
                             {% endif %}
