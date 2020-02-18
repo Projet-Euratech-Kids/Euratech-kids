@@ -51,4 +51,19 @@ class IndexController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
+    /**
+     * @Route("/condition", name="condition")
+     */
+    public function condition()
+    {
+        return $this->render('index/condition.html.twig');
+    }
+    
+    /**
+     * @Route("/mention", name="mention")
+     */
+    public function mention()
+    {
+        return $this->render('index/mention.html.twig');
+    }
 }
