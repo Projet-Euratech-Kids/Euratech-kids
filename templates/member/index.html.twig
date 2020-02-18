@@ -178,8 +178,7 @@
                                 <h2>Vos prochains ateliers</h2><br/>
                                 <div class="table-responsive">
                                     <table class="table" id="tablmob">
-                                        {% for kid in kids %}
-                                            {% if kid.user == app.user %}
+                                        {% for kid in app.user.kids %}
                                                 {% if kid.programs is not empty %}
                                                     {% for p in kid.programs %}
                                                         <tbody>
@@ -204,7 +203,6 @@
                                                         </tbody>
                                                     {% endfor %}
                                                 {% endif %}
-                                            {% endif %}
                                         {% endfor %}
                                     </table>
                                 </div>
