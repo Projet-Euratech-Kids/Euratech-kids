@@ -30,11 +30,7 @@
     </header>
 
     <div class="container-fluid" id="top">
-
-        <div class="row">
-
             <div class="col">
-
                 <div class="container-fluid position">
                     <div class="d-flex flex-row-reverse">
                         <div id="buttons" class="py-3 text-right">
@@ -54,13 +50,15 @@
                             {% endif %}
                         </div>
                     </div>
+                <div class="container">
                     <div class="col-md-12 pr-0 pl-0 text-white text-center mb-5">
                         <div class="card border-0 m-0" id="top-image">
                             <img class="card-img" src="{{ asset('img/20191022_153109.jpg') }}" alt="enfant parent">
                         </div>
                     </div>
-
+        
                     <!-- collapse modif -->
+                    
                     <div class="accordion container mx-auto pt-5" id="accordionExample">
                         <div class="card text-center col-md-12">
                             <div class="card-title" id="headingOne">
@@ -236,7 +234,7 @@
                         <h2 class="text-center">Les programmes à venir </h2>
                         <section id="programmes" class="mt-5 row text-center justify-content-md-around">
                             {% for program in programs %}
-                                <div class="card col-lg-3 col-md-5 col-12 mx-3 mb-5">
+                                <div class="card lg-3 col-md-5 mx-3 mb-5">
                                     <img class="card-img-top mt-4" src="{{ asset('img/20191022_153109.jpg') }}"
                                          alt="card photos">
                                     <h4>{{ program.category.name }}</h4>
@@ -255,9 +253,12 @@
                                         </button>
                                     </div>
                                 </div>
+                            {% endfor %}    
                             </div>
                             
+                            {% for program in programs %}
                             <!-- Modal Programme:{{ program.id }} -->
+                        <div class="container">
                             <div class="modal fade" id="p{{ program.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                                     <div class="modal-content">
@@ -286,12 +287,13 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>     
                                 <!-- Fin - Modal Programme:{{ program.id }} -->
                             {% endfor %}
                         </section>
                     </div>
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
 {% endblock %}
