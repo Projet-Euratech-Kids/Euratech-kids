@@ -56,7 +56,7 @@
                     {% if is_granted('ROLE_ADMIN') %}
                         <a class="dropdown-item" href="{{ path('easyadmin') }}">Administrer</a>
                     {% endif %}
-                    <a class="dropdown-item" href="{{ path('member') }}">Réservations</a>
+                    <a class="dropdown-item" href="{{ path('member',{'lastname': app.user.lastname}) }}">Réservations</a>
                     <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
                 </div>
             {% else %}
