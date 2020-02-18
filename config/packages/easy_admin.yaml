@@ -10,12 +10,12 @@ easy_admin:
             form:
                 fields:
                     - { property: 'name' }
-                    - { property: 'description' }
+                    - { property: 'description', type: 'text_editor' }
                     - { property: 'registration' }
                     - { property: 'startdate' }
                     - { property: 'enddate' }
                     - { property: 'category' }
-                    - { property: 'important' }
+                    - { property: 'important', type: 'text_editor' }
                     - { property: 'kids' }
 #        - App\Entity\Category
         Category:
