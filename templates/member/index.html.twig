@@ -80,27 +80,16 @@
                           <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div class="card-body">
                                     <h2>Mes infos </h2>
-                                    <form method="POST" name="SaisieInfoPerso" id="SaisieInfoPerso" action="InfosPersoB.php5" onsubmit="return ValideSaisieInfo();">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Nom</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Prénom</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Prénom">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Email address</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Password</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                        </div>
-                                        <button class="btn btn-eura text-center" type="submit">Modifier</button>
-                                        <br />
+                                {{ form_start(modifMember) }}
+                                {{ form_row(modifMember.mail) }}
+                                {{ form_row(modifMember.lastname) }}
+                                {{ form_row(modifMember.plainPassword) }}
+                                {{ form_row(modifMember.agreeTerms) }}
+
+                                <button class="btn">Modifier</button>
+                                {{ form_end(modifMember) }}
                                     <h2>Mes enfants </h2>
-                                    </form>
+
                                 <table class="table"> 
                                     <thead>
                                         <tr>
