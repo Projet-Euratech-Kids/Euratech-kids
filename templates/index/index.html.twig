@@ -137,14 +137,12 @@
                  {{ form_start(registrationForm) }}
 
                     <div class="modal-body">
-
                         {{ form_row(registrationForm.mail) }}
                         {{ form_row(registrationForm.lastname) }}
+                        {{ form_row(registrationForm.firstname) }}
+                        {{ form_row(registrationForm.phone, {'attr': {'pattern': '[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}'}}) }}
                         {{ form_row(registrationForm.plainPassword) }}
                         {{ form_row(registrationForm.agreeTerms) }}
-
-                    </div>    
-
                     </div>
 
                     <div class="modal-footer">
