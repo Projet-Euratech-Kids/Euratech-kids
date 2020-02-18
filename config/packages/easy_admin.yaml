@@ -1,11 +1,55 @@
 easy_admin:
+    list:
+        actions: ['show']
     site_name: "<a href='http://127.0.0.1:8000/'><img src='/img/logo-kids.png' width='180' /></a>"
     list:
         actions: ['show']
     entities:
         # List the entity class name you want to manage
-        - App\Entity\Program
-        - App\Entity\Category
-        - App\Entity\User
-        - App\Entity\Kids
-        - App\Entity\Workshop
+#        - App\Entity\Program
+        Program:
+            class: App\Entity\Program
+            form:
+                fields:
+                    - { property: 'name' }
+                    - { property: 'description' }
+                    - { property: 'registration' }
+                    - { property: 'startdate' }
+                    - { property: 'enddate' }
+#        - App\Entity\Category
+        Category:
+            class: App\Entity\Category
+            form:
+                fields:
+                    - { property: 'name' }
+                    - { property: 'description' }
+                    - { property: 'slug' }
+#        - App\Entity\User
+        User:
+            class: App\Entity\User
+            form:
+                fields:
+                    - { property: 'mail' }
+                    - { property: 'password' }
+                    - { property: 'roles' }
+                    - { property: 'kids' }
+                    - { property: 'lastname' }
+#        - App\Entity\Kids
+        Kids:
+            class: App\Entity\Kids
+            form:
+                fields:
+                    - { property: 'name' }
+                    - { property: 'user' }
+                    - { property: 'birthday' }
+                    - { property: 'programs' }
+#        - App\Entity\Workshop
+        Workshop:
+            class: App\Entity\Workshop
+            form:
+                fields:
+                    - { property: 'category'}
+                    - { property: 'title' }
+                    - { property: 'description', type: 'text_editor' }
+                    - { property: 'article', type: 'text_editor' }
+
