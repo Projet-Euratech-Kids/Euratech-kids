@@ -14,6 +14,9 @@ easy_admin:
                     - { property: 'registration' }
                     - { property: 'startdate' }
                     - { property: 'enddate' }
+                    - { property: 'category' }
+                    - { property: 'important' }
+                    - { property: 'kids' }
 #        - App\Entity\Category
         Category:
             class: App\Entity\Category
@@ -22,6 +25,8 @@ easy_admin:
                     - { property: 'name' }
                     - { property: 'description' }
                     - { property: 'slug' }
+                    - { property: 'programs' }
+                    - { property: 'workshops' }
 #        - App\Entity\User
         User:
             class: App\Entity\User
@@ -29,9 +34,10 @@ easy_admin:
                 fields:
                     - { property: 'mail' }
                     - { property: 'password' }
-                    - { property: 'roles' }
                     - { property: 'kids' }
                     - { property: 'lastname' }
+                    - { property: 'firstname' }
+                    - { property: 'phone' }
 #        - App\Entity\Kids
         Kids:
             class: App\Entity\Kids
@@ -50,4 +56,5 @@ easy_admin:
                     - { property: 'title' }
                     - { property: 'description', type: 'text_editor' }
                     - { property: 'article', type: 'text_editor' }
+
 
