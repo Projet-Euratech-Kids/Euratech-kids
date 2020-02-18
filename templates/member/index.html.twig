@@ -76,6 +76,8 @@
                                     {{ form_start(modifMember) }}
                                     {{ form_row(modifMember.mail) }}
                                     {{ form_row(modifMember.lastname) }}
+                                    {{ form_row(modifMember.firstname) }}
+                                    {{ form_row(modifMember.phone, {'attr': {'pattern': '[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}'}}) }}
                                     {{ form_row(modifMember.plainPassword) }}
                                     {{ form_row(modifMember.agreeTerms) }}
 
@@ -151,8 +153,7 @@
                                         </table>
                                     </div>
                                     <div class="contenu">
-                                        <button class="btn btn-eura text-center mb-3" type="submit"
-                                                onclick="fAddText()"/>
+                                        <button class="btn btn-eura text-center mb-3" type="submit" onclick="fAddText()">
                                         <i class="fas fa-plus"></i></button>
                                         <br/>
                                         <div id="Cible">
@@ -190,8 +191,7 @@
                                                         <tr>
                                                             <th class="table-light" scope="row">Annuler</th>
                                                             <td class="table-light">
-                                                                <button class="btn btn-eura text-center" href="#"><i
-                                                                            class="fas fa-eraser"></i></a>
+                                                                <button class="btn btn-eura text-center" href="#"><iclass="fas fa-eraser"></i></a>
                                                             </td>
                                                         </tr>
                                                         </tbody>
