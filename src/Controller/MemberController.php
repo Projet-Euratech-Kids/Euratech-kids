@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Kids;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\KidsRepository;
@@ -10,6 +11,7 @@ use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MemberController extends AbstractController
@@ -45,5 +47,20 @@ class MemberController extends AbstractController
             'kids' => $kids,
             'modifMember' => $modifMember->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/delkid/{id}",name="del_kid",methods={"DELETE"})
+     * @IsGranted("ROLE_USER")
+     */
+    public function delete(Request $request,Kids $kids): Response
+    {
+        if ($this->isCsrfTokenValid('delkids'.$kids->getId(),$request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($kids);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('index');
     }
 }

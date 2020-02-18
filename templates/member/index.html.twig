@@ -18,10 +18,12 @@
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <div class="container">
                 <h2>Mes infos </h2>
-                <form method="POST" name="SaisieInfoPerso" id="SaisieInfoPerso" action="InfosPersoB.php5" onsubmit="return ValideSaisieInfo();">
+                <form method="POST" name="SaisieInfoPerso" id="SaisieInfoPerso" action="InfosPersoB.php5"
+                      onsubmit="return ValideSaisieInfo();">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                               placeholder="Enter email">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
@@ -33,161 +35,183 @@
                     </div>
                     <button class="btn btn-secondary btn-sm btn-block" type="submit">Modifier</button>
                 </form>
-            </div> <br />
+            </div>
+            <br/>
             <i class="fas fa-arrow-left fa-2x ml-5 mr-3"><p id="site">Revenir au site </p></i>
         </div>
 
         <!--Mise en place du logo-->
-        <img id="logoMembre" class="mx-auto d-block mt-3 nav-link" src="{{asset('img/logo-kids.png')}}" alt="Logo Kids" href="#top" style="cursor: pointer;">
+        <img id="logoMembre" class="mx-auto d-block mt-3 nav-link" src="{{ asset('img/logo-kids.png') }}"
+             alt="Logo Kids" href="#top" style="cursor: pointer;">
 
         {% if app.user %}
-        <div class="button ml-3 mr-5">
-        <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ app.user.mail }}
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            {% if is_granted('ROLE_ADMIN') %}
-                <a class="dropdown-item" href="{{ path('easyadmin') }}">Administrer</a>
-            {% endif %}
-            <a class="dropdown-item" href="{{ path('index') }}">Accueil</a>
-            <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
-        </div>
-        </div>
+            <div class="button ml-3 mr-5">
+                <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ app.user.mail }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="dropdown-item" href="{{ path('easyadmin') }}">Administrer</a>
+                    {% endif %}
+                    <a class="dropdown-item" href="{{ path('index') }}">Accueil</a>
+                    <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
+                </div>
+            </div>
         {% endif %}
     </header>
 
     <div class="container-fluid" id="top">
         <div class="row">
-            
+
             <div class="col">
                 <div class="container-fluid">
                     <div class="col-md-12 pr-0 pl-0 text-white text-center position mb-5">
                         <div class="card border-0 m-0" id="top-image">
-                            <img class="card-img" src="{{asset('img/20191022_153109.jpg')}}" alt="enfant parent">
+                            <img class="card-img" src="{{ asset('img/20191022_153109.jpg') }}" alt="enfant parent">
                         </div>
                     </div>
-                    
+
                     <!-- collapse modif -->
                     <div class="accordion container mx-auto pt-5" id="accordionExample">
                         <div class="card text-center col-md-12">
-                          <div class="card-title" id="headingOne">
-                            <h2 class="mb-2 mt-3">
-                              <button class="btn btn-eura text-center" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <i class="fas fa-users"></i> 
-                              </button>
-                            </h2>
-                          </div>
-                          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                            <div class="card-body">
+                            <div class="card-title" id="headingOne">
+                                <h2 class="mb-2 mt-3">
+                                    <button class="btn btn-eura text-center" type="button" data-toggle="collapse"
+                                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <i class="fas fa-users"></i>
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                 data-parent="#accordionExample">
+                                <div class="card-body">
                                     <h2>Mes infos </h2>
-                                {{ form_start(modifMember) }}
-                                {{ form_row(modifMember.mail) }}
-                                {{ form_row(modifMember.lastname) }}
-                                {{ form_row(modifMember.plainPassword) }}
-                                {{ form_row(modifMember.agreeTerms) }}
+                                    {{ form_start(modifMember) }}
+                                    {{ form_row(modifMember.mail) }}
+                                    {{ form_row(modifMember.lastname) }}
+                                    {{ form_row(modifMember.plainPassword) }}
+                                    {{ form_row(modifMember.agreeTerms) }}
 
-                                <button class="btn">Modifier</button>
-                                {{ form_end(modifMember) }}
+                                    <button class="btn">Modifier</button>
+                                    {{ form_end(modifMember) }}
                                     <h2>Mes enfants </h2>
-                                    
-                                    </form>
-                            <div class="table-responsive">
-                                <table class="table" id="tableau"> 
 
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Prenom</th>
-                                            <th scope="col">Date de naissance</th>
-                                            <th scope="col">Modifier</th>
-                                            <th scope="col">Supprimer</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                            {% for kid in app.user.kids %}
+                                    </form>
+                                    <div class="table-responsive">
+                                        <table class="table" id="tableau">
+
+                                            <thead>
                                             <tr>
-                                                <td scope="col">{{ kid.name }}</td>
-                                                <td scope="col">{{ kid.birthday|date("d/m/Y") }}</td>
-                                                <td scope="col">
-                                                        <button type="button" class="btn btn-eura text-center"><i class="fas fa-user-edit"></i></button>
-                                                </td>
-                                                <td scope="col">
-                                                <form action=" " method="POST" class="d-inline">
-                                                    <input type="hidden" name="token" value="{{ csrf_token('delete') }}">
-                                                    <button type="button" class="btn btn-eura text-center"><i class="fas fa-user-times"></i></button>
-                                                </form>
-                                                </td>
+                                                <th scope="col">Prenom</th>
+                                                <th scope="col">Date de naissance</th>
+                                                <th scope="col">Modifier</th>
+                                                <th scope="col">Supprimer</th>
                                             </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                                <table class="table" id="tablmob">
-                                    {% for kid in app.user.kids %}
-                                    <tbody>
-                                      <tr class="table-light">
-                                        <th class="thead-light" scope="row">Prénom</th>
-                                        <td class="thead-light">{{ kid.name }}</td>
-                                      </tr>
-                                      <tr class="thead-light">
-                                        <th scope="row">Date de naissance</th>
-                                        <td>{{ kid.birthday|date("d/m/Y") }}</td>
-                                      </tr>
-                                      <tr class="thead-light">
-                                        <th scope="row">Modifier</th>
-                                        <td><button type="button" class="btn btn-eura text-center"><i class="fas fa-user-edit"></i></button></td>
-                                      </tr>
-                                      <tr class="thead-light">
-                                        <th scope="row">Supprimer</th>
-                                        <td><button type="button" class="btn btn-eura text-center"><i class="fas fa-user-times"></i></button></td>
-                                      </tr>
-                                    </tbody>
-                                {% endfor %}
-                                  </table>
-                            </div>    
-                                <div class="contenu">
-                                    <button class="btn btn-eura text-center mb-3" type="submit" onclick="fAddText()"/><i class="fas fa-plus"></i></button>
-                                    <br />
-                                    <div id="Cible">
+                                            </thead>
+                                            <tbody>
+                                            {% for kid in app.user.kids %}
+                                                <tr>
+                                                    <td scope="col">{{ kid.name }}</td>
+                                                    <td scope="col">{{ kid.birthday|date("d/m/Y") }}</td>
+                                                    <td scope="col">
+                                                        <button type="button" class="btn btn-eura text-center"><i
+                                                                    class="fas fa-user-edit"></i></button>
+                                                    </td>
+                                                    <td scope="col">
+                                                        <form method="post"
+                                                              action="{{ path('del_kid',{'id': kid.id}) }}"
+                                                              onsubmit="return confirm('Étes-vous certain de vouloir supprimer cette enfant ?');">
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <input type="hidden" name="_token"
+                                                                   value="{{ csrf_token('delkids' ~ kid.id) }}">
+                                                            <button class="btn btn-eura text-center"><i
+                                                                        class="fas fa-user-times"></i></button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        <table class="table" id="tablmob">
+                                            {% for kid in app.user.kids %}
+                                                <tbody>
+                                                <tr class="table-light">
+                                                    <th class="thead-light" scope="row">Prénom</th>
+                                                    <td class="thead-light">{{ kid.name }}</td>
+                                                </tr>
+                                                <tr class="thead-light">
+                                                    <th scope="row">Date de naissance</th>
+                                                    <td>{{ kid.birthday|date("d/m/Y") }}</td>
+                                                </tr>
+                                                <tr class="thead-light">
+                                                    <th scope="row">Modifier</th>
+                                                    <td>
+                                                        <button type="button" class="btn btn-eura text-center"><i
+                                                                    class="fas fa-user-edit"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr class="thead-light">
+                                                    <th scope="row">Supprimer</th>
+                                                    <td>
+                                                        <button type="button" class="btn btn-eura text-center"><i
+                                                                    class="fas fa-user-times"></i></button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+                                    <div class="contenu">
+                                        <button class="btn btn-eura text-center mb-3" type="submit"
+                                                onclick="fAddText()"/>
+                                        <i class="fas fa-plus"></i></button>
+                                        <br/>
+                                        <div id="Cible">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                          </div>
                         </div>
                     </div>
                     <!-- vos ateliers -->
                     <div class="container mx-auto pt-5">
-                        <div class="jumbotron jumbotron-fluid mt-5 row text-center justify-content-md-around mx-auto  shadow-lg" id="jumbo">
+                        <div class="jumbotron jumbotron-fluid mt-5 row text-center justify-content-md-around mx-auto  shadow-lg"
+                             id="jumbo">
                             <div class="container">
-                                <h2>Vos prochains ateliers</h2><br />
-                                <div class="table-responsive">    
+                                <h2>Vos prochains ateliers</h2><br/>
+                                <div class="table-responsive">
                                     <table class="table" id="tablmob">
                                         {% for kid in kids %}
-                                        {% if kid.user == app.user %}
-                                            {% if kid.programs is not empty %}
-                                                {% for p in kid.programs %}
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">prénom</th>
-                                                <td>{{ kid.name }}</td>
-                                              </tr>
-                                          <tr>
-                                            <th scope="row">Reservation</th>
-                                            <td>{{ p.name }}</td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">Date</th>
-                                            <td>{{ p.startdate|date('d-m-Y') }}</td>
-                                          </tr>
-                                          <tr>
-                                            <th class="table-light" scope="row">Annuler</th>
-                                            <td class="table-light"><button class="btn btn-eura text-center" href="#"><i class="fas fa-eraser"></i></a>
-                                            </td>
-                                          </tr>
-                                        </tbody>
-                                        {% endfor %}
+                                            {% if kid.user == app.user %}
+                                                {% if kid.programs is not empty %}
+                                                    {% for p in kid.programs %}
+                                                        <tbody>
+                                                        <tr>
+                                                            <th scope="row">prénom</th>
+                                                            <td>{{ kid.name }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Reservation</th>
+                                                            <td>{{ p.name }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Date</th>
+                                                            <td>{{ p.startdate|date('d-m-Y') }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="table-light" scope="row">Annuler</th>
+                                                            <td class="table-light">
+                                                                <button class="btn btn-eura text-center" href="#"><i
+                                                                            class="fas fa-eraser"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    {% endfor %}
+                                                {% endif %}
                                             {% endif %}
-                                        {% endif %}
-                                    {% endfor %}
-                                      </table>
+                                        {% endfor %}
+                                    </table>
                                 </div>
                                 <table id="tableau" class="table">
                                     <thead>
@@ -202,12 +226,20 @@
                                         {% if kid.user == app.user %}
                                             {% if kid.programs is not empty %}
                                                 {% for p in kid.programs %}
-                                                    <tr><td>{{ kid.name }}</td><td>{{ p.name }}</td><td>{{ p.startdate|date('d-m-Y') }}</td><td><button class="btn btn-eura text-center" href="#"><i class="fas fa-eraser"></i></a></td></tr>
+                                                    <tr>
+                                                        <td>{{ kid.name }}</td>
+                                                        <td>{{ p.name }}</td>
+                                                        <td>{{ p.startdate|date('d-m-Y') }}</td>
+                                                        <td>
+                                                            <button class="btn btn-eura text-center" href="#"><i
+                                                                        class="fas fa-eraser"></i></a>
+                                                        </td>
+                                                    </tr>
                                                 {% endfor %}
                                             {% endif %}
                                         {% endif %}
                                     {% endfor %}
-                                </table>  
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -216,55 +248,61 @@
                         <h2 class="text-center">Les programmes à venir </h2>
                         <section id="programmes" class="mt-5 row text-center justify-content-md-around">
                             {% for program in programs %}
-                            <div class="card col-lg-3 col-md-5 col-12 mx-3 mb-5">
-                                <img class="card-img-top mt-4" src="{{asset('img/20191022_153109.jpg')}}" alt="card photos">
-                                <h4>{{ program.category.name }}</h4>
-                                <div class="card-body">
-                                    <p class="card-text">{{ program.description }}</p>
-                                    <i class="far fa-calendar-alt"></i>
-                                    {% if program.registration %}
-                                        <p>{{ program.registration|date('d-m-Y') }}</p>
-                                    {% endif %}
-                                    <p>{{ program.startdate|date('d-m-Y') }}{% if program.enddate %} au {{ program.enddate|date('d-m-Y') }}{% endif %}</p>
+                                <div class="card col-lg-3 col-md-5 col-12 mx-3 mb-5">
+                                    <img class="card-img-top mt-4" src="{{ asset('img/20191022_153109.jpg') }}"
+                                         alt="card photos">
+                                    <h4>{{ program.category.name }}</h4>
+                                    <div class="card-body">
+                                        <p class="card-text">{{ program.description }}</p>
+                                        <i class="far fa-calendar-alt"></i>
+                                        {% if program.registration %}
+                                            <p>{{ program.registration|date('d-m-Y') }}</p>
+                                        {% endif %}
+                                        <p>{{ program.startdate|date('d-m-Y') }}{% if program.enddate %} au {{ program.enddate|date('d-m-Y') }}{% endif %}</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="button" class="btn btn-eura" data-toggle="modal"
+                                                data-target="#p{{ program.id }}">
+                                            Réserver
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="card-footer">
-                                    <button type="button" class="btn btn-eura" data-toggle="modal" data-target="#p{{ program.id }}">
-                                        Réserver
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Modal Programme:{{ program.id }} -->
-                            <div class="modal fade" id="p{{ program.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalScrollableTitle">Reserver pour {{ program.name }}</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="form-check text-left">
-                                                {% for kid in kids %}
-                                                    {% if kid.user == app.user %}
-                                                        {% if program not in kid.programs %}
-                                                            <input class="form-check-input" type="checkbox" id="gridCheck">
-                                                            <label class="form-check-label" for="gridCheck">
-                                                                {{ kid.name }}
-                                                            </label>
-                                                            <br />
-                                                        {% endif %}
-                                                    {% endif %}
-                                                {% endfor %}
+                                <!-- Modal Programme:{{ program.id }} -->
+                                <div class="modal fade" id="p{{ program.id }}" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalScrollableTitle">Reserver
+                                                    pour {{ program.name }}</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-eura">Valider</button>
+                                            <div class="modal-body">
+                                                <div class="form-check text-left">
+                                                    {% for kid in kids %}
+                                                        {% if kid.user == app.user %}
+                                                            {% if program not in kid.programs %}
+                                                                <input class="form-check-input" type="checkbox"
+                                                                       id="gridCheck">
+                                                                <label class="form-check-label" for="gridCheck">
+                                                                    {{ kid.name }}
+                                                                </label>
+                                                                <br/>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-eura">Valider</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Fin - Modal Programme:{{ program.id }} -->
+                                <!-- Fin - Modal Programme:{{ program.id }} -->
                             {% endfor %}
                         </section>
                     </div>
