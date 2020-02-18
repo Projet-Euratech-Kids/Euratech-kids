@@ -1,10 +1,7 @@
 /* fonction pour ajout input enfant */
-
-function fAddText() {
-    document.getElementById('Cible').innerHTML = 
-        '<label for="exampleInputEmail1">Prénom</label><input type = "text" class="form-control" /><label for="exampleInputEmail1">Date de naissance</label><input type="date" class="form-control" id="exampleInputPassword1" placeholder="Password"><button class="btn btn-eura text-center" type="submit">Ajouter</button>';
-            }; 
-            
+function myFunction() {
+    document.getElementById("cible").style.display="block";
+  }
             
             
 $(document).ready(function () {
