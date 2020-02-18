@@ -2,8 +2,6 @@ easy_admin:
     list:
         actions: ['show']
     site_name: "<a href='http://127.0.0.1:8000/'><img src='/img/logo-kids.png' width='180' /></a>"
-    list:
-        actions: ['show']
     entities:
         # List the entity class name you want to manage
 #        - App\Entity\Program
