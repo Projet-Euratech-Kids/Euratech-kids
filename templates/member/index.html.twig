@@ -101,7 +101,8 @@
                                         <br />
                                     <h2>Mes enfants </h2>
                                     </form>
-                                <table class="table"> 
+                            <div class="table-responsive">
+                                <table class="table" id="tableau"> 
                                     <thead>
                                         <tr>
                                             <th scope="col">Prenom</th>
@@ -113,23 +114,46 @@
                                     <tbody>
                                             {% for kid in app.user.kids %}
                                             <tr>
-                                                <td>{{ kid.name }}</td>
-                                                <td>{{ kid.birthday|date("d/m/Y") }}</td>
-                                                <td>
+                                                <td scope="col">{{ kid.name }}</td>
+                                                <td scope="col">{{ kid.birthday|date("d/m/Y") }}</td>
+                                                <td scope="col">
                                                         <button type="button" class="btn btn-eura text-center"><i class="fas fa-user-edit"></i></button>
                                                 </td>
-                                                <td>
-                                                    <form action=" " method="POST" class="d-inline">
-                                                        <input type="hidden" name="token" value="{{ csrf_token('delete') }}">
-                                                        <button type="button" class="btn btn-eura text-center"><i class="fas fa-user-times"></i></button>
-                                                    </form>
+                                                <td scope="col">
+                                                <form action=" " method="POST" class="d-inline">
+                                                    <input type="hidden" name="token" value="{{ csrf_token('delete') }}">
+                                                    <button type="button" class="btn btn-eura text-center"><i class="fas fa-user-times"></i></button>
+                                                </form>
                                                 </td>
                                             </tr>
                                         {% endfor %}
                                     </tbody>
                                 </table>
+                                <table class="table" id="tablmob">
+                                    {% for kid in app.user.kids %}
+                                    <tbody>
+                                      <tr class="table-light">
+                                        <th class="thead-light" scope="row">Prénom</th>
+                                        <td class="thead-light">{{ kid.name }}</td>
+                                      </tr>
+                                      <tr class="thead-light">
+                                        <th scope="row">Date de naissance</th>
+                                        <td>{{ kid.birthday|date("d/m/Y") }}</td>
+                                      </tr>
+                                      <tr class="thead-light">
+                                        <th scope="row">Modifier</th>
+                                        <td><button type="button" class="btn btn-eura text-center"><i class="fas fa-user-edit"></i></button></td>
+                                      </tr>
+                                      <tr class="thead-light">
+                                        <th scope="row">Supprimer</th>
+                                        <td><button type="button" class="btn btn-eura text-center"><i class="fas fa-user-times"></i></button></td>
+                                      </tr>
+                                    </tbody>
+                                {% endfor %}
+                                  </table>
+                            </div>    
                                 <div class="contenu">
-                                    <button class="btn btn-eura text-center"type="submit" onclick="fAddText()"/><i class="fas fa-plus"></i></button>
+                                    <button class="btn btn-eura text-center mb-3" type="submit" onclick="fAddText()"/><i class="fas fa-plus"></i></button>
                                     <br />
                                     <div id="Cible">
                                     </div>
@@ -143,7 +167,38 @@
                         <div class="jumbotron jumbotron-fluid mt-5 row text-center justify-content-md-around mx-auto  shadow-lg" id="jumbo">
                             <div class="container">
                                 <h2>Vos prochains ateliers</h2><br />
-                                <table class="table">
+                                <div class="table-responsive">    
+                                    <table class="table" id="tablmob">
+                                        {% for kid in kids %}
+                                        {% if kid.user == app.user %}
+                                            {% if kid.programs is not empty %}
+                                                {% for p in kid.programs %}
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">prénom</th>
+                                                <td>{{ kid.name }}</td>
+                                              </tr>
+                                          <tr>
+                                            <th scope="row">Reservation</th>
+                                            <td>{{ p.name }}</td>
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">Date</th>
+                                            <td>{{ p.startdate|date('d-m-Y') }}</td>
+                                          </tr>
+                                          <tr>
+                                            <th class="table-light" scope="row">Annuler</th>
+                                            <td class="table-light"><button class="btn btn-eura text-center" href="#"><i class="fas fa-eraser"></i></a>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                        {% endfor %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                      </table>
+                                </div>
+                                <table id="tableau" class="table">
                                     <thead>
                                     <tr>
                                         <th scope="col">Prénom</th>
@@ -156,12 +211,12 @@
                                         {% if kid.user == app.user %}
                                             {% if kid.programs is not empty %}
                                                 {% for p in kid.programs %}
-                                                    <tr><td>{{ kid.name }}</td><td>{{ p.name }}</td><td>{{ p.startdate|date('d-m-Y') }}</td><td><a href="#"><i class="fas fa-eraser"></i></a></td></tr>
+                                                    <tr><td>{{ kid.name }}</td><td>{{ p.name }}</td><td>{{ p.startdate|date('d-m-Y') }}</td><td><button class="btn btn-eura text-center" href="#"><i class="fas fa-eraser"></i></a></td></tr>
                                                 {% endfor %}
                                             {% endif %}
                                         {% endif %}
                                     {% endfor %}
-                                </table>
+                                </table>  
                             </div>
                         </div>
                     </div>
