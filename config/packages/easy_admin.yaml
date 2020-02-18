@@ -29,7 +29,6 @@ easy_admin:
                 fields:
                     - { property: 'mail' }
                     - { property: 'password' }
-                    - { property: 'roles' }
                     - { property: 'kids' }
                     - { property: 'lastname' }
 #        - App\Entity\Kids

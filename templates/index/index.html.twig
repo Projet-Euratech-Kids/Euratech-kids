@@ -185,7 +185,7 @@
             <section id="programmes" class="mt-5 row justify-content-md-around">
                 {% for workshop in workshops %}
                     <div class="card border-0 mx-auto col-lg-3 mb-4">
-                        <h5 class="text-eura pt-3">{{ workshop.title }}</h5>
+                        <h3 class="text-eura pt-3 text-center">{{ workshop.title }}</h3>
                         {#                    {% if workshop.image %}#}
                         <img class="card-img-top rounded mt-4" src="{{asset('img/20191022_153109.jpg')}}" alt="card photos">
                         {#                    {% endif %}#}
@@ -193,7 +193,7 @@
                         <div class="card-body">
                             <p class="card-text">{{ workshop.description|raw }}</p>
                         </div>
-                        <div class="card-footer">
+                        <div class="card-footer mx-auto">
                             <a data-toggle="modal" data-target="#explorateur" class="btn btn-eura">En savoir plus</a>
                         </div>
                     </div>

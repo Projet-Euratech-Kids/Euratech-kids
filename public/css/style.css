@@ -323,10 +323,10 @@ a svg:hover{
     margin-top: 5px;
 }
 .time-right:hover {
-    box-shadow: 1px 1px 1px 1px #f0ad4e !important;
+    box-shadow: -15px 0 30px -15px #f0ad4e !important;
 }
 .time-left:hover {
-    box-shadow: 1px 1px 1px 1px #9C4E95 !important;
+    box-shadow: 5px 0 35px -15px #9C4E95 !important;
 }
 /* section 4 separator */
 #separatorImg {
