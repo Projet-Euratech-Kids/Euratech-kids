@@ -4,60 +4,28 @@
 
 {% block body %}
     <header>
-        <a href="{{ path('index') }}" id="return" class="btn btn-eura btn-sm ml-2">Revenir au site</a>
 
-        <!-- Ouverture du menu au click -->
-        <nav class="topnav" id="topNavMembre">
-            <a href="#" onclick="openNav()">
-                <i class="fas fa-edit text-eura"></i>
-            </a>
-        </nav>
-
-        <!--Mise en place du menu -->
-        <div id="sideNavigation" class="sidenav MenuMembre">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <div class="container">
-                <h2>Mes infos </h2>
-                <form method="POST" name="SaisieInfoPerso" id="SaisieInfoPerso" action="InfosPersoB.php5"
-                      onsubmit="return ValideSaisieInfo();">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                               placeholder="Enter email">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
-                    <button class="btn btn-secondary btn-sm btn-block" type="submit">Modifier</button>
-                </form>
-            </div>
-            <br/>
-            <i class="fas fa-arrow-left fa-2x ml-5 mr-3"><p id="site">Revenir au site </p></i>
-        </div>
+        <a href="{{ path('index') }}" id="return" class="btn btn-eura btn-sm ml-2"><i class="far fa-arrow-alt-circle-left"></i></a>
 
         <!--Mise en place du logo-->
         <img id="logoMembre" class="mx-auto d-block mt-3 nav-link" src="{{ asset('img/logo-kids.png') }}"
              alt="Logo Kids" href="#top" style="cursor: pointer;">
 
         {% if app.user %}
-            <div class="button ml-3 mr-5">
-                <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ app.user.mail }}
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <a class="dropdown-item" href="{{ path('easyadmin') }}">Administrer</a>
-                    {% endif %}
-                    <a class="dropdown-item" href="{{ path('index') }}">Accueil</a>
-                    <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
-                </div>
-            </div>
+
+        <div class="button ml-3 mr-5">
+        <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ app.user.lastname }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="dropdown-item" href="{{ path('easyadmin') }}">Administrer</a>
+            {% endif %}
+            <a class="dropdown-item" href="{{ path('index') }}">Accueil</a>
+            <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
+        </div>
+        </div>
+
         {% endif %}
     </header>
 
@@ -65,7 +33,7 @@
         <div class="row">
 
             <div class="col">
-                <div class="container-fluid">
+                <div class="container">
                     <div class="col-md-12 pr-0 pl-0 text-white text-center position mb-5">
                         <div class="card border-0 m-0" id="top-image">
                             <img class="card-img" src="{{ asset('img/20191022_153109.jpg') }}" alt="enfant parent">
@@ -93,8 +61,10 @@
                                     {{ form_row(modifMember.plainPassword) }}
                                     {{ form_row(modifMember.agreeTerms) }}
 
-                                    <button class="btn">Modifier</button>
-                                    {{ form_end(modifMember) }}
+
+                                <button class="btn btn-eura">Modifier</button>
+                                {{ form_end(modifMember) }}
+                                
                                     <h2>Mes enfants </h2>
 
                                     </form>
