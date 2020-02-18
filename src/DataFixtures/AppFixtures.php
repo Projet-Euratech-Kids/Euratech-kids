@@ -60,6 +60,8 @@ class AppFixtures extends Fixture
         );
         $user->setRoles($roles);
         $user->setLastname($faker->lastName);
+        $user->setFirstname($faker->firstName);
+        $user->setPhone('0312345678');
         $manager->persist($user);
         $users[] = $user;
       }

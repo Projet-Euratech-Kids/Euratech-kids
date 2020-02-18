@@ -137,12 +137,12 @@
                  {{ form_start(registrationForm) }}
 
                     <div class="modal-body">
-
                         {{ form_row(registrationForm.mail) }}
                         {{ form_row(registrationForm.lastname) }}
+                        {{ form_row(registrationForm.firstname) }}
+                        {{ form_row(registrationForm.phone, {'attr': {'pattern': '[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}'}}) }}
                         {{ form_row(registrationForm.plainPassword) }}
                         {{ form_row(registrationForm.agreeTerms) }}
-
                     </div>
 
                     <div class="modal-footer">
@@ -222,56 +222,6 @@
     </section>
     <!-- Fin - Les Programmes -->
 
-{#    <!-- Les Programmes -->#}
-{#    <section id="programmes">#}
-{#        <div class="container-fluid">#}
-{#            <h2 class="text-center">Découvrez nos programmes</h2>#}
-{#            <section id="programmes" class="mt-5 row text-center justify-content-md-around">#}
-
-{#                {% for program in programs %}#}
-{#                <div class="card border-0 mx-auto col-lg-3 mb-4">#}
-{#                    <h5 class="text-eura pt-3">Découvrir en s’amusant</h5>#}
-{#                    <img class="card-img-top rounded mt-4" src="{{asset('img/20191022_153109.jpg')}}" alt="card photos">#}
-{#                    <h4 class="pt-3">{{ program.name }}</h4>#}
-{#                    <div class="card-body">#}
-{#                        <p class="card-text">{{ program.description }}</p>#}
-{#                    </div>#}
-{#                    <div class="card-footer">#}
-{#                        <a data-toggle="modal" data-target="#program{{ program.id }}" class="btn btn-eura">En savoir plus</a>#}
-{#                    </div>#}
-{#                </div>#}
-
-{#                <!-- Modal {{program.name}} -->#}
-{#                <div class="modal fade" id="program{{ program.id }}" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">#}
-{#                    <div class="modal-dialog" role="document">#}
-{#                        <div class="modal-content">#}
-{#                            <div class="modal-header">#}
-{#                                <h5 class="modal-title" id="staticBackdropLabel">{{ program.name }}</h5>#}
-{#                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
-{#                                    <span aria-hidden="true">&times;</span>#}
-{#                                </button>#}
-{#                            </div>#}
-{#                            <div class="modal-body text-left">#}
-{#                                <p>#}
-{#                                    <span class="text-eura font-weight-bold">Cycle 1 :</span> Je découvre le coding#}
-{#                                    Les technologies utilisées et adaptées pour les plus jeunes permettent à votre enfant de découvrir avec et/ou sans tablette les notions du code informatique.</p>#}
-{#                                <p>#}
-{#                                    <span class="text-eura font-weight-bold">Cycle 2 :</span> Je découvre la robotique#}
-{#                                    Je découvre le robot <span class="text-eura font-weight-bold">Thymio®</span> et son fonctionnement. J'apprends à construire un robot en <span class="text-eura font-weight-bold">Lego®</span> à l’aide d’un modèle. J'apprends à déplacer un robot.#}
-{#                                    Les enfants doivent être accompagnés d’un de leurs parents.#}
-{#                                </p>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <!-- Fin - Modal {{program.name}} -->#}
-{#                {% endfor %}#}
-
-{#            </section>#}
-{#        </div>#}
-{#    </section>#}
-{#    <!-- Fin - Les Programmes -->#}
-
     <!-- Partie planning -->
     <section id="planning">
         <h2 class="text-center mt-5 mb-4">Planning</h2>
@@ -288,6 +238,24 @@
                     <h4 class="timeline-title">{{ program.category.name }}</h4>
                     <div class="timeline-body">
                         <p>{{ program.description }}</p>
+                        {% if program.important %}
+                            <div id="accordion">
+                                <div>
+                                    <div id="headingOne">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                Important
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <p>{{ program.important }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
                         <br />
                         <!--Les activités proposées au Learning District sont financées par la Ville de Lille c’est pourquoi elles sont réservées aux habitants de Lille, Lomme et Hellemmes.<br />
                         Pour vous inscrire, nous vous demanderons donc un justificatif de domicile.Si vous habitez à Lille, Lomme ou Hellemmes, vous pouvez inscrire vos enfants et nous vous transférons les documents à remplir et à nous retourner.<br />
@@ -319,6 +287,24 @@
                     <div class="timeline-body">
                         <h4 class="timeline-title">{{ program.category.name }}</h4>
                         <p>{{ program.description }}</p>
+                        {% if program.important %}
+                            <div id="accordion">
+                                <div>
+                                    <div id="headingOne">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                Important
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <p>{{ program.important }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
                         <br />
                         <div class="date">
                             {% if program.registration %}

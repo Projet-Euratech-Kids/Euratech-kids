@@ -54,6 +54,11 @@ class Program
      */
     private $kids;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $important;
+
     public function __construct()
     {
         $this->kids = new ArrayCollection();
@@ -164,6 +169,18 @@ class Program
           $this->kids->removeElement($kid);
           $kid->removeProgram($this);
       }
+
+      return $this;
+  }
+
+  public function getImportant(): ?string
+  {
+      return $this->important;
+  }
+
+  public function setImportant(?string $important): self
+  {
+      $this->important = $important;
 
       return $this;
   }
