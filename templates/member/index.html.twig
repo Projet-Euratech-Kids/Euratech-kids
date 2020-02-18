@@ -154,16 +154,16 @@
                                     </div>
                                     <div class="contenu">
 
-                                        <button class="btn btn-eura text-center mb-3 " type="submit"/>
+                                        <button class="btn btn-eura text-center mb-3 " type="submit">
                                         <i class="fas fa-plus " onclick="myFunction()"></i></button>
 
                                         <br/>
                                         <div id="cible" class="flip">
-                                            <label for="exampleInputEmail1">Prénom</label>
-                                            <input type = "text" class="form-control" />
-                                            <label for="exampleInputEmail1">Date de naissance</label>
-                                            <input type="date" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                            <button class="btn btn-eura text-center" type="submit">Ajouter</button>
+                                            {{ form_start(addkids) }}
+                                            {{ form_row(addkids.name) }}
+                                            {{ form_row(addkids.birthday) }}
+                                            <button class="btn">Register</button>
+                                            {{ form_end(addkids) }}
                                         </div>
                                     </div>
                                 </div>
