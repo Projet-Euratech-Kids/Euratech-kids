@@ -175,7 +175,11 @@ a svg:hover{
 }
 #planning i { /* logo fleche */ 
     position: relative;
+    transition: all 2s;
     /*top: 14px;*/
+}
+#planning i:hover{
+    transform: rotate(360deg);
 }
 /* timeline */
 .timeline {
@@ -318,7 +322,12 @@ a svg:hover{
 .timeline-body > p + p {
     margin-top: 5px;
 }
-
+.time-right:hover {
+    box-shadow: 1px 1px 1px 1px #f0ad4e !important;
+}
+.time-left:hover {
+    box-shadow: 1px 1px 1px 1px #9C4E95 !important;
+}
 /* section 4 separator */
 #separatorImg {
     background-image: url(../img/img_parallax_secondpictures.jpg);
@@ -393,6 +402,9 @@ a svg:hover{
 }
 #lille{
     width: 5em;
+}
+footer i:hover{
+    color: red !important;
 }
 
 /* media */
@@ -489,6 +501,7 @@ a svg:hover{
     
     #programmes .card:hover{
         transform: scale(1.1);
+        box-shadow: 1px 1px 1px #f0ad4e !important;
     }
 
     #programmes .container-fluid{
@@ -563,7 +576,17 @@ a svg:hover{
     #return {
         display: none;
     }
+    #tableau {
+        display: none;
+    }
 }
+
+@media screen and (min-width: 860px) {
+    #tablmob {
+        display: none;
+    }
+}
+
 @media screen and (max-width: 500px){
     #logoMembre {
         position: relative;
