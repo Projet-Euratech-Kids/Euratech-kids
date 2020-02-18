@@ -24,6 +24,12 @@ header span {
     margin: 5px;
 }
 
+/* form color */
+.form-control:focus{
+    border-color: #f0ad4e;  
+    box-shadow: none; 
+}
+
 /* au click MDP */
 #avatar {
 	width: 140px;
@@ -83,7 +89,7 @@ to {
     transition: .8s;
 }
 .sidenav a:hover{
-    color: rgb(78,103,169);
+    color: #ffc107;
 }
 
 
@@ -167,6 +173,9 @@ a svg:hover{
 #btn {
     position: relative;
     top: 3em;
+}
+#programmes .card-title {
+    height: 85px;
 }
 
 /*section 3 planning */
