@@ -585,9 +585,6 @@ footer i:hover{
     #tableau {
         display: none;
     }
-}
-
-@media screen and (min-width: 860px) {
     #tablmob {
         display: none;
     }
@@ -597,5 +594,10 @@ footer i:hover{
     #logoMembre {
         position: relative;
         right: 40px;
+    }
+}
+@media screen and (max-width: 970px) {
+    .btn-n{
+        display: none;
     }
 }
