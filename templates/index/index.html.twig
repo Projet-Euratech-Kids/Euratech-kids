@@ -183,170 +183,168 @@
     <section id="programmes">
         <div class="container-fluid">
             <h2 class="text-center">Découvrez nos programmes</h2>
-            <section id="programmes" class="mt-5 row text-center justify-content-md-around">
-                <div class="card border-0 mx-auto col-lg-3 mb-4">
-                    <h5 class="text-eura pt-3">Découvrir en s’amusant</h5>
-                    <img class="card-img-top rounded mt-4" src="{{asset('img/20191022_153109.jpg')}}" alt="card photos">
-                    <h4 class="pt-3">Programme Explorateurs 5-7ans</h4>
-                    <div class="card-body">
-                        <p class="card-text">Parcours de 2 cycles de 6 ateliers de 1h30 :</p>
-                        <ul class="text-left">
-                            <li>Mes premiers pas dans le coding</li>
-                            <li>Mes premiers pas dans la robotique</li>
-                        </ul>
-                    </div>
-                    <div class="card-footer">
-                        <a data-toggle="modal" data-target="#explorateur" class="btn btn-eura">En savoir plus</a>
-                    </div>
-                </div>
+            <section id="programmes" class="mt-5 row justify-content-md-around">
+                {% for workshop in workshops %}
+                    <div class="card border-0 mx-auto col-lg-3 mb-4">
+                        <h5 class="text-eura pt-3">{{ workshop.title }}</h5>
+                        {#                    {% if workshop.image %}#}
+                        <img class="card-img-top rounded mt-4" src="{{asset('img/20191022_153109.jpg')}}" alt="card photos">
+                        {#                    {% endif %}#}
+                        <h4 class="pt-3">{{ workshop.category }}</h4>
+                        <div class="card-body">
+                            <p class="card-text">{{ workshop.description|raw }}</p>
+                                {{ workshop.description|raw }}
 
-                <!-- Modal Explorateur -->
-                <div class="modal fade" id="explorateur" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Explorateurs</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body text-left">
-                                <p>
-                                    <span class="text-eura font-weight-bold">Cycle 1 :</span> Je découvre le coding
-                                    Les technologies utilisées et adaptées pour les plus jeunes permettent à votre enfant de découvrir avec et/ou sans tablette les notions du code informatique.</p>
-                                <p>
-                                    <span class="text-eura font-weight-bold">Cycle 2 :</span> Je découvre la robotique
-                                    Je découvre le robot <span class="text-eura font-weight-bold">Thymio®</span> et son fonctionnement. J'apprends à construire un robot en <span class="text-eura font-weight-bold">Lego®</span> à l’aide d’un modèle. J'apprends à déplacer un robot.
-                                    Les enfants doivent être accompagnés d’un de leurs parents.
-                                </p>
+                        </div>
+                        <div class="card-footer">
+                            <a data-toggle="modal" data-target="#explorateur" class="btn btn-eura">En savoir plus</a>
+                        </div>
+                    </div>
+
+                    <!-- Modal Explorateur -->
+                    <div class="modal fade" id="explorateur" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">{{ workshop.category }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body text-left">
+                                    <p>
+                                        <span class="text-eura font-weight-bold"Détail des cycles :</span> {{ workshop.article|raw }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
+
                 <!-- Fin - Modal Explorateur -->
 
-                <div class="card border-0 mx-auto col-lg-3 mb-4">
-                    <h5 class="text-eura pt-3">Apprendre et créer en s'amusant</h5>
-                    <img class="card-img-top rounded mt-4" src="{{asset('img/20191022_153109.jpg')}}" alt="card photos">
-                    <h4 class="pt-3">Programme Concepteurs 8-12ans </h4>
-                    <div class="card-body">
-                        <p class="card-text">Parcours de 5 cycles de 6 ateliers de 1h30 :</p>
-                        <ul class="text-left">
-                            <li>Coding</li>
-                            <li>Robotique</li>
-                            <li>Maker 3D</li>
-                            <li>Electronique/robotique</li>
-                            <li>Site Web HTML5/CSS3</li>
-                        </ul>
+{#                <div class="card border-0 mx-auto col-lg-3 mb-4">#}
+{#                    <h5 class="text-eura pt-3">Apprendre et créer en s'amusant</h5>#}
+{#                    <img class="card-img-top rounded mt-4" src="{{asset('img/20191022_153109.jpg')}}" alt="card photos">#}
+{#                    <h4 class="pt-3">Programme Concepteurs 8-12ans </h4>#}
+{#                    <div class="card-body">#}
+{#                        <p class="card-text">Parcours de 5 cycles de 6 ateliers de 1h30 :</p>#}
+{#                        <ul class="text-left">#}
+{#                            <li>Coding</li>#}
+{#                            <li>Robotique</li>#}
+{#                            <li>Maker 3D</li>#}
+{#                            <li>Electronique/robotique</li>#}
+{#                            <li>Site Web HTML5/CSS3</li>#}
+{#                        </ul>#}
 
-                    </div>
-                    <div class="card-footer">
-                        <a data-toggle="modal" data-target="#concepteur" class="btn btn-eura">En savoir plus</a>
-                    </div>
-                </div>
+{#                    </div>#}
+{#                    <div class="card-footer">#}
+{#                        <a data-toggle="modal" data-target="#concepteur" class="btn btn-eura">En savoir plus</a>#}
+{#                    </div>#}
+{#                </div>#}
 
-                <!-- Modal Concepteurs -->
-                <div class="modal fade" id="concepteur" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <form method="POST">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Concepteurs</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body text-left">
-                                    <p>
-                                        <span class="text-eura font-weight-bold">Cycle 1 :</span> Coding
-                                        J'apprends à coder des animations et jeux vidéo avec Scratch®.
-                                    </p>
-                                    <p>
-                                        <span class="text-eura font-weight-bold">Cycle 2 :</span> Robotique
-                                        J'apprends à construire et programmer un robot avec les Lego® Education et le robot Thymio®.
-                                    </p>
-                                    <p>
-                                        <span class="text-eura font-weight-bold">Cycle 3 :</span> Découverte de l'impression 3D
-                                        J'apprends à coder et dessiner mon objet en 3D
-                                        J'apprends à utiliser une imprimante 3D
-                                    </p>
-                                    <p>
-                                        <span class="text-eura font-weight-bold">Cycle 4 :</span> Electronique/robotique
-                                        Je découvre l'électronique.
-                                        J'apprends à créer un robot avec des composants électroniques.
-                                        Je programme et joue avec mon robot.
-                                    </p>
-                                    <p>
-                                        <span class="text-eura font-weight-bold">Cycle 5 :</span> Site Web HTML5/CSS3
-                                        J'apprends la programmation Web en codant un site web.
-                                    </p>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- Fin - Modal Concepteurs -->
+{#                <!-- Modal Concepteurs -->#}
+{#                <div class="modal fade" id="concepteur" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">#}
+{#                    <div class="modal-dialog" role="document">#}
+{#                        <div class="modal-content">#}
+{#                            <form method="POST">#}
+{#                                <div class="modal-header">#}
+{#                                    <h5 class="modal-title" id="staticBackdropLabel">Concepteurs</h5>#}
+{#                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#                                        <span aria-hidden="true">&times;</span>#}
+{#                                    </button>#}
+{#                                </div>#}
+{#                                <div class="modal-body text-left">#}
+{#                                    <p>#}
+{#                                        <span class="text-eura font-weight-bold">Cycle 1 :</span> Coding#}
+{#                                        J'apprends à coder des animations et jeux vidéo avec Scratch®.#}
+{#                                    </p>#}
+{#                                    <p>#}
+{#                                        <span class="text-eura font-weight-bold">Cycle 2 :</span> Robotique#}
+{#                                        J'apprends à construire et programmer un robot avec les Lego® Education et le robot Thymio®.#}
+{#                                    </p>#}
+{#                                    <p>#}
+{#                                        <span class="text-eura font-weight-bold">Cycle 3 :</span> Découverte de l'impression 3D#}
+{#                                        J'apprends à coder et dessiner mon objet en 3D#}
+{#                                        J'apprends à utiliser une imprimante 3D#}
+{#                                    </p>#}
+{#                                    <p>#}
+{#                                        <span class="text-eura font-weight-bold">Cycle 4 :</span> Electronique/robotique#}
+{#                                        Je découvre l'électronique.#}
+{#                                        J'apprends à créer un robot avec des composants électroniques.#}
+{#                                        Je programme et joue avec mon robot.#}
+{#                                    </p>#}
+{#                                    <p>#}
+{#                                        <span class="text-eura font-weight-bold">Cycle 5 :</span> Site Web HTML5/CSS3#}
+{#                                        J'apprends la programmation Web en codant un site web.#}
+{#                                    </p>#}
+{#                                </div>#}
+{#                            </form>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <!-- Fin - Modal Concepteurs -->#}
 
-                <div class="card border-0 mx-auto col-lg-3 mb-4">
-                    <h5 class="text-eura pt-3">Entreprendre un projet valorisant</h5>
-                    <img class="card-img-top rounded mt-4" src="{{asset('img/20191022_153109.jpg')}}" alt="card photos">
-                    <h4 class="pt-3">Programme Développeurs 13-15ans</h4>
-                    <div class="card-body">
-                        <p class="card-text">Parcours de 5 cycles de 6 ateliers de 1h30 :</p>
-                        <ul class="text-left">
-                            <li>Site Web HTML5/CSS3</li>
-                            <li>Maker 3D</li>
-                            <li>Robotique</li>
-                            <li>Electronique/robotique</li>
-                            <li>Projet</li>
-                        </ul>
+{#                <div class="card border-0 mx-auto col-lg-3 mb-4">#}
+{#                    <h5 class="text-eura pt-3">Entreprendre un projet valorisant</h5>#}
+{#                    <img class="card-img-top rounded mt-4" src="{{asset('img/20191022_153109.jpg')}}" alt="card photos">#}
+{#                    <h4 class="pt-3">Programme Développeurs 13-15ans</h4>#}
+{#                    <div class="card-body">#}
+{#                        <p class="card-text">Parcours de 5 cycles de 6 ateliers de 1h30 :</p>#}
+{#                        <ul class="text-left">#}
+{#                            <li>Site Web HTML5/CSS3</li>#}
+{#                            <li>Maker 3D</li>#}
+{#                            <li>Robotique</li>#}
+{#                            <li>Electronique/robotique</li>#}
+{#                            <li>Projet</li>#}
+{#                        </ul>#}
 
-                    </div>
-                    <div class="card-footer">
-                        <a data-toggle="modal" data-target="#developpeur" class="btn btn-eura">En savoir plus</a>
-                    </div>
-                </div>
+{#                    </div>#}
+{#                    <div class="card-footer">#}
+{#                        <a data-toggle="modal" data-target="#developpeur" class="btn btn-eura">En savoir plus</a>#}
+{#                    </div>#}
+{#                </div>#}
 
-                <!-- Modal Developpeurs -->
-                <div class="modal fade" id="developpeur" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <form method="POST">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Développeurs</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body text-left">
-                                    <p>
-                                        <span class="text-eura font-weight-bold">Cycle 1 :</span> Site web HTML5/CSS3
-                                        J'apprends la programmation Web en codant un site web.
-                                    </p>
-                                    <p>
-                                        <span class="text-eura font-weight-bold">Cycle 2 :</span> Découverte de l'impression 3D
-                                        J'apprends à coder et dessiner mon objet en 3D
-                                        J'apprends à utiliser une imprimante 3D
-                                    </p>
-                                    <p>
-                                        <span class="text-eura font-weight-bold">Cycle 3 :</span> Robotique
-                                        J'apprends à construire et programmer un robot en utilisant le pack inventor de Jimu®.
-                                    </p>
-                                    <p>
-                                        <span class="text-eura font-weight-bold">Cycle 4 :</span> Electronique/robotique
-                                        Je découvre l'électronique.
-                                        J'apprends à créer un robot avec des composants électroniques.
-                                        Je programme et joue avec mon robot.
-                                    </p>
-                                    <p>
-                                        <span class="text-eura font-weight-bold">Cycle 5 :</span> Je créé mon projet
-                                        Au choix parmi les domaines suivants : coding, web, robotique, électronique. J'innove et j'entreprends un projet valorisant.
-                                    </p>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+{#                <!-- Modal Developpeurs -->#}
+{#                <div class="modal fade" id="developpeur" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">#}
+{#                    <div class="modal-dialog" role="document">#}
+{#                        <div class="modal-content">#}
+{#                            <form method="POST">#}
+{#                                <div class="modal-header">#}
+{#                                    <h5 class="modal-title" id="staticBackdropLabel">Développeurs</h5>#}
+{#                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#                                        <span aria-hidden="true">&times;</span>#}
+{#                                    </button>#}
+{#                                </div>#}
+{#                                <div class="modal-body text-left">#}
+{#                                    <p>#}
+{#                                        <span class="text-eura font-weight-bold">Cycle 1 :</span> Site web HTML5/CSS3#}
+{#                                        J'apprends la programmation Web en codant un site web.#}
+{#                                    </p>#}
+{#                                    <p>#}
+{#                                        <span class="text-eura font-weight-bold">Cycle 2 :</span> Découverte de l'impression 3D#}
+{#                                        J'apprends à coder et dessiner mon objet en 3D#}
+{#                                        J'apprends à utiliser une imprimante 3D#}
+{#                                    </p>#}
+{#                                    <p>#}
+{#                                        <span class="text-eura font-weight-bold">Cycle 3 :</span> Robotique#}
+{#                                        J'apprends à construire et programmer un robot en utilisant le pack inventor de Jimu®.#}
+{#                                    </p>#}
+{#                                    <p>#}
+{#                                        <span class="text-eura font-weight-bold">Cycle 4 :</span> Electronique/robotique#}
+{#                                        Je découvre l'électronique.#}
+{#                                        J'apprends à créer un robot avec des composants électroniques.#}
+{#                                        Je programme et joue avec mon robot.#}
+{#                                    </p>#}
+{#                                    <p>#}
+{#                                        <span class="text-eura font-weight-bold">Cycle 5 :</span> Je créé mon projet#}
+{#                                        Au choix parmi les domaines suivants : coding, web, robotique, électronique. J'innove et j'entreprends un projet valorisant.#}
+{#                                    </p>#}
+{#                                </div>#}
+{#                            </form>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
                 <!-- Fin - Modal Developpeurs -->
 
             </section>
