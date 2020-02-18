@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Kids;
 use App\Entity\User;
+use App\Form\AddKidsType;
 use App\Form\RegistrationFormType;
 use App\Repository\KidsRepository;
 use App\Repository\ProgramRepository;
@@ -31,11 +32,31 @@ class MemberController extends AbstractController
 
         $kids = $kidsRepository->findAll();
 
+        // Modif Member
+
         $modifMember = $this->createForm(RegistrationFormType::class,$user);
         $modifMember->handleRequest($request);
 
         if ($modifMember->isSubmitted() && $modifMember->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('index');
+        }
+
+        // Add Kids Form
+
+        $addKids = new Kids();
+        $add = $this->createForm(AddKidsType::class, $addKids);
+        $add->handleRequest($request);
+
+        if($add->isSubmitted() && $add->isValid()) {
+            if (!$addKids->getUser()) {
+                $addKids->setUser($this->getUser());
+            }
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($addKids);
+            $entityManager->flush();
+            $this->addFlash('addkids','Votre enfant a bien etait ajoute.');
 
             return $this->redirectToRoute('index');
         }
@@ -46,6 +67,7 @@ class MemberController extends AbstractController
             'programs' => $programs,
             'kids' => $kids,
             'modifMember' => $modifMember->createView(),
+            'addkids'=> $add->createView(),
         ]);
     }
 

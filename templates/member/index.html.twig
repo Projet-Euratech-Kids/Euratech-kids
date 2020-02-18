@@ -14,7 +14,7 @@
         {% if app.user %}
 
         <div class="button ml-3 mr-5">
-        <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-outline-eura dropdown-toggle btn-n" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{ app.user.lastname }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -30,13 +30,13 @@
     </header>
 
     <div class="container-fluid" id="top">
-            <div class="col">
+            <div class="row mb-5">
                 <div class="container-fluid position">
                     <div class="d-flex flex-row-reverse">
                         <div id="buttons" class="py-3 text-right">
                             {% if app.user %}
                                 <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ app.user.mail }}
+                                    {{ app.user.lastname }}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     {% if is_granted('ROLE_ADMIN') %}
@@ -76,6 +76,8 @@
                                     {{ form_start(modifMember) }}
                                     {{ form_row(modifMember.mail) }}
                                     {{ form_row(modifMember.lastname) }}
+                                    {{ form_row(modifMember.firstname) }}
+                                    {{ form_row(modifMember.phone, {'attr': {'pattern': '[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}'}}) }}
                                     {{ form_row(modifMember.plainPassword) }}
                                     {{ form_row(modifMember.agreeTerms) }}
 
@@ -151,11 +153,17 @@
                                         </table>
                                     </div>
                                     <div class="contenu">
-                                        <button class="btn btn-eura text-center mb-3" type="submit"
-                                                onclick="fAddText()"/>
-                                        <i class="fas fa-plus"></i></button>
+
+                                        <button class="btn btn-eura text-center mb-3 " type="submit">
+                                        <i class="fas fa-plus " onclick="myFunction()"></i></button>
+
                                         <br/>
-                                        <div id="Cible">
+                                        <div id="cible" class="flip">
+                                            {{ form_start(addkids) }}
+                                            {{ form_row(addkids.name) }}
+                                            {{ form_row(addkids.birthday) }}
+                                            <button class="btn">Register</button>
+                                            {{ form_end(addkids) }}
                                         </div>
                                     </div>
                                 </div>
@@ -170,8 +178,7 @@
                                 <h2>Vos prochains ateliers</h2><br/>
                                 <div class="table-responsive">
                                     <table class="table" id="tablmob">
-                                        {% for kid in kids %}
-                                            {% if kid.user == app.user %}
+                                        {% for kid in app.user.kids %}
                                                 {% if kid.programs is not empty %}
                                                     {% for p in kid.programs %}
                                                         <tbody>
@@ -190,14 +197,12 @@
                                                         <tr>
                                                             <th class="table-light" scope="row">Annuler</th>
                                                             <td class="table-light">
-                                                                <button class="btn btn-eura text-center" href="#"><i
-                                                                            class="fas fa-eraser"></i></a>
+                                                                <button class="btn btn-eura text-center" href="#"><iclass="fas fa-eraser"></i></a>
                                                             </td>
                                                         </tr>
                                                         </tbody>
                                                     {% endfor %}
                                                 {% endif %}
-                                            {% endif %}
                                         {% endfor %}
                                     </table>
                                 </div>

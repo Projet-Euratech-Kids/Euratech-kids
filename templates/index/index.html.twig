@@ -28,7 +28,7 @@
         <div class="button ml-3 mr-5" id="buttons-h">
             {% if app.user %}
                 <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ app.user.mail }}
+                    {{ app.user.lastname }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     {% if is_granted('ROLE_ADMIN') %}
@@ -50,7 +50,7 @@
         <div id="buttons" class="py-3 text-right">
             {% if app.user %}
                 <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ app.user.mail }}
+                    {{ app.user.lastname }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     {% if is_granted('ROLE_ADMIN') %}
@@ -185,7 +185,9 @@
             <section id="programmes" class="mt-5 row justify-content-md-around">
                 {% for workshop in workshops %}
                     <div class="card border-0 mx-auto col-lg-3 mb-4">
-                        <h5 class="text-eura pt-3">{{ workshop.title }}</h5>
+                        <div class="card-title mt-2">
+                            <h3 class="text-eura pt-3 text-center">{{ workshop.title }}</h3>
+                        </div>
                         {#                    {% if workshop.image %}#}
                         <img class="card-img-top rounded mt-4" src="{{asset('img/20191022_153109.jpg')}}" alt="card photos">
                         {#                    {% endif %}#}
@@ -193,7 +195,7 @@
                         <div class="card-body">
                             <p class="card-text">{{ workshop.description|raw }}</p>
                         </div>
-                        <div class="card-footer">
+                        <div class="card-footer mx-auto">
                             <a data-toggle="modal" data-target="#explorateur" class="btn btn-eura">En savoir plus</a>
                         </div>
                     </div>
@@ -258,24 +260,6 @@
                             </div>
                         {% endif %}
                         <br />
-                        <div id="accordion">
-                            <div class="card">
-                                <div class="card-header" id="headingOne">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        Important
-                                    </button>
-                                </h5>
-                                </div>
-                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                                    <div class="card-body">
-                                        Les activités proposées au Learning District sont financées par la Ville de Lille c’est pourquoi elles sont réservées aux habitants de Lille, Lomme et Hellemmes.<br />
-                                        Pour vous inscrire, nous vous demanderons donc un justificatif de domicile.Si vous habitez à Lille, Lomme ou Hellemmes, vous pouvez inscrire vos enfants et nous vous transférons les documents à remplir et à nous retourner.<br />
-                                        Si toute les places ne sont pas réservées par des Lillois, Lommois et Hellemmois nous reviendrons vers ceux en aillant fait la demande par email.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <!-- fin modal important -->
                         <!--Les activités proposées au Learning District sont financées par la Ville de Lille c’est pourquoi elles sont réservées aux habitants de Lille, Lomme et Hellemmes.<br />
                         Pour vous inscrire, nous vous demanderons donc un justificatif de domicile.Si vous habitez à Lille, Lomme ou Hellemmes, vous pouvez inscrire vos enfants et nous vous transférons les documents à remplir et à nous retourner.<br />
