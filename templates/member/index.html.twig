@@ -15,7 +15,7 @@
 
         <div class="button ml-3 mr-5">
         <button class="btn btn-outline-eura dropdown-toggle btn-n" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ app.user.lastname }}
+            {{ app.user.firstname }} {{ app.user.lastname }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {% if is_granted('ROLE_ADMIN') %}
@@ -36,7 +36,7 @@
                         <div id="buttons" class="py-3 text-right">
                             {% if app.user %}
                                 <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ app.user.lastname }}
+                                    {{ app.user.firstname }} {{ app.user.lastname }}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     {% if is_granted('ROLE_ADMIN') %}
@@ -154,15 +154,17 @@
                                     </div>
                                     <div class="contenu">
 
-                                        <button class="btn btn-eura text-center mb-3 " type="submit">
-                                        <i class="fas fa-plus " onclick="myFunction()"></i></button>
+                                        <button class="btn btn-eura text-center mb-3" onclick="myFunction()" type="submit">
+                                        <i class="fas fa-plus "></i></button>
 
                                         <br/>
                                         <div id="cible" class="flip">
                                             {{ form_start(addkids) }}
                                             {{ form_row(addkids.name) }}
-                                            {{ form_row(addkids.birthday) }}
-                                            <button class="btn">Register</button>
+                                            <div class="d-flex justify-content-center">
+                                                {{ form_row(addkids.birthday) }}
+                                            </div>
+                                                <button class="btn btn-outline-eura">Ajouter</button>
                                             {{ form_end(addkids) }}
                                         </div>
                                     </div>

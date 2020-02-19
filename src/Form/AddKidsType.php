@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Kids;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +14,10 @@ class AddKidsType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('birthday')
+            ->add('birthday',DateType::class, [
+              'format' => 'dd-MM-yyyy',
+              'years' => range(date('Y')-25, date('Y'))
+            ])
         ;
     }
 
