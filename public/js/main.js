@@ -173,6 +173,14 @@ $("#sendM").on("click", function(e){
      });
 });
 
+/* Formulaire Newsletter */
+$("#submitNewsletter").on("click", function(e){
+    e.preventDefault();
+    $("#checked").on("click", function(){
+        $("#subscribe").submit();
+    });
+});
+
 /* Formulaire connexion */
 $("#mdp").focus(function(){
 	$("#roulette").css({

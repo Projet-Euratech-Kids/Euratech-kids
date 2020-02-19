@@ -56,5 +56,6 @@ easy_admin:
                     - { property: 'title' }
                     - { property: 'description', type: 'text_editor' }
                     - { property: 'article', type: 'text_editor' }
-
-
+#        - App\Entity\Newsletter
+        Newsletter:
+            class: App\Entity\Newsletter
