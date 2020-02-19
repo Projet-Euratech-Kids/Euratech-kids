@@ -87,7 +87,6 @@
                                 
                                     <h2>Mes enfants </h2>
 
-                                    </form>
                                     <div class="table-responsive">
                                         <table class="table" id="tableau">
 
@@ -185,7 +184,7 @@
                                                     {% for p in kid.programs %}
                                                         <tbody>
                                                         <tr>
-                                                            <th scope="row">prénom</th>
+                                                            <th scope="row">Prénom</th>
                                                             <td>{{ kid.name }}</td>
                                                         </tr>
                                                         <tr>
@@ -199,7 +198,7 @@
                                                         <tr>
                                                             <th class="table-light" scope="row">Annuler</th>
                                                             <td class="table-light">
-                                                                <button class="btn btn-eura text-center" href="#"><iclass="fas fa-eraser"></i></a>
+                                                                <a href="#"><button class="btn btn-eura text-center"><i class="fas fa-eraser"></i></button></a>
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -225,8 +224,7 @@
                                                         <td>{{ p.name }}</td>
                                                         <td>{{ p.startdate|date('d-m-Y') }}</td>
                                                         <td>
-                                                            <button class="btn btn-eura text-center" href="#"><i
-                                                                        class="fas fa-eraser"></i></a>
+                                                            <a href="#"><button class="btn btn-eura text-center"><i class="fas fa-eraser"></i></button></a>
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
@@ -249,22 +247,32 @@
                                         <p class="card-text">{{ program.description }}</p>
                                         <i class="far fa-calendar-alt"></i>
                                         {% if program.registration %}
-                                            <p>{{ program.registration|date('d-m-Y') }}</p>
+                                            <p>Inscriptions à partir du {{ program.registration|date('d-m-Y') }}</p>
                                         {% endif %}
                                         <p>{{ program.startdate|date('d-m-Y') }}{% if program.enddate %} au {{ program.enddate|date('d-m-Y') }}{% endif %}</p>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="button" class="btn btn-eura" data-toggle="modal"
-                                                data-target="#p{{ program.id }}">
-                                            Réserver
-                                        </button>
+                                        {% if program.registration %}
+                                            {% if date().timestamp >= program.registration.timestamp %}
+                                                {% if date().timestamp < program.startdate.timestamp %}
+                                                    <button type="button" class="btn btn-eura" data-toggle="modal" data-target="#p{{ program.id }}">Réserver</button>
+                                                {% else %}
+                                                    <button type="button" class="btn btn-eura" disabled>Réservations terminées</button>
+                                                {% endif %}
+                                            {% else %}
+                                                <button type="button" class="btn btn-eura" disabled>Réservations non ouvertes</button>
+                                            {% endif %}
+                                        {% else %}
+                                            <button type="button" class="btn btn-eura" data-toggle="modal" data-target="#p{{ program.id }}">Réserver</button>
+                                        {% endif %}
                                     </div>
                                 </div>
-                            {% endfor %}    
-                            </div>
+                            {% endfor %}
+                        </section>
+                    </div>
                             
-                            {% for program in programs %}
-                            <!-- Modal Programme:{{ program.id }} -->
+                    {% for program in programs %}
+                        <!-- Modal Programme:{{ program.id }} -->
                         <div class="container">
                             <div class="modal fade" id="p{{ program.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -286,21 +294,19 @@
                                                         <br />
                                                     {% endif %}
                                                 {% endfor %}
-                                                </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-eura">Valider</button>
-                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-eura">Valider</button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>     
-                                <!-- Fin - Modal Programme:{{ program.id }} -->
-                            {% endfor %}
-                        </section>
-                    </div>
+                            </div>
+                        </div>
+                        <!-- Fin - Modal Programme:{{ program.id }} -->
+                    {% endfor %}
                     </div>
                 </div>
-        </div>
+            </div>
     </div>
 {% endblock %}
