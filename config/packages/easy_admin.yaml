@@ -2,6 +2,14 @@ easy_admin:
     list:
         actions: ['show']
     site_name: "<a href='http://127.0.0.1:8000/'><img src='/img/logo-kids.png' width='180' /></a>"
+    design:
+        menu:
+            - { entity: 'Program', label: 'Programmes', icon: 'fas fa-chalkboard-teacher' }
+            - { entity: 'Category', label: 'Catégories' }
+            - { entity: 'User', label: 'Parents', icon: 'fas fa-users' }
+            - { entity: 'Kids', label: 'Enfants', icon: 'fas fa-child' }
+            - { entity: 'Workshop', label: 'Ateliers', icon: 'fas fa-puzzle-piece' }
+            - { entity: 'Newsletter', icon: 'fas fa-envelope' }
     entities:
         # List the entity class name you want to manage
 #        - App\Entity\Program
@@ -9,24 +17,24 @@ easy_admin:
             class: App\Entity\Program
             form:
                 fields:
-                    - { property: 'name' }
+                    - { property: 'name', label: 'Nom' }
                     - { property: 'description' }
-                    - { property: 'registration', type: 'App\Form\CustomDateType' }
-                    - { property: 'startdate', type: 'App\Form\CustomDateType' }
-                    - { property: 'enddate', type: 'App\Form\CustomDateType' }
-                    - { property: 'category' }
+                    - { property: 'registration', type: 'App\Form\CustomDateType', label: 'Inscription' }
+                    - { property: 'startdate', type: 'App\Form\CustomDateType', label: 'Début' }
+                    - { property: 'enddate', type: 'App\Form\CustomDateType', label: 'Fin' }
+                    - { property: 'category', label: 'Catégorie' }
                     - { property: 'important' }
-                    - { property: 'kids' }
+                    - { property: 'kids', label: 'Enfants' }
 #        - App\Entity\Category
         Category:
             class: App\Entity\Category
             form:
                 fields:
-                    - { property: 'name' }
+                    - { property: 'name', label: 'Nom' }
                     - { property: 'description' }
                     - { property: 'slug' }
-                    - { property: 'programs' }
-                    - { property: 'workshops' }
+                    - { property: 'programs', label: 'Programmes' }
+                    - { property: 'workshops', label: 'Ateliers' }
 #        - App\Entity\User
         User:
             class: App\Entity\User
@@ -52,10 +60,10 @@ easy_admin:
             class: App\Entity\Workshop
             form:
                 fields:
-                    - { property: 'category'}
-                    - { property: 'title' }
+                    - { property: 'category', label: 'Catégorie' }
+                    - { property: 'title', label: 'Titre' }
                     - { property: 'description', type: 'text_editor' }
-                    - { property: 'article', type: 'text_editor' }
+                    - { property: 'article', type: 'text_editor', label: 'Détails' }
 #        - App\Entity\Newsletter
         Newsletter:
             class: App\Entity\Newsletter
