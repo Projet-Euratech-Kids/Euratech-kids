@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Kids;
+use App\Entity\Program;
 use App\Entity\User;
 use App\Form\AddKidsType;
+use App\Form\BookingFormType;
 use App\Form\RegistrationFormType;
 use App\Repository\KidsRepository;
 use App\Repository\ProgramRepository;
@@ -70,6 +72,38 @@ class MemberController extends AbstractController
             'addkids'=> $add->createView(),
         ]);
     }
+
+    /**
+     * @Route("/booking/{p_id}/{k_id}", name="booking")
+     */
+    public function booking($p_id, $k_id, KidsRepository $kidsRepository, ProgramRepository $programRepository) :Response
+    {
+      $kid = $kidsRepository->find($k_id);
+      $prog = $programRepository->find($p_id);
+      $prog->addKid($kid);
+
+      $entityManager = $this->getDoctrine()->getManager();
+      $entityManager->persist($prog);
+      $entityManager->flush();
+
+      return $this->redirectToRoute('member', ["id" => $kid->getUser()->getId()]);
+    }
+
+  /**
+   * @Route("/cancel/{p_id}/{k_id}", name="cancel")
+   */
+  public function cancel($p_id, $k_id, KidsRepository $kidsRepository, ProgramRepository $programRepository) :Response
+  {
+    $k = $kidsRepository->find($k_id);
+    $p = $programRepository->find($p_id);
+    $p->removeKid($k);
+
+    $entityManager = $this->getDoctrine()->getManager();
+    $entityManager->persist($p);
+    $entityManager->flush();
+
+    return $this->redirectToRoute('member', ["id" => $k->getUser()->getId()]);
+  }
 
     /**
      * @Route("/delkid/{id}",name="del_kid",methods={"DELETE"})

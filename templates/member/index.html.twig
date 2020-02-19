@@ -198,7 +198,7 @@
                                                         <tr>
                                                             <th class="table-light" scope="row">Annuler</th>
                                                             <td class="table-light">
-                                                                <a href="#"><button class="btn btn-eura text-center"><i class="fas fa-eraser"></i></button></a>
+                                                                <a href="{{ path('cancel', {p_id: p.id, k_id: kid.id}) }}"><button class="btn btn-eura text-center"><i class="fas fa-eraser"></i></button></a>
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -224,7 +224,7 @@
                                                         <td>{{ p.name }}</td>
                                                         <td>{{ p.startdate|date('d-m-Y') }}</td>
                                                         <td>
-                                                            <a href="#"><button class="btn btn-eura text-center"><i class="fas fa-eraser"></i></button></a>
+                                                            <a href="{{ path('cancel', {p_id: p.id, k_id: kid.id}) }}"><button class="btn btn-eura text-center"><i class="fas fa-eraser"></i></button></a>
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
@@ -287,11 +287,7 @@
                                             <div class="form-check text-left">
                                                 {% for kid in app.user.kids %}
                                                     {% if program not in kid.programs %}
-                                                        <input class="form-check-input" type="checkbox" id="gridCheck">
-                                                        <label class="form-check-label" for="gridCheck">
-                                                            {{ kid.name }}
-                                                        </label>
-                                                        <br />
+                                                        <p><a href="{{ path('booking', {p_id: program.id, k_id: kid.id}) }}">{{ kid.name }}</a></p>
                                                     {% endif %}
                                                 {% endfor %}
                                             </div>
