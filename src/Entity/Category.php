@@ -43,6 +43,11 @@ class Category
      */
     private $workshops;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $image;
+
     public function __construct()
     {
         $this->programs = new ArrayCollection();
@@ -88,6 +93,16 @@ class Category
         $this->slug = $slug;
 
         return $this;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
     }
 
     /**
