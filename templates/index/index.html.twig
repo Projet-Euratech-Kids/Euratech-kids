@@ -196,12 +196,12 @@
                             <p class="card-text">{{ workshop.description|raw }}</p>
                         </div>
                         <div class="card-footer mx-auto">
-                            <a data-toggle="modal" data-target="#explorateur" class="btn btn-eura">En savoir plus</a>
+                            <a data-toggle="modal" data-target="#explorateur{{workshop.id}}" class="btn btn-eura">En savoir plus</a>
                         </div>
                     </div>
 
                     <!-- Modal Explorateur -->
-                    <div class="modal fade" id="explorateur" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="explorateur{{workshop.id}}"  tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -424,13 +424,12 @@
             <div class="col-12 col-lg-5 col-md-6 mx-auto" id="newsletter">
                 <h2 class="text-warning">Newsletter</h2>
                 <p class="text-white">Abonnez-vous à notre newsletter pour être informé de notre actualité et de nos événements.</p>
-                <form>
                     <div class="form-group">
-                        <label for="email" class="text-white">Adresse mail</label>
-                        <input type="email" class="form-control" name="email">
-                        <button type="" id="submitNewsletter" class="btn btn-eura mt-3">M'abonner</button>
+                        {{ form_start(newsletter) }}
+                        {{ form_row(newsletter.mail) }}
+                        <button type="submit" class="btn btn-eura">M'abonner</button>
+                        {{ form_end(newsletter) }}
                     </div>
-                </form>
             </div>
         </div>
     </section>

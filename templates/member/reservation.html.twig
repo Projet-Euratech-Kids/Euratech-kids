@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<header>
+
+    <a href="{{ path('index') }}" id="return" class="btn btn-eura btn-sm ml-2"><i class="far fa-arrow-alt-circle-left"></i></a>
+
+    <!--Mise en place du logo-->
+    <img id="logoMembre" class="mx-auto d-block mt-3 nav-link" src="{{ asset('img/logo-kids.png') }}"
+         alt="Logo Kids" href="#top" style="cursor: pointer;">
+
+    {% if app.user %}
+
+    <div class="button ml-3 mr-5">
+    <button class="btn btn-outline-eura dropdown-toggle btn-n" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{ app.user.lastname }}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        {% if is_granted('ROLE_ADMIN') %}
+            <a class="dropdown-item" href="{{ path('easyadmin') }}">Administrer</a>
+        {% endif %}
+        <a class="dropdown-item" href="{{ path('index') }}">Accueil</a>
+        <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
+    </div>
+    </div>
+
+    {% endif %}
+</header>
+
+        <h2>Réservation</h2>
+    <div class="container">
+        <form>
+            <label>Nom:</label>
+                <input type="text">
+            <label>Programme:</label>
+                <select>  
+                </select>    
+        </form>
+    </div>    
+
+
+
+{% endblock %}
