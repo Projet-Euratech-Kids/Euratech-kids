@@ -11,9 +11,9 @@ easy_admin:
                 fields:
                     - { property: 'name' }
                     - { property: 'description' }
-                    - { property: 'registration' }
-                    - { property: 'startdate' }
-                    - { property: 'enddate' }
+                    - { property: 'registration', type: 'App\Form\CustomDateType' }
+                    - { property: 'startdate', type: 'App\Form\CustomDateType' }
+                    - { property: 'enddate', type: 'App\Form\CustomDateType' }
                     - { property: 'category' }
                     - { property: 'important' }
                     - { property: 'kids' }
@@ -45,7 +45,7 @@ easy_admin:
                 fields:
                     - { property: 'name' }
                     - { property: 'user' }
-                    - { property: 'birthday', type: 'App\Form\CustomDateType' }
+                    - { property: 'birthday' }
                     - { property: 'programs' }
 #        - App\Entity\Workshop
         Workshop:

@@ -14,7 +14,7 @@ class CustomDateType extends DateType
     parent::configureOptions($resolver);
 
     // Permet d'avoir une date de -25 ans par rapport à l'année actuelle dans easy admin
-    $resolver->setDefault('years', range(date('Y')-25, date('Y')));
+    $resolver->setDefault('years', range(date('Y'), date('Y')+5));
 
   }
 }
