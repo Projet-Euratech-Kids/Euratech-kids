@@ -15,7 +15,7 @@
 
         <div class="button ml-3 mr-5">
         <button class="btn btn-outline-eura dropdown-toggle btn-n" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ app.user.lastname }}
+            {{ app.user.firstname }} {{ app.user.lastname }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {% if is_granted('ROLE_ADMIN') %}
@@ -36,7 +36,7 @@
                         <div id="buttons" class="py-3 text-right">
                             {% if app.user %}
                                 <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ app.user.lastname }}
+                                    {{ app.user.firstname }} {{ app.user.lastname }}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     {% if is_granted('ROLE_ADMIN') %}
@@ -87,7 +87,6 @@
                                 
                                     <h2>Mes enfants </h2>
 
-                                    </form>
                                     <div class="table-responsive">
                                         <table class="table" id="tableau">
 
@@ -105,8 +104,35 @@
                                                     <td scope="col">{{ kid.name }}</td>
                                                     <td scope="col">{{ kid.birthday|date("d/m/Y") }}</td>
                                                     <td scope="col">
-                                                        <button type="button" class="btn btn-eura text-center"><i
+                                                        <button type="button" class="btn btn-eura text-center" data-toggle="modal" data-target="#k{{ kid.id}}"><i
                                                                     class="fas fa-user-edit"></i></button>
+
+                                                        <!-- Modal modif kid-->
+                                                    <div class="modal fade" id="k{{ kid.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">Modifier</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                            </div>
+                                                    <div class="modal-body">
+                                                        <div class="container">        
+                                                            <label>Nom</label>
+                                                            <input type="text" value="{{ kid.name }}"></br>
+                                                            <label>Date de naisance</label>
+                                                            <input type="text" value="{{ kid.birthday|date("d/m/Y") }}">
+                                                            </div>
+                                                        </div>    
+                                                            <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+                                                            <button type="button" class="btn btn-eura">Sauvegarder</button>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>    
+                                                        <!-- Fin Modal modif kid-->
                                                     </td>
                                                     <td scope="col">
                                                         <form method="post"
@@ -154,15 +180,17 @@
                                     </div>
                                     <div class="contenu">
 
-                                        <button class="btn btn-eura text-center mb-3 " type="submit">
-                                        <i class="fas fa-plus " onclick="myFunction()"></i></button>
+                                        <button class="btn btn-eura text-center mb-3" onclick="myFunction()" type="submit">
+                                        <i class="fas fa-plus "></i></button>
 
                                         <br/>
                                         <div id="cible" class="flip">
                                             {{ form_start(addkids) }}
                                             {{ form_row(addkids.name) }}
-                                            {{ form_row(addkids.birthday) }}
-                                            <button class="btn">Register</button>
+                                            <div class="d-flex justify-content-center">
+                                                {{ form_row(addkids.birthday) }}
+                                            </div>
+                                                <button class="btn btn-outline-eura">Ajouter</button>
                                             {{ form_end(addkids) }}
                                         </div>
                                     </div>
@@ -183,7 +211,7 @@
                                                     {% for p in kid.programs %}
                                                         <tbody>
                                                         <tr>
-                                                            <th scope="row">prénom</th>
+                                                            <th scope="row">Prénom</th>
                                                             <td>{{ kid.name }}</td>
                                                         </tr>
                                                         <tr>
@@ -197,7 +225,7 @@
                                                         <tr>
                                                             <th class="table-light" scope="row">Annuler</th>
                                                             <td class="table-light">
-                                                                <button class="btn btn-eura text-center" href="#"><iclass="fas fa-eraser"></i></a>
+                                                                <a href="#"><button class="btn btn-eura text-center"><i class="fas fa-eraser"></i></button></a>
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -223,8 +251,7 @@
                                                         <td>{{ p.name }}</td>
                                                         <td>{{ p.startdate|date('d-m-Y') }}</td>
                                                         <td>
-                                                            <button class="btn btn-eura text-center" href="#"><i
-                                                                        class="fas fa-eraser"></i></a>
+                                                            <a href="#"><button class="btn btn-eura text-center"><i class="fas fa-eraser"></i></button></a>
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
@@ -247,22 +274,32 @@
                                         <p class="card-text">{{ program.description }}</p>
                                         <i class="far fa-calendar-alt"></i>
                                         {% if program.registration %}
-                                            <p>{{ program.registration|date('d-m-Y') }}</p>
+                                            <p>Inscriptions à partir du {{ program.registration|date('d-m-Y') }}</p>
                                         {% endif %}
                                         <p>{{ program.startdate|date('d-m-Y') }}{% if program.enddate %} au {{ program.enddate|date('d-m-Y') }}{% endif %}</p>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="button" class="btn btn-eura" data-toggle="modal"
-                                                data-target="#p{{ program.id }}">
-                                            Réserver
-                                        </button>
+                                        {% if program.registration %}
+                                            {% if date().timestamp >= program.registration.timestamp %}
+                                                {% if date().timestamp < program.startdate.timestamp %}
+                                                    <button type="button" class="btn btn-eura" data-toggle="modal" data-target="#p{{ program.id }}">Réserver</button>
+                                                {% else %}
+                                                    <button type="button" class="btn btn-eura" disabled>Réservations terminées</button>
+                                                {% endif %}
+                                            {% else %}
+                                                <button type="button" class="btn btn-eura" disabled>Réservations non ouvertes</button>
+                                            {% endif %}
+                                        {% else %}
+                                            <button type="button" class="btn btn-eura" data-toggle="modal" data-target="#p{{ program.id }}">Réserver</button>
+                                        {% endif %}
                                     </div>
                                 </div>
-                            {% endfor %}    
-                            </div>
+                            {% endfor %}
+                        </section>
+                    </div>
                             
-                            {% for program in programs %}
-                            <!-- Modal Programme:{{ program.id }} -->
+                    {% for program in programs %}
+                        <!-- Modal Programme:{{ program.id }} -->
                         <div class="container">
                             <div class="modal fade" id="p{{ program.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -284,21 +321,19 @@
                                                         <br />
                                                     {% endif %}
                                                 {% endfor %}
-                                                </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-eura">Valider</button>
-                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-eura">Valider</button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>     
-                                <!-- Fin - Modal Programme:{{ program.id }} -->
-                            {% endfor %}
-                        </section>
-                    </div>
+                            </div>
+                        </div>
+                        <!-- Fin - Modal Programme:{{ program.id }} -->
+                    {% endfor %}
                     </div>
                 </div>
-        </div>
+            </div>
     </div>
 {% endblock %}

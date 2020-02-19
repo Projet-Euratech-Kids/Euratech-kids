@@ -20,10 +20,10 @@ easy_admin:
             form:
                 fields:
                     - { property: 'name' }
-                    - { property: 'description', type: 'text_editor' }
-                    - { property: 'registration' }
-                    - { property: 'startdate' }
-                    - { property: 'enddate' }
+                    - { property: 'description' }
+                    - { property: 'registration', type: 'App\Form\CustomDateType' }
+                    - { property: 'startdate', type: 'App\Form\CustomDateType' }
+                    - { property: 'enddate', type: 'App\Form\CustomDateType' }
                     - { property: 'category' }
                     - { property: 'important', type: 'text_editor' }
                     - { property: 'kids' }
