@@ -34,21 +34,9 @@ class PostImageSubscriber implements EventSubscriberInterface
         $result = $event->getSubject();
         $method = $event->getArgument('request')->getMethod();
 
-//  possibilité de ragouter les image dans program et workshop / champ de table supprimé dans les entity
-
-        //if (! $result instanceof Category || $method !== Request::METHOD_POST) {
-        //    return;
-        //}
-        if (! $result instanceof Gallery || $method !== Request::METHOD_POST) {
+        if ((! $result instanceof Program && ! $result instanceof Workshop && ! $result instanceof Gallery && ! $result instanceof Category) || $method !== Request::METHOD_POST) {
             return;
         }
-        //
-        //if (! $result instanceof Program || $method !== Request::METHOD_POST) {
-        //    return;
-        //}
-        //if (! $result instanceof Workshop || $method !== Request::METHOD_POST) {
-        //    return;
-        //}
 
         if ($result->getImage() instanceof UploadedFile) {
             $url = $this->imagesService->saveToDisk($result->getImage());
@@ -60,7 +48,7 @@ class PostImageSubscriber implements EventSubscriberInterface
         $result = $event->getSubject();
         $method = $event->getArgument('request')->getMethod();
 
-        if (! $result instanceof Category || $method !== Request::METHOD_POST) {
+        if ((! $result instanceof Program && ! $result instanceof Workshop && ! $result instanceof Gallery && ! $result instanceof Category) || $method !== Request::METHOD_POST) {
             return;
         }
         if ($result->getImage() instanceof UploadedFile) {
