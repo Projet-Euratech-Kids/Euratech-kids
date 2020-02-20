@@ -3,12 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Newsletter;
+use App\Entity\Contact;
 use App\Entity\User;
 use App\Form\NewsletterFormType;
 use App\Form\ContactType;
 use App\Form\RegistrationFormType;
 use App\Form\NewsletterType;
-use App\Entity\Newsletter;
 use App\Repository\ProgramRepository;
 use App\Repository\WorkshopRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,7 +38,8 @@ class IndexController extends AbstractController
                           Request $request,
                           UserPasswordEncoderInterface $passwordEncoder,
                           WorkshopRepository $workshopRepository,
-                          MailerInterface $mailer)
+                          MailerInterface $mailer,
+                          Contact $contact)
 
     {
       $programs = $programRepository->findAll();
@@ -97,21 +98,19 @@ class IndexController extends AbstractController
 
         //Contact Form
 
+        $contact = new Contact();
         $contact = $this->createForm(ContactType::class);
         $contact->handleRequest($request);
 
         if ($contact->isSubmitted() && $contact->isValid()) {
             $email = (new TemplatedEmail())
-                ->from('hello@example.com')
-                ->to($user->getMail())
-                ->subject('Mail confirmation')
-                ->htmlTemplate('mail/confirmMail.html.twig')
-                ->context([
-                    'user' => $user,
-                ]);
-            $mailer->send($email);
-          
+                ->from($contact->getEmail())
+                ->to('Matthieu@gmail.com')
+                ->subject('Contact Euratech-Kids de la part de ' . $contact->getName())
+                ->htmlTemplate('mail/contact.html.twig');
         }
+        
+        /*$mailer->send($email); */
 
         return $this->render('index/index.html.twig', [
             'controller_name' => 'IndexController',
