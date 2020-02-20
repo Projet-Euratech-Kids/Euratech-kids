@@ -2,10 +2,6 @@
 
 namespace App\Form;
 
-<<<<<<< HEAD
-=======
-use App\Entity\Contact;
->>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -24,14 +20,4 @@ class ContactType extends AbstractType
             ->add('message',TextareaType::class)
         ;
     }
-<<<<<<< HEAD
-=======
-
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => Contact::class,
-        ]);
-    }
->>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
 }

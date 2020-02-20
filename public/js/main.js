@@ -204,16 +204,4 @@ $("input[type=checkbox]").on( "click", function(){
   } else {
      $("#mdp").attr("type","password");
   }
-<<<<<<< HEAD
 });
-=======
-});
-
-
-/* btn hover effect */
-$(".hover").mouseleave(
-    function() {
-      $(this).removeClass("hover");
-    }
-  );
->>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
