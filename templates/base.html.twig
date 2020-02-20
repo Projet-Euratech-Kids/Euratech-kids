@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="EuraTech'Kids : coding, robotique, créativité, mettez vos enfants à l'heure du numérique !
+        La pédagogie est axée sur le jeu, la découverte et la création. Une approche ludique est essentielle
+        pour développer la curiosité, libérer la créativité et susciter l'intérêt de chaque enfant de 5 à 15 ans.">
+        <meta name="keywords" content="Euratech'Kids, Euratechnologies, ateliers coding Lille, ateliers robotique Lille, ateliers coding vacances, ateliers robotique vacances, atelier coding mercredi, atelier robotique mercredi, atelier coding et robotique en semaine, coding, robotique, Lille, ateliers gratuits">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}Euratech'kids!{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+            <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        
+        {% block footer %}
+            <footer class="container-fluid text-white shadow-lg" style="background-color: rgb(78,103,169);">
+                <div class="container">
+                    <div class="row pt-5">
+                        <div class="col-6 col-lg-3 col-md-3 pb-3"><img id="eura" src="{{ asset('img/euratechnologies-logo-white.svg') }}" alt="euratech" class="mr-3 img-fluid"></div>
+                        <div class="col-6 col-lg-3 col-md-3 pb-3"><img id="lille" src="{{ asset('img/Logo_de_Lille.png') }}" alt="Lille" class="img-fluid"></div>
+                        <div class="col-12 col-lg-3 col-md-3 pb-3">
+                            <p class="text-left">
+                                EuraTech'Kids
+                                <br>
+                                EuraTechnologies
+                                <br>
+                                165 Avenue de Bretagne, 59000 Lille
+                            </p>
+                        </div>
+                        <div class="col-12 col-lg-3 col-md-3 pb-3">
+                            <a href="{{ path('condition') }}" class="text-white">Conditions Générales d'Utilisation</a><br>
+                            <a href="{{ path('mention') }}" class="text-white">Mentions Légales</a>
+                            <div class="mt-2">
+                                <a href="#"><i class="fab fa-instagram fa-2x mr-4 text-white"></i></a>
+                                <a href="#"><i class="fab fa-twitter fa-2x mr-4 text-white"></i></a>
+                                <a href="#"><i class="fab fa-facebook-square fa-2x text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pb-5">
+                        <div class="col">
+                            <p class="text-center mt-4">Copyright © 2020, Euratech'Kids. Tous droits réservés.</p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        {% endblock %}
+        
+        {% block javascripts %}
+            <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+            <script>AOS.init();</script>
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+            <script src="{{ asset('js/main.js') }}"></script>
+            <script src="{{ asset('js/program.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

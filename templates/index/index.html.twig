@@ -1,0 +1,526 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <header class="shadow">
+        <!--Mise en place du menu-->
+        <div id="sideNavigation" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="#programmes" class="nav-link" onclick="closeNav()">Nos programmes</a>
+            <a href="#planning" class="nav-link" onclick="closeNav()">Le planning</a>
+            <a href="#school" class="nav-link" onclick="closeNav()">Pour les ecoles</a>
+            <a href="#galery-link" class="nav-link" onclick="closeNav()">Album</a>
+            <a href="#contact" class="nav-link" onclick="closeNav()">Contact</a>
+        </div>
+
+        <!--Utilisation d'une svg-->
+        <nav class="topnav">
+            <a onclick="openNav()" class="pr-0">
+                <svg width="30" height="30">
+                    <path d="M0,5 30,5" stroke="rgb(176,176,176)" stroke-width="2"/>
+                    <path d="M0,14 30,14" stroke="rgb(176,176,176)" stroke-width="2"/>
+                    <path d="M0,23 30,23" stroke="rgb(176,176,176)" stroke-width="2"/>
+                </svg>
+            </a>
+        </nav>
+        <!--Mise en place du logo-->
+        <img id="logo" class="mx-auto d-block mt-3 nav-link" src="{{asset('img/logo-kids.png')}}" alt="Logo Kids" href="#top" style="cursor: pointer;">
+
+        <div class="button ml-3 mr-5" id="buttons-h">
+            {% if app.user %}
+                <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ app.user.firstname }} {{ app.user.lastname }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="dropdown-item" href="{{ path('easyadmin') }}">Administrer</a>
+                    {% endif %}
+                    <a class="dropdown-item" href="{{ path('member',{'id': app.user.id}) }}">Réservations</a>
+                    <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
+                </div>
+            {% else %}
+            <a class="btn btn-outline-eura btn-sm mr-3" data-toggle="modal" data-target="#connexion">Connexion</a>
+            <a class="btn btn-eura btn-sm mr-3" data-toggle="modal" data-target="#inscription">Inscription</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Top Image -->
+    <div class="container-fluid position" id="top">
+
+        <div id="buttons" class="py-3 text-right">
+            {% if app.user %}
+                <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ app.user.firstname }} {{ app.user.lastname }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="dropdown-item" href="{{ path('easyadmin') }}">Administrer</a>
+                    {% endif %}
+                    <a class="dropdown-item" href="{{ path('member',{'id': app.user.id}) }}">Réservations</a>
+                    <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
+                </div>
+            {% else %}
+                <button class="btn btn-eura btn-sm mr-3" data-toggle="modal" data-target="#connexion">Connexion</button>
+                <button class="btn btn-eura btn-sm mr-3" data-toggle="modal" data-target="#inscription">Inscription</button>
+            {% endif %}
+        </div>
+
+        <div class="col-md-12 pr-0 pl-0 text-white text-center">
+            <div class="card border-0 m-0" id="top-image">
+                <img class="card-img" src="{{asset('img/20191022_153109.jpg')}}" alt="enfant parent" style="z-index: 1;">
+                <div class="card-img-overlay d-flex align-items-center justify-content-center flex-column caption" style="z-index: 3;">
+                    <div id="ombre" class="text-center">
+                        <div id="text-desk" data-aos="fade-up" data-aos-duration="2000">
+                            <h2 class="text-warning">Initiez vos enfants au monde du numérique</h2>
+                            <p>EuraTechnologies renforce son programme d’accompagnement des plus jeunes avec EURATECH’KIDS pour donner aux enfants le goût de la programmation et les projeter dans le futur.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="text-phone" class="text-center pt-4">
+            <h2 class="mb-3">Initiez vos enfants au monde du numérique</h2>
+            <p class="">EuraTechnologies renforce son programme d’accompagnement des plus jeunes avec EURATECH’KIDS pour donner aux enfants le goût de la programmation et les projeter dans le futur.</p>
+        </div>
+
+    </div>
+    <!-- Fin - Top Image -->
+
+    <!-- Modal Connexion -->
+    <div class="modal fade" id="connexion" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form method="POST" action="{{ path('login') }}">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Connexion</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="avatar" class="mx-auto shadow">
+                            <div id="roulette"></div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="mail">Email</label>
+                            <input type="text" name="_username" id="mail" class="form-control" placeholder="Email" required autofocus>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" name="_password" id="mdp" class="form-control" placeholder="Mot de passe" required>
+                        </div>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-eura">Se connecter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Fin - Modal Connexion -->
+
+    <!-- Modal Inscription -->
+    <div class="modal fade" id="inscription" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Inscription</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                 {{ form_start(registrationForm) }}
+
+                    <div class="modal-body">
+                        {{ form_row(registrationForm.mail) }}
+                        {{ form_row(registrationForm.lastname) }}
+                        {{ form_row(registrationForm.firstname) }}
+                        {{ form_row(registrationForm.phone, {'attr': {'pattern': '[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}'}}) }}
+                        {{ form_row(registrationForm.plainPassword) }}
+                        {{ form_row(registrationForm.agreeTerms) }}
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-eura">S'inscrire</button>
+                    </div>
+
+                        {{ form_end(registrationForm) }}
+
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin - Modal Inscription -->
+
+    <!-- Pedagogie -->
+    <section id="pedagogy" class="pb-5 pt-5">
+        <div class="container-md p-0">
+            <div class="Pedagogy-presentation text-center">
+                <h1 class="pb-3">Notre pédagogie</h1>
+                <p> Les ateliers coding, robotique et créatif sont l’occasion de faire découvrir aux enfants le champ des
+                    possibles du numérique à travers des idées de projets qu’ils souhaitent réaliser en faisant appel à leur
+                    imagination. La pédagogie de nos ateliers
+                    est axée sur le jeu, la découverte et la création. Nous pensons que l’approche doit être ludique pour
+                    développer la curiosité, libérer la créativité et susciter l’intérêt de chaque enfant. L’articulation du
+                    programme se compose de plusieurs
+                    ateliers qui partent de la découverte de l’univers numérique jusqu’à la réalisation du projet de l’enfant
+                    par ses soins.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Les Programmes -->
+    <section id="programmes">
+        <div class="container-fluid">
+            <h3 class="text-center h2">Découvrez nos programmes</h3>
+            <section id="programmes" class="mt-5 row justify-content-md-around">
+                {% for workshop in workshops %}
+                    <div class="card border-0 mx-auto col-lg-3 mb-4">
+                        <div class="card-title mt-2">
+                            <h3 class="pt-3 text-center">{{ workshop.title }}</h3>
+                        </div>
+                            {% if workshop.category.image %}
+                                <img class="card-img-top rounded mt-4" src="{{ workshop.category.image }}" alt="card photos">
+                            {% endif %}
+                        <h4 class="pt-3 text-center">{{ workshop.category }}</h4>
+                        <div class="card-body">
+                            <p class="card-text">{{ workshop.description|raw }}</p>
+                        </div>
+                        <div class="card-footer mx-auto">
+                            <a data-toggle="modal" data-target="#workshop-{{ workshop.id }}" class="btn btn-eura">En savoir plus</a>
+                        </div>
+                    </div>
+
+                    <!-- Modal Explorateur -->
+                    <div class="modal fade" id="workshop-{{ workshop.id }}" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">{{ workshop.category }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body text-left">
+                                    <p>
+                                        <span class="text-eura font-weight-bold"Détail des cycles :</span> {{ workshop.article|raw }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <!-- Fin - Modal Explorateur -->
+            </section>
+        </div>
+    </section>
+    <!-- Fin - Les Programmes -->
+
+    <!-- Partie planning -->
+    <section id="planning">
+        <h3 class="text-center mt-5 mb-4 h2">Planning</h3>
+        <!-- Timeline -->
+        <ul class="timeline mx-lg-5 mx-3">
+            {% for program in programs %}
+                {% if((loop.index)%2 != 0) %}
+            <li>
+                <div class="timeline-badge purple"><i class="fas fa-arrow-left"></i></div>
+                <div class="timeline-panel time-left" style="z-index: 5;">
+                    <div class="timeline-heading">
+                        {% if program.category.image %}
+                            <img class="card-img-top rounded mt-4" src="{{ program.category.image }}" alt="card photos">
+                        {% endif %}
+                    </div>
+                    <h4 class="timeline-title">{{ program.category.name }}</h4>
+                    <div class="timeline-body">
+                        <p>{{ program.description }}</p>
+                        {% if program.important %}
+                            <div id="accordion">
+                                <div>
+                                    <div id="headingOne">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                Important
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <p>{{ program.important }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <br />
+                        <!-- fin modal important -->
+                        <!--Les activités proposées au Learning District sont financées par la Ville de Lille c’est pourquoi elles sont réservées aux habitants de Lille, Lomme et Hellemmes.<br />
+                        Pour vous inscrire, nous vous demanderons donc un justificatif de domicile.Si vous habitez à Lille, Lomme ou Hellemmes, vous pouvez inscrire vos enfants et nous vous transférons les documents à remplir et à nous retourner.<br />
+                        Si toute les places ne sont pas réservées par des Lillois, Lommois et Hellemmois nous reviendrons vers ceux en aillant fait la demande par email.</p> -->
+                        <div class="date">
+                            {% if program.registration %}
+                            <p>Inscriptions à partir du {{ program.registration|date('d-m-Y') }}<br /></p>
+                            {% endif %}
+                            <p>{{ program.startdate|date('d-m-Y') }} {% if program.enddate %} au {{ program.enddate|date('d-m-Y') }}{% endif %}</p>
+                        </div><br>
+                        {% if program.category.name != "Vacances" %}
+                            {% if app.user %}
+                                <a href="{{ path('member',{'id': app.user.id}) }}"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
+                            {% else %}
+                                <a data-toggle="modal" data-target="#connexion"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
+            {% endif %}
+            {% if((loop.index)%2 == 0) %}
+            <li class="timeline-inverted right">
+                <div class="timeline-badge warning"><i class="fas fa-arrow-right arrow-right"></i></div>
+                <div class="timeline-panel time-right" style="z-index: 4;">
+                    <div class="timeline-heading">
+                        {% if program.category.image %}
+                            <img class="card-img-top rounded mt-4" src="{{ program.category.image }}" alt="card photos">
+                        {% endif %}
+                    </div>
+                    <div class="timeline-body">
+                        <h4 class="timeline-title">{{ program.category.name }}</h4>
+                        <p>{{ program.description }}</p>
+                        {% if program.important %}
+                            <div id="accordion">
+                                <div>
+                                    <div id="headingOne">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                Important
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <p>{{ program.important }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <br />
+                        <div class="date">
+                            {% if program.registration %}
+                                <p>Inscriptions à partir du {{ program.registration|date('d-m-Y') }}<br /></p>
+                            {% endif %}
+                            <p>{{ program.startdate|date('d-m-Y') }} {% if program.enddate %} au {{ program.enddate|date('d-m-Y') }}{% endif %}</p>
+                        </div><br>
+                        {% if program.category.name != "Vacances" %}
+                            {% if app.user %}
+                                <a href="{{ path('member',{'id': app.user.id}) }}"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
+                            {% else %}
+                                <a data-toggle="modal" data-target="#connexion"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+        <!-- Timeline -->
+    </section>
+
+    <!-- Image de séparation -->
+    <section id="separatorImg" class="mt-3 mb-4">
+
+    </section>
+
+    <!-- Ecole -->
+    <section id="school">
+        <div class="jumbotron mx-4 shadow">
+            <!-- <h2 class="text-center mb-5">Ecoles</h2> -->
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="text-center mb-3">Ecole maternelle</h3>
+                    <p class="lead">Les technologies utilisées et adaptées pour les plus jeunes permettent aux élèves de découvrir avec et/ou sans tablette les notions du code informatique. Sans la tablette nous utilisons des petits robots éducatifs : Thymio® le robot déjà programmé, BeeBot® l'abeille programmable, Jack la souris qui code et Cubetto®, le robot éducatif en bois.  Avec la Tablette, nous avons une diversité d'applications afin que les élèves découvrent les notions du code informatique tout en s'amusant. Exemple : Scratch® JR / codeKarts® /...</p>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="text-center mb-3">Ecole primaire</h3>
+                    <p class="lead">A travers différents ateliers utilisant une technologie adaptée, EuraTech'Kids fait découvrir à vos élèves les notions du code informatique : atelier robotique, construction et programmation de robot, création de petits jeux vidéo avec Scratch®, découverte de la 3D avec impression 3D et sensibilisation à l'électronique.</p>
+                </div>
+            </div>
+            <hr class="my-4">
+            <p class="text-center">Durée : 1 journée avec possibilité de déjeuner sur place (prévoir un pique-nique). 1/2 journée matin ou après-midi.</p>
+            <div class="text-center">
+                <a class="nav-link btn btn-eura btn-lg" href="#contact" role="button">Demander votre devis</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galerie d'image -->
+    <h2 id="galery-link" class="text-center mt-5">Galerie d'images</h2>
+    <!-- Galerie Ordinateur -->
+    <section id="galery" class="container mt-5 galery-desk">
+        <div class="row mx-3">
+            <div class="col-md-3 mb-3">
+                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
+            </div>
+            <div class="col-md-3 mb-3">
+                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
+            </div>
+            <div class="col-md-3 mb-3">
+                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
+            </div>
+            <div class="col-md-3 mb-3">
+                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
+            </div>
+            <div class="col-md-3">
+                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
+            </div>
+            <div class="col-md-3">
+                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
+            </div>
+            <div class="col-md-3">
+                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
+            </div>
+            <div class="col-md-3">
+                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
+            </div>
+        </div>
+    </section>
+    <!-- Fin - Galerie Ordinateur -->
+    <!-- Galerie Smartphone -->
+    <section id="galery" class="container-fluid galery-phone">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="assets/img/20191022_153109.jpg" class="rounded" alt="#">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/img/20191022_153109.jpg" class="rounded" alt="#">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/img/20191022_153109.jpg" class="rounded" alt="#">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </section>
+    <!-- Fin - Galerie Smartphone -->
+    <!-- Fin - Galerie d'image -->
+
+    <!-- Image de séparation -->
+    <section id="separatorImgNewsletter" class="mt-5 mb-4">
+        <div class="caption">
+            <div class="col-12 col-lg-5 col-md-6 mx-auto" id="newsletter">
+                <h3 class="text-warning h2">Newsletter</h3>
+                <p class="text-white">Abonnez-vous à notre newsletter pour être informé de notre actualité et de nos événements.</p>
+                <div class="text-white">
+                    {{ form_start(newsletterForm, {'attr':{'id':'subscribe'}}) }}
+                    {{ form_row(newsletterForm.mail) }}
+                    <button type="submit" id="submitNewsletter" class="btn btn-eura mt-3" data-toggle="modal" data-target="#sub">M'abonner</button>
+                    {{ form_end(newsletterForm) }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="mt-5">
+        <div class="row px-5">
+            <!-- <div class="col-12 col-lg-6 pt-5"> -->
+            <div class="col-12 col-lg-6 col-md-8 mx-auto pt-5 px-lg-5 px-3">
+                <h3 class="text-center h2">Contactez nous</h3>
+                {{ form_start(contactform) }}
+                {{ form_row(contactform.email, {'attr':{  'required' : 'required'}}) }}
+                {{ form_row(contactform.name, {'attr':{  'required' : 'required'}}) }}
+                {{ form_row(contactform.tel, {'attr': {'pattern': '[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}', 'required' : 'required' }}) }}
+                {{ form_row(contactform.message, {'attr':{  'required' : 'required'}}) }}
+                <button class="btn btn-eura btn-block mb-3">Envoyer</button>
+                {{ form_end(contactform) }}
+            </div>
+
+            <!-- Modal Send -->
+            <div class="modal fade" id="send" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <img class="img-fluid" src="{{asset('img/undraw_Mail_sent_qwwx.png')}}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="text-center">Message Envoyé !</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="ok" type="button" class="btn btn-eura btn-block mx-5" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin - Modal Send -->
+
+            <!-- Modal Subscribe -->
+            <div class="modal fade" id="sub" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <img class="img-fluid" src="{{asset('img/undraw_confirmation_2uy0.png')}}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="text-center">Inscription Confirmée !</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="checked" type="button" class="btn btn-eura btn-block mx-5" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin - Modal Subscribe -->
+
+            <!-- <div class="col-12 col-lg-4 mx-auto py-5">
+                <h2>Newsletter</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="email">Adresse mail</label>
+                        <input type="email" class="form-control" name="email">
+                        <button type="" id="submitNewsletter" class="btn btn-eura mt-3">M'abonner</button>
+                    </div>
+                </form>
+            </div> -->
+        </div>
+        <div class="row">
+            <div class="col-12 pr-2 pl-2" id="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2530.6812896777224!2d3.0178653157380126!3d50.633037179501024!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c2d55c764ab439%3A0x2e9bfd5c48d283b!2sEuraTechnologies!5e0!3m2!1sfr!2sfr!4v1580645598517!5m2!1sfr!2sfr" width="100%" height="600" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+            </div>
+        </div>
+    </section>
+    <!-- Fin - Contact -->
+{% endblock %}
