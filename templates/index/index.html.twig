@@ -443,13 +443,13 @@
         <div class="row px-5">
             <!-- <div class="col-12 col-lg-6 pt-5"> -->
             <div class="col-12 col-lg-6 col-md-8 mx-auto pt-5 px-lg-5 px-3">
-                <h2 class="text-center">Contactez nous</h2>
+                <h3 class="text-center h2">Contactez nous</h3>
                 {{ form_start(contactform) }}
                 {{ form_row(contactform.email, {'attr':{  'required' : 'required'}}) }}
                 {{ form_row(contactform.name, {'attr':{  'required' : 'required'}}) }}
                 {{ form_row(contactform.tel, {'attr': {'pattern': '[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}', 'required' : 'required' }}) }}
                 {{ form_row(contactform.message, {'attr':{  'required' : 'required'}}) }}
-                <button class="btn btn-success btn-block mb-3">Envoyer</button>
+                <button class="btn btn-eura btn-block mb-3">Envoyer</button>
                 {{ form_end(contactform) }}
             </div>
 
