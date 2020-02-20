@@ -26,7 +26,6 @@ class MemberController extends AbstractController
                           UserRepository $userRepository,
                           KidsRepository $kidsRepository,
                           User $user,
-                          Program $program,
                           Request $request)
     {
         $member = $userRepository->findAll();

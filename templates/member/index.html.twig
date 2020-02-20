@@ -322,7 +322,12 @@
                                             <div class="form-check text-left">
                                                 {% for kid in app.user.kids %}
                                                     {% if program not in kid.programs %}
-                                                        <p><a href="{{ path('booking', {p_id: program.id, k_id: kid.id}) }}">{{ kid.name }}</a></p>
+                                                    {% set age = (date().timestamp - kid.birthday.timestamp)/31536000 %}
+                                                        {% if age >= program.category.minAge %}
+                                                            {% if age <= program.category.maxAge %}
+                                                                <p><a href="{{ path('booking', {p_id: program.id, k_id: kid.id}) }}">{{ kid.name }}</a></p>
+                                                            {% endif %}
+                                                        {% endif %}
                                                     {% endif %}
                                                 {% endfor %}
                                             </div>

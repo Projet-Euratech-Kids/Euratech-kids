@@ -48,7 +48,9 @@ easy_admin:
                     - { property: 'description' }
                     - { property: 'slug' }
                     - { property: 'programs' }
-                    - { property: 'workshops', label: 'Evénement' }
+                    - { property: 'workshops' }
+                    - { property: 'minAge' }
+                    - { property: 'maxAge' }
                     - { property: 'image', type: 'image', base_path: '/' }
             form:
                 fields:
@@ -56,7 +58,9 @@ easy_admin:
                     - { property: 'description' }
                     - { property: 'slug' }
                     - { property: 'programs' }
-                    - { property: 'workshops', label: 'Evénement' }
+                    - { property: 'workshops' }
+                    - { property: 'minAge' }
+                    - { property: 'maxAge' }
                     - { property: 'image', type: 'file', type_options: { data_class: null } }
 #        - App\Entity\User
         User:
@@ -112,7 +116,7 @@ easy_admin:
             class: App\Entity\Newsletter
             list:
                 fields:
-                    - { property: 'article' }
+                    - { property: 'mail' }
 #        - App\Entity\Gallery
         Gallery:
             class: App\Entity\Gallery
