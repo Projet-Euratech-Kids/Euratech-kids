@@ -31,6 +31,7 @@ class IndexController extends AbstractController
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param WorkshopRepository $workshopRepository
      * @param MailerInterface $mailer
+     * @param Contact $contact
      * @return RedirectResponse|Response
      * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
      */
@@ -38,8 +39,7 @@ class IndexController extends AbstractController
                           Request $request,
                           UserPasswordEncoderInterface $passwordEncoder,
                           WorkshopRepository $workshopRepository,
-                          MailerInterface $mailer,
-                          Contact $contact)
+                          MailerInterface $mailer)
 
     {
       $programs = $programRepository->findAll();
@@ -99,15 +99,15 @@ class IndexController extends AbstractController
         //Contact Form
 
         $contact = new Contact();
-        $contact = $this->createForm(ContactType::class);
-        $contact->handleRequest($request);
+        $contactform = $this->createForm(ContactType::class, $contact);
+        $contactform->handleRequest($request);
 
-        if ($contact->isSubmitted() && $contact->isValid()) {
-            $email = (new TemplatedEmail())
-                ->from($contact->getEmail())
-                ->to('Matthieu@gmail.com')
-                ->subject('Contact Euratech-Kids de la part de ' . $contact->getName())
-                ->htmlTemplate('mail/contact.html.twig');
+        if ($contactform->isSubmitted() && $contactform->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($contact);
+            $entityManager->flush();
+
         }
         
         /*$mailer->send($email); */
@@ -118,7 +118,7 @@ class IndexController extends AbstractController
             'workshops' => $workshops,
             'registrationForm' => $form->createView(),
             'newsletterForm' => $newsletterForm->createView(),
-            'contactform' => $contact->createView(),
+            'contactform' => $contactform->createView(),
 
         ]);
     }
