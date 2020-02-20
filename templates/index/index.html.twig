@@ -447,7 +447,7 @@
                 {{ form_start(contactform) }}
                 {{ form_row(contactform.email, {'attr':{  'required' : 'required'}}) }}
                 {{ form_row(contactform.name, {'attr':{  'required' : 'required'}}) }}
-                {{ form_row(contactform.tel, {'attr': {'pattern': '[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}', 'required' : 'required' }}) }}
+                {{ form_row(contactform.phone, {'attr': {'pattern': '[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}', 'required' : 'required' }}) }}
                 {{ form_row(contactform.message, {'attr':{  'required' : 'required'}}) }}
                 <button class="btn btn-success btn-block mb-3">Envoyer</button>
                 {{ form_end(contactform) }}
