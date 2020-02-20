@@ -70,8 +70,8 @@
                 <img class="card-img" src="{{asset('img/20191022_153109.jpg')}}" alt="enfant parent" style="z-index: 1;">
                 <div class="card-img-overlay d-flex align-items-center justify-content-center flex-column caption" style="z-index: 3;">
                     <div id="ombre" class="text-center">
-                        <div id="text-desk" data-aos="fade-up" data-aos-duration="3000">
-                            <h2 class="mb-3 text-warning">Initiez vos enfants au monde du numérique</h2>
+                        <div id="text-desk" data-aos="fade-up" data-aos-duration="2000">
+                            <h2 class="text-warning">Initiez vos enfants au monde du numérique</h2>
                             <p>EuraTechnologies renforce son programme d’accompagnement des plus jeunes avec EURATECH’KIDS pour donner aux enfants le goût de la programmation et les projeter dans le futur.</p>
                         </div>
                     </div>
@@ -181,7 +181,7 @@
     <!-- Les Programmes -->
     <section id="programmes">
         <div class="container-fluid">
-            <h2 class="text-center">Découvrez nos programmes</h2>
+            <h3 class="text-center h2">Découvrez nos programmes</h3>
             <section id="programmes" class="mt-5 row justify-content-md-around">
                 {% for workshop in workshops %}
                     <div class="card border-0 mx-auto col-lg-3 mb-4">
@@ -227,7 +227,7 @@
 
     <!-- Partie planning -->
     <section id="planning">
-        <h2 class="text-center mt-5 mb-4">Planning</h2>
+        <h3 class="text-center mt-5 mb-4 h2">Planning</h3>
         <!-- Timeline -->
         <ul class="timeline mx-lg-5 mx-3">
             {% for program in programs %}
@@ -347,18 +347,18 @@
             <!-- <h2 class="text-center mb-5">Ecoles</h2> -->
             <div class="row">
                 <div class="col-md-6">
-                    <h3 class="text-center">Ecole maternelle</h3>
+                    <h3 class="text-center mb-3">Ecole maternelle</h3>
                     <p class="lead">Les technologies utilisées et adaptées pour les plus jeunes permettent aux élèves de découvrir avec et/ou sans tablette les notions du code informatique. Sans la tablette nous utilisons des petits robots éducatifs : Thymio® le robot déjà programmé, BeeBot® l'abeille programmable, Jack la souris qui code et Cubetto®, le robot éducatif en bois.  Avec la Tablette, nous avons une diversité d'applications afin que les élèves découvrent les notions du code informatique tout en s'amusant. Exemple : Scratch® JR / codeKarts® /...</p>
                 </div>
                 <div class="col-md-6">
-                    <h3 class="text-center">Ecole primaire</h3>
+                    <h3 class="text-center mb-3">Ecole primaire</h3>
                     <p class="lead">A travers différents ateliers utilisant une technologie adaptée, EuraTech'Kids fait découvrir à vos élèves les notions du code informatique : atelier robotique, construction et programmation de robot, création de petits jeux vidéo avec Scratch®, découverte de la 3D avec impression 3D et sensibilisation à l'électronique.</p>
                 </div>
             </div>
             <hr class="my-4">
             <p class="text-center">Durée : 1 journée avec possibilité de déjeuner sur place (prévoir un pique-nique). 1/2 journée matin ou après-midi.</p>
             <div class="text-center">
-                <a class="btn btn-eura btn-lg" href="#" role="button">Demander votre devis</a>
+                <a class="nav-link btn btn-eura btn-lg" href="#contact" role="button">Demander votre devis</a>
             </div>
         </div>
     </section>
@@ -426,15 +426,14 @@
     <section id="separatorImgNewsletter" class="mt-5 mb-4">
         <div class="caption">
             <div class="col-12 col-lg-5 col-md-6 mx-auto" id="newsletter">
-                <h2 class="text-warning">Newsletter</h2>
+                <h3 class="text-warning h2">Newsletter</h3>
                 <p class="text-white">Abonnez-vous à notre newsletter pour être informé de notre actualité et de nos événements.</p>
-                <form>
-                    <div class="form-group">
-                        <label for="email" class="text-white">Adresse mail</label>
-                        <input type="email" class="form-control" name="email">
-                        <button type="" id="submitNewsletter" class="btn btn-eura mt-3">M'abonner</button>
-                    </div>
-                </form>
+                <div class="text-white">
+                    {{ form_start(newsletterForm, {'attr':{'id':'subscribe'}}) }}
+                    {{ form_row(newsletterForm.mail) }}
+                    <button type="submit" id="submitNewsletter" class="btn btn-eura mt-3" data-toggle="modal" data-target="#sub">M'abonner</button>
+                    {{ form_end(newsletterForm) }}
+                </div>
             </div>
         </div>
     </section>
@@ -445,13 +444,11 @@
             <!-- <div class="col-12 col-lg-6 pt-5"> -->
             <div class="col-12 col-lg-6 col-md-8 mx-auto pt-5 px-lg-5 px-3">
                 <h2 class="text-center">Contactez nous</h2>
-
                 {{ form_start(contactform) }}
                 {{ form_row(contactform.email, {'attr':{  'required' : 'required'}}) }}
                 {{ form_row(contactform.name, {'attr':{  'required' : 'required'}}) }}
                 {{ form_row(contactform.tel, {'attr': {'pattern': '[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}', 'required' : 'required' }}) }}
                 {{ form_row(contactform.message, {'attr':{  'required' : 'required'}}) }}
-
                 <button class="btn btn-success btn-block mb-3">Envoyer</button>
                 {{ form_end(contactform) }}
             </div>
@@ -481,6 +478,32 @@
                 </div>
             </div>
             <!-- Fin - Modal Send -->
+
+            <!-- Modal Subscribe -->
+            <div class="modal fade" id="sub" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <img class="img-fluid" src="{{asset('img/undraw_confirmation_2uy0.png')}}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="text-center">Inscription Confirmée !</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="checked" type="button" class="btn btn-eura btn-block mx-5" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin - Modal Subscribe -->
 
             <!-- <div class="col-12 col-lg-4 mx-auto py-5">
                 <h2>Newsletter</h2>

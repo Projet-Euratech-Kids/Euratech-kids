@@ -12,7 +12,6 @@
              alt="Logo Kids" href="#top" style="cursor: pointer;">
 
         {% if app.user %}
-
             <div class="button ml-3 mr-5">
                 <button class="btn btn-outline-eura dropdown-toggle btn-n" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ app.user.firstname }} {{ app.user.lastname }}
@@ -25,7 +24,6 @@
                     <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
                 </div>
             </div>
-
         {% endif %}
     </header>
 
@@ -62,17 +60,17 @@
                     <div class="accordion container mx-auto pt-5" id="accordionExample">
                         <div class="card text-center col-md-12">
                             <div class="card-title" id="headingOne">
-                                <h2 class="mb-2 mt-3">
+                                <div class="mb-2 mt-3">
                                     <button class="btn btn-eura text-center" type="button" data-toggle="collapse"
                                             data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                         <i class="fas fa-users"></i>
                                     </button>
-                                </h2>
+                                </div>
                             </div>
                             <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
                                  data-parent="#accordionExample">
                                 <div class="card-body">
-                                    <h2>Mes infos </h2>
+                                    <h3 class="h2">Mes infos </h3>
                                     {{ form_start(modifMember) }}
                                     {{ form_row(modifMember.mail) }}
                                     {{ form_row(modifMember.lastname) }}
@@ -81,11 +79,10 @@
                                     {{ form_row(modifMember.plainPassword) }}
                                     {{ form_row(modifMember.agreeTerms) }}
 
-
-                                    <button class="btn btn-eura">Modifier</button>
-                                    {{ form_end(modifMember) }}
-
-                                    <h2>Mes enfants </h2>
+                                <button class="btn btn-eura">Modifier</button>
+                                {{ form_end(modifMember) }}
+                              
+                                    <h3 class="h2">Mes enfants </h3>
 
                                     <div class="table-responsive">
                                         <table class="table" id="tableau">
@@ -181,7 +178,7 @@
                                     <div class="contenu">
 
                                         <button class="btn btn-eura text-center mb-3" onclick="myFunction()" type="submit">
-                                            <i class="fas fa-plus "></i></button>
+                                        <i class="fas fa-plus "></i></button>
 
                                         <br/>
                                         <div id="cible" class="flip">
@@ -190,7 +187,9 @@
                                             <div class="d-flex justify-content-center">
                                                 {{ form_row(addkids.birthday) }}
                                             </div>
+
                                             <button class="btn btn-outline-eura">Ajouter</button>
+
                                             {{ form_end(addkids) }}
                                         </div>
                                     </div>
@@ -203,36 +202,34 @@
                         <div class="jumbotron jumbotron-fluid mt-5 row text-center justify-content-md-around mx-auto  shadow-lg"
                              id="jumbo">
                             <div class="container">
-                                <h2>Vos prochains ateliers</h2><br/>
+                                <h3 class="h2">Vos prochains ateliers</h3><br/>
                                 <div class="table-responsive">
                                     <table class="table" id="tablmob">
                                         {% for kid in app.user.kids %}
-
-                                            {% if kid.programs is not empty %}
-                                                {% for p in kid.programs %}
-                                                    <tbody>
-                                                    <tr>
-                                                        <th scope="row">Prénom</th>
-                                                        <td>{{ kid.name }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">Reservation</th>
-                                                        <td>{{ p.name }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">Date</th>
-                                                        <td>{{ p.startdate|date('d-m-Y') }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="table-light" scope="row">Annuler</th>
-                                                        <td class="table-light">
-                                                            <a href="{{ path('cancel', {p_id: p.id, k_id: kid.id}) }}"><button class="btn btn-eura text-center"><i class="fas fa-eraser"></i></button></a>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                {% endfor %}
-                                            {% endif %}
-
+                                                {% if kid.programs is not empty %}
+                                                    {% for p in kid.programs %}
+                                                        <tbody>
+                                                        <tr>
+                                                            <th scope="row">Prénom</th>
+                                                            <td>{{ kid.name }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Reservation</th>
+                                                            <td>{{ p.name }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Date</th>
+                                                            <td>{{ p.startdate|date('d-m-Y') }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="table-light" scope="row">Annuler</th>
+                                                            <td class="table-light">
+                                                                <a href="{{ path('cancel', {p_id: p.id, k_id: kid.id}) }}"><button class="btn btn-eura text-center"><i class="fas fa-eraser"></i></button></a>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    {% endfor %}
+                                                {% endif %}
                                         {% endfor %}
                                     </table>
                                 </div>
@@ -246,7 +243,6 @@
                                     </tr>
                                     </thead>
                                     {% for kid in app.user.kids %}
-
                                         {% if kid.programs is not empty %}
                                             {% for p in kid.programs %}
                                                 <tr>
@@ -259,7 +255,6 @@
                                                 </tr>
                                             {% endfor %}
                                         {% endif %}
-
                                     {% endfor %}
                                 </table>
                             </div>
@@ -267,7 +262,7 @@
                     </div>
                     <!-- Les programmes -->
                     <div class="container mx-auto mb-5">
-                        <h2 class="text-center">Les programmes à venir </h2>
+                        <h3 class="text-center h2">Les programmes à venir </h3>
                         <section id="programmes" class="mt-5 row text-center justify-content-md-around">
                             {% for program in programs %}
                                 <div class="card lg-3 col-md-5 mx-3 mb-5">
@@ -301,7 +296,6 @@
                             {% endfor %}
                         </section>
                     </div>
-
                     {% for program in programs %}
                         <!-- Modal Programme:{{ program.id }} -->
                         <div class="container">
@@ -309,7 +303,7 @@
                                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalScrollableTitle">Reserver pour {{ program.name }}</h5>
+                                            <h5 class="modal-title" id="exampleModalScrollableTitle">Reserver pour id {{ program.id }}</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -324,9 +318,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-
                                             <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Fermer</button>
-
                                         </div>
                                     </div>
                                 </div>
@@ -334,10 +326,8 @@
                         </div>
                         <!-- Fin - Modal Programme:{{ program.id }} -->
                     {% endfor %}
-
                 </div>
             </div>
         </div>
-
     </div>
 {% endblock %}

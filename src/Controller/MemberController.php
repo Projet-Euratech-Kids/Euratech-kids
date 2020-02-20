@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Kids;
 use App\Entity\Program;
 use App\Entity\User;
+use App\Form\AddKidsType;
+use App\Form\BookingFormType;
 use App\Form\AddKidsProgType;
 use App\Form\AddKidsType;
 use App\Form\ProgramType;
@@ -38,7 +40,7 @@ class MemberController extends AbstractController
 
         // Modif Member
 
-        $modifMember = $this->createForm(RegistrationFormType::class, $user);
+        $modifMember = $this->createForm(RegistrationFormType::class,$user);
         $modifMember->handleRequest($request);
 
         if ($modifMember->isSubmitted() && $modifMember->isValid()) {
@@ -65,17 +67,67 @@ class MemberController extends AbstractController
             return $this->redirectToRoute('member', ["id" => $addKids->getUser()->getId()]);
         }
 
+        // Add Kids Form
+
+        $addKids = new Kids();
+        $add = $this->createForm(AddKidsType::class, $addKids);
+        $add->handleRequest($request);
+
+        if($add->isSubmitted() && $add->isValid()) {
+            if (!$addKids->getUser()) {
+                $addKids->setUser($this->getUser());
+            }
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($addKids);
+            $entityManager->flush();
+            $this->addFlash('addkids','Votre enfant a bien etait ajoute.');
+
+            return $this->redirectToRoute('member', ["id" => $addKids->getUser()->getId()]);
+        }
+
         return $this->render('member/index.html.twig', [
             'controller_name' => 'MemberController',
             'member' => $member,
             'programs' => $programs,
             'kids' => $kids,
             'modifMember' => $modifMember->createView(),
-            'addkids' => $add->createView(),
+            'addkids'=> $add->createView(),
         ]);
 
 
     }
+
+    /**
+     * @Route("/booking/{p_id}/{k_id}", name="booking")
+     */
+    public function booking($p_id, $k_id, KidsRepository $kidsRepository, ProgramRepository $programRepository) :Response
+    {
+      $kid = $kidsRepository->find($k_id);
+      $prog = $programRepository->find($p_id);
+      $prog->addKid($kid);
+
+      $entityManager = $this->getDoctrine()->getManager();
+      $entityManager->persist($prog);
+      $entityManager->flush();
+
+      return $this->redirectToRoute('member', ["id" => $kid->getUser()->getId()]);
+    }
+
+  /**
+   * @Route("/cancel/{p_id}/{k_id}", name="cancel")
+   */
+  public function cancel($p_id, $k_id, KidsRepository $kidsRepository, ProgramRepository $programRepository) :Response
+  {
+    $k = $kidsRepository->find($k_id);
+    $p = $programRepository->find($p_id);
+    $p->removeKid($k);
+
+    $entityManager = $this->getDoctrine()->getManager();
+    $entityManager->persist($p);
+    $entityManager->flush();
+
+    return $this->redirectToRoute('member', ["id" => $k->getUser()->getId()]);
+  }
 
     /**
      * @Route("/delkid/{id}",name="del_kid",methods={"DELETE"})

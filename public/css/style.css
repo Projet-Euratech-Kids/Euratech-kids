@@ -5,6 +5,7 @@ html {
 
 h1, h2, h3, h4 {
     color: #f0ad4e !important;
+    margin: auto;
 }
 
 /*Header et menu */
@@ -159,6 +160,103 @@ a svg:hover{
     left: 50% !important; /* à 50%/50% du parent référent */
     transform: translate(-50%, -50%);
 }
+
+/* Animation border sur le titre et texte dans l'image */
+
+h2{
+    text-decoration: none;
+    height: 70px;
+}
+h2:before{
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: 0;
+    height: 0;
+    background: transparent;
+    border: 2px solid transparent;
+}
+h2:before{
+   animation: animate 1s linear forwards;
+   animation-delay: 1s;
+}
+@keyframes animate{
+    0%{
+        width: 0;
+        height: 0;
+        border-top-color: #f0ad4e;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-radius: 5px;
+    }
+    50%{
+        width: 100%;
+        height: 0;
+        border-top-color: #f0ad4e;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        border-right-color: #f0ad4e;
+        border-radius: 5px;
+    }
+    100%{
+        width: 100%;
+        height: 100%;
+        border-top-color: #f0ad4e;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        border-right-color: #f0ad4e;
+        border-radius: 5px;
+    }
+}
+
+h2:after{
+content: '';
+position: absolute;
+top: -2px;
+left: -2px;
+width: 0;
+height: 0;
+background: transparent;
+border: 2px solid transparent;
+}
+
+h2:after{
+animation: animate2 1s linear forwards;
+animation-delay: 1s;
+}
+
+@keyframes animate2{
+    0%{
+        width: 0;
+        height: 0;
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: #f0ad4e;
+        border-right-color: transparent;
+        border-radius: 5px;
+    }
+    50%{
+        width: 0;
+        height: 100%;
+        border-top-color: transparent;
+        border-bottom-color: #f0ad4e;
+        border-left-color: #f0ad4e;
+        border-right-color: transparent;
+        border-radius: 5px;
+    }
+    100%{
+        width: 100%;
+        height: 100%;
+        border-top-color: transparent;
+        border-bottom-color: #f0ad4e;
+        border-left-color: #f0ad4e;
+        border-right-color: transparent;
+        border-radius: 5px;
+    }
+}
+
 
 /*section 2 programme */
 

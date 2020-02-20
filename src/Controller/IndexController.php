@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Newsletter;
 use App\Entity\User;
+use App\Form\NewsletterFormType;
 use App\Form\ContactType;
 use App\Form\RegistrationFormType;
 use App\Repository\ProgramRepository;
@@ -12,9 +14,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
-
 use Symfony\Component\Mime\Email;
-
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -76,6 +76,22 @@ class IndexController extends AbstractController
             return $this->redirectToRoute('index');
         }
 
+
+      // Form Newsletter
+        $newsletter = new Newsletter();
+        $newsletterForm = $this->createForm(NewsletterFormType::class, $newsletter);
+        $newsletterForm->handleRequest($request);
+
+        if ($newsletterForm->isSubmitted() && $newsletterForm->isValid()) {
+
+          $entityManager = $this->getDoctrine()->getManager();
+          $entityManager->persist($newsletter);
+          $entityManager->flush();
+
+
+          return $this->redirectToRoute('index');
+        }
+
         //Contact Form
 
         $contact = $this->createForm(ContactType::class);
@@ -93,12 +109,12 @@ class IndexController extends AbstractController
             $mailer->send($email);
         }
 
-
         return $this->render('index/index.html.twig', [
             'controller_name' => 'IndexController',
             'programs' => $programs,
             'workshops' => $workshops,
             'registrationForm' => $form->createView(),
+            'newsletterForm' => $newsletterForm->createView(),
             'contactform' => $contact->createView(),
         ]);
     }
