@@ -43,6 +43,7 @@ class AppFixtures extends Fixture
         $category = new Category();
         $category->setName($plainCategory);
         $category->setSlug($this->slugger->slug($plainCategory)->lower());
+        $category->setImage('/uploads/images//5e4d47fa97973.jpeg');
         $manager->persist($category);
         $categories[] = $category;
       }

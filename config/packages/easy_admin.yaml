@@ -98,8 +98,7 @@ easy_admin:
 #        - App\Entity\Newsletter
         Newsletter:
             class: App\Entity\Newsletter
+            list:
+                fields:
                     - { property: 'article', type: 'text_editor' }
-#                    - {property: 'image', type: 'file'}
-
-
-
+#                   - { property: 'image', type: 'file'}
