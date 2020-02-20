@@ -97,32 +97,32 @@ class MemberController extends AbstractController
      */
     public function booking($p_id, $k_id, KidsRepository $kidsRepository, ProgramRepository $programRepository) :Response
     {
-      $kid = $kidsRepository->find($k_id);
-      $prog = $programRepository->find($p_id);
-      $prog->addKid($kid);
+        $kid = $kidsRepository->find($k_id);
+        $prog = $programRepository->find($p_id);
+        $prog->addKid($kid);
 
-      $entityManager = $this->getDoctrine()->getManager();
-      $entityManager->persist($prog);
-      $entityManager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($prog);
+        $entityManager->flush();
 
-      return $this->redirectToRoute('member', ["id" => $kid->getUser()->getId()]);
+        return $this->redirectToRoute('member', ["id" => $kid->getUser()->getId()]);
     }
 
-  /**
-   * @Route("/cancel/{p_id}/{k_id}", name="cancel")
-   */
-  public function cancel($p_id, $k_id, KidsRepository $kidsRepository, ProgramRepository $programRepository) :Response
-  {
-    $k = $kidsRepository->find($k_id);
-    $p = $programRepository->find($p_id);
-    $p->removeKid($k);
+    /**
+     * @Route("/cancel/{p_id}/{k_id}", name="cancel")
+     */
+    public function cancel($p_id, $k_id, KidsRepository $kidsRepository, ProgramRepository $programRepository) :Response
+    {
+        $k = $kidsRepository->find($k_id);
+        $p = $programRepository->find($p_id);
+        $p->removeKid($k);
 
-    $entityManager = $this->getDoctrine()->getManager();
-    $entityManager->persist($p);
-    $entityManager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($p);
+        $entityManager->flush();
 
-    return $this->redirectToRoute('member', ["id" => $k->getUser()->getId()]);
-  }
+        return $this->redirectToRoute('member', ["id" => $k->getUser()->getId()]);
+    }
 
     /**
      * @Route("/delkid/{id}",name="del_kid",methods={"DELETE"})
@@ -137,5 +137,15 @@ class MemberController extends AbstractController
         }
 
         return $this->redirectToRoute('member', ["id" => $kids->getUser()->getId()]);
+    }
+
+    /**
+     * @Route("/reservation/{id}",name="reservation")
+     * @IsGranted("ROLE_USER")
+     */
+
+    public function addKidProg()
+    {
+        return $this->render('member/reservation.html.twig');
     }
 }

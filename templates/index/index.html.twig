@@ -38,8 +38,8 @@
                     <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
                 </div>
             {% else %}
-            <a class="btn btn-outline-eura btn-sm mr-3" data-toggle="modal" data-target="#connexion">Connexion</a>
-            <a class="btn btn-eura btn-sm mr-3" data-toggle="modal" data-target="#inscription">Inscription</a>
+            <a class="btn btn-outline-eura btn-sm mr-3 effect" data-toggle="modal" data-target="#connexion">Connexion</a>
+            <a class="btn btn-outline-eura btn-sm mr-3 effect" data-toggle="modal" data-target="#inscription">Inscription</a>
             {% endif %}
         </div>
     </header>
@@ -49,7 +49,7 @@
 
         <div id="buttons" class="py-3 text-right">
             {% if app.user %}
-                <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-outline-eura dropdown-toggle effect" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ app.user.firstname }} {{ app.user.lastname }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -60,8 +60,8 @@
                     <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
                 </div>
             {% else %}
-                <button class="btn btn-eura btn-sm mr-3" data-toggle="modal" data-target="#connexion">Connexion</button>
-                <button class="btn btn-eura btn-sm mr-3" data-toggle="modal" data-target="#inscription">Inscription</button>
+                <button class="btn btn-outline-eura btn-sm mr-3 effect" data-toggle="modal" data-target="#connexion">Connexion</button>
+                <button class="btn btn-outline-eura btn-sm mr-3 effect" data-toggle="modal" data-target="#inscription">Inscription</button>
             {% endif %}
         </div>
 
@@ -79,7 +79,7 @@
             </div>
         </div>
         <div id="text-phone" class="text-center pt-4">
-            <h2 class="mb-3">Initiez vos enfants au monde du numérique</h2>
+            <h3 class="mb-3 h2">Initiez vos enfants au monde du numérique</h3>
             <p class="">EuraTechnologies renforce son programme d’accompagnement des plus jeunes avec EURATECH’KIDS pour donner aux enfants le goût de la programmation et les projeter dans le futur.</p>
         </div>
 
@@ -115,8 +115,8 @@
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-eura">Se connecter</button>
+                        <button type="button" class="btn btn-outline-eura mr-3 effect" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-outline-eura effect">Se connecter</button>
                     </div>
                 </form>
             </div>
@@ -147,8 +147,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-eura">S'inscrire</button>
+                        <button type="button" class="btn btn-outline-eura mr-3 effect" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-outline-eura effect">S'inscrire</button>
                     </div>
 
                         {{ form_end(registrationForm) }}
@@ -196,12 +196,15 @@
                             <p class="card-text">{{ workshop.description|raw }}</p>
                         </div>
                         <div class="card-footer mx-auto">
-                            <a data-toggle="modal" data-target="#workshop-{{ workshop.id }}" class="btn btn-eura">En savoir plus</a>
+
+                            <a data-toggle="modal" data-target="#workshop-{{ workshop.id }}" class="btn btn-outline-eura effect">En savoir plus</a>
                         </div>
                     </div>
 
                     <!-- Modal Explorateur -->
+
                     <div class="modal fade" id="workshop-{{ workshop.id }}" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -231,6 +234,7 @@
         <!-- Timeline -->
         <ul class="timeline mx-lg-5 mx-3">
             {% for program in programs %}
+                 {% if date().timestamp < program.startdate.timestamp %}
                 {% if((loop.index)%2 != 0) %}
             <li>
                 <div class="timeline-badge purple"><i class="fas fa-arrow-left"></i></div>
@@ -274,9 +278,9 @@
                         </div><br>
                         {% if program.category.name != "Vacances" %}
                             {% if app.user %}
-                                <a href="{{ path('member',{'id': app.user.id}) }}"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
+                                <a href="{{ path('member',{'id': app.user.id}) }}"><button class="btn btn-outline-eura btn-lg mr-3 effect">Réserver ce cours</button></a>
                             {% else %}
-                                <a data-toggle="modal" data-target="#connexion"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
+                                <a data-toggle="modal" data-target="#connexion"><button class="btn btn-outline-eura btn-lg mr-3 effect">Réserver ce cours</button></a>
                             {% endif %}
                         {% endif %}
                     </div>
@@ -322,14 +326,15 @@
                         </div><br>
                         {% if program.category.name != "Vacances" %}
                             {% if app.user %}
-                                <a href="{{ path('member',{'id': app.user.id}) }}"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
+                                <a href="{{ path('member',{'id': app.user.id}) }}"><button class="btn btn-outline-eura btn-lg mr-3 effect">Réserver ce cours</button></a>
                             {% else %}
-                                <a data-toggle="modal" data-target="#connexion"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
+                                <a data-toggle="modal" data-target="#connexion"><button class="btn btn-outline-eura btn-lg mr-3 effect">Réserver ce cours</button></a>
                             {% endif %}
                         {% endif %}
                     </div>
                 </div>
             </li>
+            {% endif %}
             {% endif %}
             {% endfor %}
         </ul>
@@ -358,40 +363,23 @@
             <hr class="my-4">
             <p class="text-center">Durée : 1 journée avec possibilité de déjeuner sur place (prévoir un pique-nique). 1/2 journée matin ou après-midi.</p>
             <div class="text-center">
-                <a class="nav-link btn btn-eura btn-lg" href="#contact" role="button">Demander votre devis</a>
+                <a class="nav-link btn btn-outline-eura btn-lg effect" href="#contact" role="button">Demander votre devis</a>
             </div>
         </div>
     </section>
 
     <!-- Galerie d'image -->
-    <h2 id="galery-link" class="text-center mt-5">Galerie d'images</h2>
+    <h3 id="galery-link" class="text-center mt-5 h2">Galerie d'images</h3>
     <!-- Galerie Ordinateur -->
-    <section id="galery" class="container mt-5 galery-desk">
+    <section id="gallery" class="container mt-5 galery-desk">
         <div class="row mx-3">
-            <div class="col-md-3 mb-3">
-                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
-            </div>
-            <div class="col-md-3 mb-3">
-                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
-            </div>
-            <div class="col-md-3 mb-3">
-                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
-            </div>
-            <div class="col-md-3 mb-3">
-                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
-            </div>
-            <div class="col-md-3">
-                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
-            </div>
-            <div class="col-md-3">
-                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
-            </div>
-            <div class="col-md-3">
-                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
-            </div>
-            <div class="col-md-3">
-                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
-            </div>
+            {% for gallery in gallery %}
+                <div class="col-md-3 mb-3">
+                    {% if gallery %}
+                        <img class="card-img-top rounded mt-4" src="{{ gallery.image }}" alt="card photos">
+                    {% endif %}
+                </div>
+            {% endfor %}
         </div>
     </section>
     <!-- Fin - Galerie Ordinateur -->
@@ -428,10 +416,11 @@
             <div class="col-12 col-lg-5 col-md-6 mx-auto" id="newsletter">
                 <h3 class="text-warning h2">Newsletter</h3>
                 <p class="text-white">Abonnez-vous à notre newsletter pour être informé de notre actualité et de nos événements.</p>
+
                 <div class="text-white">
                     {{ form_start(newsletterForm, {'attr':{'id':'subscribe'}}) }}
                     {{ form_row(newsletterForm.mail) }}
-                    <button type="submit" id="submitNewsletter" class="btn btn-eura mt-3" data-toggle="modal" data-target="#sub">M'abonner</button>
+                    <button type="submit" id="submitNewsletter" class="btn btn-outline-eura mt-3 effect" data-toggle="modal" data-target="#sub">M'abonner</button>
                     {{ form_end(newsletterForm) }}
                 </div>
             </div>
@@ -447,9 +436,9 @@
                 {{ form_start(contactform) }}
                 {{ form_row(contactform.email, {'attr':{  'required' : 'required'}}) }}
                 {{ form_row(contactform.name, {'attr':{  'required' : 'required'}}) }}
-                {{ form_row(contactform.tel, {'attr': {'pattern': '[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}', 'required' : 'required' }}) }}
+                {{ form_row(contactform.phone, {'attr': {'pattern': '[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}', 'required' : 'required' }}) }}
                 {{ form_row(contactform.message, {'attr':{  'required' : 'required'}}) }}
-                <button class="btn btn-eura btn-block mb-3">Envoyer</button>
+                <button class="btn btn-outline-eura btn-block mb-3 effect">Envoyer</button>
                 {{ form_end(contactform) }}
             </div>
 
@@ -472,7 +461,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button id="ok" type="button" class="btn btn-eura btn-block mx-5" data-dismiss="modal">OK</button>
+                            <button id="ok" type="button" class="btn btn-outline-eura btn-block mx-5 effect" data-dismiss="modal">OK</button>
                         </div>
                     </div>
                 </div>
@@ -498,7 +487,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button id="checked" type="button" class="btn btn-eura btn-block mx-5" data-dismiss="modal">OK</button>
+                            <button id="checked" type="button" class="btn btn-outline-eura btn-block mx-5 effect" data-dismiss="modal">OK</button>
                         </div>
                     </div>
                 </div>

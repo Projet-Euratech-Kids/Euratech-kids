@@ -10,6 +10,7 @@ easy_admin:
             - { entity: 'Kids', label: 'Enfants', icon: 'fas fa-child' }
             - { entity: 'Workshop', label: 'Ateliers', icon: 'fas fa-puzzle-piece' }
             - { entity: 'Newsletter', icon: 'fas fa-envelope' }
+            - { entity: 'Gallery', icon: 'fas fa-images' }
     entities:
         # List the entity class name you want to manage
 #        - App\Entity\Program
@@ -17,19 +18,19 @@ easy_admin:
             class: App\Entity\Program
             list:
                 fields:
-                    - { property: 'name' }
-                    - { property: 'description', type: 'text_editor' }
-                    - { property: 'registration' }
-                    - { property: 'startdate' }
-                    - { property: 'category' }
+                    - { property: 'name', label: 'Nom' }
+                    - { property: 'description' }
+                    - { property: 'registration', label: Ouverture d'inscription }
+                    - { property: 'startdate', label: 'Début' }
+                    - { property: 'category', label: 'Categories' }
                     - { property: 'important', type: 'text_editor' }
-                    - { property: 'kids' }
-                    - { property: 'places' }
-#                    - { property: 'image', type: 'image', base_path: '/' }
+                    - { property: 'kids', label: 'Enfants' }
+                    - { property: 'places', label: 'Places disponibles' }
+#                    - { property: 'image', type: 'image', base_path: '/', label: 'Images' }
             form:
                 fields:
                     - { property: 'name' }
-                    - { property: 'description' }
+                    - { property: 'description', type: 'text_editor' }
                     - { property: 'registration', type: 'App\Form\CustomDateType', label: 'Inscription' }
                     - { property: 'startdate', type: 'App\Form\CustomDateType', label: 'Début' }
                     - { property: 'enddate', type: 'App\Form\CustomDateType', label: 'Fin' }
@@ -38,13 +39,12 @@ easy_admin:
                     - { property: 'important', type: 'text_editor' }
                     - { property: 'places', label: 'Places disponibles' }
 #                    - { property: 'image', type: 'file' }
-
 #        - App\Entity\Category
         Category:
             class: App\Entity\Category
             list:
                 fields:
-                    - { property: 'name' }
+                    - { property: 'name', label: 'Nom' }
                     - { property: 'description' }
                     - { property: 'slug' }
                     - { property: 'programs' }
@@ -62,26 +62,38 @@ easy_admin:
                     - { property: 'minAge' }
                     - { property: 'maxAge' }
                     - { property: 'image', type: 'file', type_options: { data_class: null } }
-
 #        - App\Entity\User
         User:
             class: App\Entity\User
+            list:
+                fields:
+                    - { property: 'lastname', label: 'Nom' }
+                    - { property: 'firstname', label: 'Prenom' }
+                    - { property: 'mail', label: 'Email' }
+                    - { property: 'kids', label: 'Enfant(s)' }
+                    - { property: 'phone', label: 'Telephone' }
             form:
                 fields:
-                    - { property: 'mail' }
-                    - { property: 'password' }
-                    - { property: 'kids' }
-                    - { property: 'lastname' }
-                    - { property: 'firstname' }
-                    - { property: 'phone' }
+                    - { property: 'mail', label: 'Email' }
+                    - { property: 'password', label: 'Mot de passe' }
+                    - { property: 'kids', label: 'Enfant(s)' }
+                    - { property: 'lastname', label: 'Nom' }
+                    - { property: 'firstname', label: 'Prenom' }
+                    - { property: 'phone', label: 'Telephone' }
 #        - App\Entity\Kids
         Kids:
             class: App\Entity\Kids
+            list:
+                fields:
+                    - { property: 'name', label: 'Nom' }
+                    - { property: 'user', label: 'Parents' }
+                    - { property: 'birthday', label: 'Date de naissance' }
+                    - { property: 'programs',label: 'Programe(s)' }
             form:
                 fields:
-                    - { property: 'name' }
-                    - { property: 'user' }
-                    - { property: 'birthday' }
+                    - { property: 'name', label: 'Nom' }
+                    - { property: 'user', label: 'Parents' }
+                    - { property: 'birthday', label: 'Date de naissance' }
                     - { property: 'programs' }
 #        - App\Entity\Workshop
         Workshop:
@@ -89,16 +101,15 @@ easy_admin:
             list:
                 fields:
                     - { property: 'category'}
-                    - { property: 'title' }
-                    - { property: 'description', type: 'text_editor' }
-                    - { property: 'article', type: 'text_editor' }
+                    - { property: 'title', label: 'titre' }
+                    - { property: 'description' }
+                    - { property: 'article' }
 #                    - { property: 'image', type: 'image', base_path: '/' }
             form:
                 fields:
                     - { property: 'category', label: 'Catégorie' }
                     - { property: 'title', label: 'Titre' }
                     - { property: 'description', type: 'text_editor' }
-
                     - { property: 'article', type: 'text_editor', label: 'Détails' }
 #        - App\Entity\Newsletter
         Newsletter:
@@ -106,4 +117,14 @@ easy_admin:
             list:
                 fields:
                     - { property: 'mail' }
-#                   - { property: 'image', type: 'file'}
+#        - App\Entity\Gallery
+        Gallery:
+            class: App\Entity\Gallery
+            list:
+                fields:
+                    - { property: 'image', type: 'image', base_path: '/' }
+                    - { property: 'description' }
+            form:
+                fields:
+                    - { property: 'image', type: 'file', type_options: { data_class: null } }
+                    - { property: 'description' }

@@ -205,3 +205,11 @@ $("input[type=checkbox]").on( "click", function(){
      $("#mdp").attr("type","password");
   }
 });
+
+
+/* btn hover effect */
+$(".hover").mouseleave(
+    function() {
+      $(this).removeClass("hover");
+    }
+  );
