@@ -188,20 +188,20 @@
                         <div class="card-title mt-2">
                             <h3 class="pt-3 text-center">{{ workshop.title }}</h3>
                         </div>
-                        {#                    {% if workshop.image %}#}
-                        <img class="card-img-top rounded mt-4" src="{{asset('img/20191022_153109.jpg')}}" alt="card photos">
-                        {#                    {% endif %}#}
+                            {% if workshop.category.image %}
+                                <img class="card-img-top rounded mt-4" src="{{ workshop.category.image }}" alt="card photos">
+                            {% endif %}
                         <h4 class="pt-3 text-center">{{ workshop.category }}</h4>
                         <div class="card-body">
                             <p class="card-text">{{ workshop.description|raw }}</p>
                         </div>
                         <div class="card-footer mx-auto">
-                            <a data-toggle="modal" data-target="#explorateur" class="btn btn-eura">En savoir plus</a>
+                            <a data-toggle="modal" data-target="#workshop-{{ workshop.id }}" class="btn btn-eura">En savoir plus</a>
                         </div>
                     </div>
 
                     <!-- Modal Explorateur -->
-                    <div class="modal fade" id="explorateur" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="workshop-{{ workshop.id }}" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -236,7 +236,9 @@
                 <div class="timeline-badge purple"><i class="fas fa-arrow-left"></i></div>
                 <div class="timeline-panel time-left" style="z-index: 5;">
                     <div class="timeline-heading">
-                        <img src="{{asset('img/20191022_153109.jpg')}}" alt="">
+                        {% if program.category.image %}
+                            <img class="card-img-top rounded mt-4" src="{{ program.category.image }}" alt="card photos">
+                        {% endif %}
                     </div>
                     <h4 class="timeline-title">{{ program.category.name }}</h4>
                     <div class="timeline-body">
@@ -286,7 +288,9 @@
                 <div class="timeline-badge warning"><i class="fas fa-arrow-right arrow-right"></i></div>
                 <div class="timeline-panel time-right" style="z-index: 4;">
                     <div class="timeline-heading">
-                        <img src="{{asset('img/20191022_153109.jpg')}}" alt="">
+                        {% if program.category.image %}
+                            <img class="card-img-top rounded mt-4" src="{{ program.category.image }}" alt="card photos">
+                        {% endif %}
                     </div>
                     <div class="timeline-body">
                         <h4 class="timeline-title">{{ program.category.name }}</h4>
@@ -439,28 +443,14 @@
         <div class="row px-5">
             <!-- <div class="col-12 col-lg-6 pt-5"> -->
             <div class="col-12 col-lg-6 col-md-8 mx-auto pt-5 px-lg-5 px-3">
-                <h3 class="text-center h2">Contactez nous</h3>
-                <form class="pb-3" id="messageSend" method="POST">
-                    <div class="form-group">
-                        <label for="email">Adresse mail</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-                        <small id="emailHelp" class="form-text text-muted">Nous ne partagerons jamais cette adresse avec quelqu'un d'autre.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="nom">Votre nom</label>
-                        <input type="text" class="form-control" id="nom">
-                    </div>
-                    <div class="form-group">
-                        <label for="tel">Votre téléphone</label>
-                        <input type="tel" class="form-control" id="tel" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" aria-describedby="telHelp">
-                        <small style="letter-spacing:0 ;" id="telHelp" class="form-text text-muted">Exemple: 0612345678</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Votre Message</label>
-                        <textarea name="message" id="message" cols="30" rows="5" class="form-control" id="message" style="resize: none;"></textarea>
-                    </div>
-                    <button id="sendM" class="btn btn-outline-eura"  data-toggle="modal" data-target="#send">Envoyer votre message</button>
-                </form>
+                <h2 class="text-center">Contactez nous</h2>
+                {{ form_start(contactform) }}
+                {{ form_row(contactform.email, {'attr':{  'required' : 'required'}}) }}
+                {{ form_row(contactform.name, {'attr':{  'required' : 'required'}}) }}
+                {{ form_row(contactform.tel, {'attr': {'pattern': '[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}', 'required' : 'required' }}) }}
+                {{ form_row(contactform.message, {'attr':{  'required' : 'required'}}) }}
+                <button class="btn btn-success btn-block mb-3">Envoyer</button>
+                {{ form_end(contactform) }}
             </div>
 
             <!-- Modal Send -->
