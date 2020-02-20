@@ -232,8 +232,10 @@
     <section id="planning">
         <h3 class="text-center mt-5 mb-4 h2">Planning</h3>
         <!-- Timeline -->
-        <ul class="timeline mx-lg-5 mx-3">
+        
+        <ul class="timeline mx-lg-5 mx-3">    
             {% for program in programs %}
+            {% if program %}
                  {% if date().timestamp < program.startdate.timestamp %}
                 {% if((loop.index)%2 != 0) %}
             <li>
@@ -334,11 +336,15 @@
                     </div>
                 </div>
             </li>
+            {% endif %} 
             {% endif %}
-            {% endif %}
+                    {% else %}
+            <p>rien</p>
+        {% endif %}
             {% endfor %}
         </ul>
-        <!-- Timeline -->
+
+        <!-- Timeline --> 
     </section>
 
     <!-- Image de séparation -->
