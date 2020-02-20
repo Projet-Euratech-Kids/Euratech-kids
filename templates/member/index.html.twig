@@ -62,17 +62,17 @@
                     <div class="accordion container mx-auto pt-5" id="accordionExample">
                         <div class="card text-center col-md-12">
                             <div class="card-title" id="headingOne">
-                                <h2 class="mb-2 mt-3">
+                                <div class="mb-2 mt-3">
                                     <button class="btn btn-eura text-center" type="button" data-toggle="collapse"
                                             data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                         <i class="fas fa-users"></i>
                                     </button>
-                                </h2>
+                                </div>
                             </div>
                             <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
                                  data-parent="#accordionExample">
                                 <div class="card-body">
-                                    <h2>Mes infos </h2>
+                                    <h3 class="h2">Mes infos </h3>
                                     {{ form_start(modifMember) }}
                                     {{ form_row(modifMember.mail) }}
                                     {{ form_row(modifMember.lastname) }}
@@ -85,7 +85,7 @@
                                 <button class="btn btn-eura">Modifier</button>
                                 {{ form_end(modifMember) }}
                                 
-                                    <h2>Mes enfants </h2>
+                                    <h3 class="h2">Mes enfants </h3>
 
                                     <div class="table-responsive">
                                         <table class="table" id="tableau">
@@ -176,7 +176,7 @@
                         <div class="jumbotron jumbotron-fluid mt-5 row text-center justify-content-md-around mx-auto  shadow-lg"
                              id="jumbo">
                             <div class="container">
-                                <h2>Vos prochains ateliers</h2><br/>
+                                <h3 class="h2">Vos prochains ateliers</h3><br/>
                                 <div class="table-responsive">
                                     <table class="table" id="tablmob">
                                         {% for kid in app.user.kids %}
@@ -236,7 +236,7 @@
                     </div>
                     <!-- Les programmes -->
                     <div class="container mx-auto mb-5">
-                        <h2 class="text-center">Les programmes à venir </h2>
+                        <h3 class="text-center h2">Les programmes à venir </h3>
                         <section id="programmes" class="mt-5 row text-center justify-content-md-around">
                             {% for program in programs %}
                                 <div class="card lg-3 col-md-5 mx-3 mb-5">
