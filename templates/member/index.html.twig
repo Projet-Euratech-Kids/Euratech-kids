@@ -104,8 +104,35 @@
                                                     <td scope="col">{{ kid.name }}</td>
                                                     <td scope="col">{{ kid.birthday|date("d/m/Y") }}</td>
                                                     <td scope="col">
-                                                        <button type="button" class="btn btn-eura text-center"><i
+                                                        <button type="button" class="btn btn-eura text-center" data-toggle="modal" data-target="#k{{ kid.id}}"><i
                                                                     class="fas fa-user-edit"></i></button>
+
+                                                        <!-- Modal modif kid-->
+                                                    <div class="modal fade" id="k{{ kid.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">Modifier</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                            </div>
+                                                    <div class="modal-body">
+                                                        <div class="container">        
+                                                            <label>Nom</label>
+                                                            <input type="text" value="{{ kid.name }}"></br>
+                                                            <label>Date de naisance</label>
+                                                            <input type="text" value="{{ kid.birthday|date("d/m/Y") }}">
+                                                            </div>
+                                                        </div>    
+                                                            <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
+                                                            <button type="button" class="btn btn-eura">Sauvegarder</button>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>    
+                                                        <!-- Fin Modal modif kid-->
                                                     </td>
                                                     <td scope="col">
                                                         <form method="post"
@@ -180,6 +207,7 @@
                                 <div class="table-responsive">
                                     <table class="table" id="tablmob">
                                         {% for kid in app.user.kids %}
+
                                             {% if kid.programs is not empty %}
                                                 {% for p in kid.programs %}
                                                     <tbody>
@@ -204,6 +232,7 @@
                                                     </tbody>
                                                 {% endfor %}
                                             {% endif %}
+
                                         {% endfor %}
                                     </table>
                                 </div>
@@ -217,6 +246,7 @@
                                     </tr>
                                     </thead>
                                     {% for kid in app.user.kids %}
+
                                         {% if kid.programs is not empty %}
                                             {% for p in kid.programs %}
                                                 <tr>
@@ -229,6 +259,7 @@
                                                 </tr>
                                             {% endfor %}
                                         {% endif %}
+
                                     {% endfor %}
                                 </table>
                             </div>
@@ -293,7 +324,9 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
+
                                             <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Fermer</button>
+
                                         </div>
                                     </div>
                                 </div>
@@ -301,8 +334,10 @@
                         </div>
                         <!-- Fin - Modal Programme:{{ program.id }} -->
                     {% endfor %}
+
                 </div>
             </div>
         </div>
+
     </div>
 {% endblock %}

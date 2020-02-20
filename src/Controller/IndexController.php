@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
+
+use Symfony\Component\Mime\Email;
+
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -33,6 +36,7 @@ class IndexController extends AbstractController
                           UserPasswordEncoderInterface $passwordEncoder,
                           WorkshopRepository $workshopRepository,
                           MailerInterface $mailer)
+
     {
       $programs = $programRepository->findAll();
       $workshops = $workshopRepository->findAll();
@@ -56,7 +60,18 @@ class IndexController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // do anything else you need here, like send an email
+            // mail
+
+            $email = (new TemplatedEmail())
+            ->from('hello@example.com')
+            ->to($user->getMail())
+            ->subject('Mail confirmation')
+            ->htmlTemplate('mail/confirmMail.html.twig')
+            ->context([
+                'user' => $user,
+            ]);
+
+            $mailer->send($email);
 
             return $this->redirectToRoute('index');
         }

@@ -7,6 +7,16 @@ easy_admin:
 #        - App\Entity\Program
         Program:
             class: App\Entity\Program
+            list:
+                fields:
+                    - { property: 'name' }
+                    - { property: 'description', type: 'text_editor' }
+                    - { property: 'registration' }
+                    - { property: 'startdate' }
+                    - { property: 'category' }
+                    - { property: 'important', type: 'text_editor' }
+                    - { property: 'kids' }
+#                    - { property: 'image', type: 'image', base_path: '/' }
             form:
                 fields:
                     - { property: 'name' }
@@ -15,11 +25,20 @@ easy_admin:
                     - { property: 'startdate', type: 'App\Form\CustomDateType' }
                     - { property: 'enddate', type: 'App\Form\CustomDateType' }
                     - { property: 'category' }
-                    - { property: 'important' }
+                    - { property: 'important', type: 'text_editor' }
                     - { property: 'kids' }
+#                    - { property: 'image', type: 'file' }
 #        - App\Entity\Category
         Category:
             class: App\Entity\Category
+            list:
+                fields:
+                    - { property: 'name' }
+                    - { property: 'description' }
+                    - { property: 'slug' }
+                    - { property: 'programs' }
+                    - { property: 'workshops' }
+                    - { property: 'image', type: 'image', base_path: '/' }
             form:
                 fields:
                     - { property: 'name' }
@@ -27,6 +46,7 @@ easy_admin:
                     - { property: 'slug' }
                     - { property: 'programs' }
                     - { property: 'workshops' }
+                    - { property: 'image', type: 'file', type_options: { data_class: null } }
 #        - App\Entity\User
         User:
             class: App\Entity\User
@@ -50,11 +70,19 @@ easy_admin:
 #        - App\Entity\Workshop
         Workshop:
             class: App\Entity\Workshop
+            list:
+                fields:
+                    - { property: 'category'}
+                    - { property: 'title' }
+                    - { property: 'description', type: 'text_editor' }
+                    - { property: 'article', type: 'text_editor' }
+#                    - { property: 'image', type: 'image', base_path: '/' }
             form:
                 fields:
                     - { property: 'category'}
                     - { property: 'title' }
                     - { property: 'description', type: 'text_editor' }
                     - { property: 'article', type: 'text_editor' }
+#                    - {property: 'image', type: 'file'}
 
 

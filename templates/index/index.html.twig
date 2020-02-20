@@ -188,9 +188,9 @@
                         <div class="card-title mt-2">
                             <h3 class="pt-3 text-center">{{ workshop.title }}</h3>
                         </div>
-                        {#                    {% if workshop.image %}#}
-                        <img class="card-img-top rounded mt-4" src="{{asset('img/20191022_153109.jpg')}}" alt="card photos">
-                        {#                    {% endif %}#}
+                            {% if workshop.category.image %}
+                                <img class="card-img-top rounded mt-4" src="{{ workshop.category.image }}" alt="card photos">
+                            {% endif %}
                         <h4 class="pt-3 text-center">{{ workshop.category }}</h4>
                         <div class="card-body">
                             <p class="card-text">{{ workshop.description|raw }}</p>
@@ -236,7 +236,9 @@
                 <div class="timeline-badge purple"><i class="fas fa-arrow-left"></i></div>
                 <div class="timeline-panel time-left" style="z-index: 5;">
                     <div class="timeline-heading">
-                        <img src="{{asset('img/20191022_153109.jpg')}}" alt="">
+                        {% if program.category.image %}
+                            <img class="card-img-top rounded mt-4" src="{{ program.category.image }}" alt="card photos">
+                        {% endif %}
                     </div>
                     <h4 class="timeline-title">{{ program.category.name }}</h4>
                     <div class="timeline-body">
@@ -286,7 +288,9 @@
                 <div class="timeline-badge warning"><i class="fas fa-arrow-right arrow-right"></i></div>
                 <div class="timeline-panel time-right" style="z-index: 4;">
                     <div class="timeline-heading">
-                        <img src="{{asset('img/20191022_153109.jpg')}}" alt="">
+                        {% if program.category.image %}
+                            <img class="card-img-top rounded mt-4" src="{{ program.category.image }}" alt="card photos">
+                        {% endif %}
                     </div>
                     <div class="timeline-body">
                         <h4 class="timeline-title">{{ program.category.name }}</h4>
