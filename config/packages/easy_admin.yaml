@@ -26,7 +26,7 @@ easy_admin:
                     - { property: 'important', type: 'text_editor' }
                     - { property: 'kids', label: 'Enfants' }
                     - { property: 'places', label: 'Places disponibles' }
-#                    - { property: 'image', type: 'image', base_path: '/', label: 'Images' }
+                    - { property: 'image', type: 'image', base_path: '/', label: 'Images' }
             form:
                 fields:
                     - { property: 'name' }
@@ -38,7 +38,7 @@ easy_admin:
                     - { property: 'kids', label: 'Enfants' }
                     - { property: 'important', type: 'text_editor' }
                     - { property: 'places', label: 'Places disponibles' }
-#                    - { property: 'image', type: 'file' }
+                    - { property: 'image', type: 'file', type_options: { data_class: null } }
 #        - App\Entity\Category
         Category:
             class: App\Entity\Category
@@ -100,13 +100,14 @@ easy_admin:
                     - { property: 'title', label: 'titre' }
                     - { property: 'description' }
                     - { property: 'article' }
-#                    - { property: 'image', type: 'image', base_path: '/' }
+                    - { property: 'image', type: 'image', base_path: '/' }
             form:
                 fields:
                     - { property: 'category', label: 'Catégorie' }
                     - { property: 'title', label: 'Titre' }
                     - { property: 'description', type: 'text_editor' }
                     - { property: 'article', type: 'text_editor', label: 'Détails' }
+                    - { property: 'image', type: 'file', type_options: { data_class: null } }
 #        - App\Entity\Newsletter
         Newsletter:
             class: App\Entity\Newsletter

@@ -64,6 +64,11 @@ class Program
      */
     private $places;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $image;
+
     public function __construct()
     {
         $this->kids = new ArrayCollection();
@@ -191,17 +196,27 @@ class Program
     }
 
 
-  public function getPlaces(): ?int
-  {
+    public function getPlaces(): ?int
+    {
       return $this->places;
-  }
+    }
 
-  public function setPlaces(int $places): self
-  {
+    public function setPlaces(int $places): self
+    {
       $this->places = $places;
 
       return $this;
-  }
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
 
 //    public function __toString(){
 //      $this->getStartDate();

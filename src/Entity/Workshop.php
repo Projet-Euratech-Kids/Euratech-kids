@@ -37,6 +37,11 @@ class Workshop
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $image;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -88,6 +93,16 @@ class Workshop
         $this->category = $category;
 
         return $this;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
     }
 
     public function __toString(){
