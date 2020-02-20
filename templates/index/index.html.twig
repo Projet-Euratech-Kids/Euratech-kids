@@ -371,32 +371,15 @@
     <!-- Galerie d'image -->
     <h3 id="galery-link" class="text-center mt-5 h2">Galerie d'images</h3>
     <!-- Galerie Ordinateur -->
-    <section id="galery" class="container mt-5 galery-desk">
+    <section id="gallery" class="container mt-5 galery-desk">
         <div class="row mx-3">
-            <div class="col-md-3 mb-3">
-                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
-            </div>
-            <div class="col-md-3 mb-3">
-                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
-            </div>
-            <div class="col-md-3 mb-3">
-                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
-            </div>
-            <div class="col-md-3 mb-3">
-                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
-            </div>
-            <div class="col-md-3">
-                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
-            </div>
-            <div class="col-md-3">
-                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
-            </div>
-            <div class="col-md-3">
-                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
-            </div>
-            <div class="col-md-3">
-                <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
-            </div>
+            {% for gallery in gallery %}
+                <div class="col-md-3 mb-3">
+                    {% if gallery %}
+                        <img class="card-img-top rounded mt-4" src="{{ gallery.image }}" alt="card photos">
+                    {% endif %}
+                </div>
+            {% endfor %}
         </div>
     </section>
     <!-- Fin - Galerie Ordinateur -->

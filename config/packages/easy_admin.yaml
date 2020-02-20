@@ -10,6 +10,7 @@ easy_admin:
             - { entity: 'Kids', label: 'Enfants', icon: 'fas fa-child' }
             - { entity: 'Workshop', label: 'Ateliers', icon: 'fas fa-puzzle-piece' }
             - { entity: 'Newsletter', icon: 'fas fa-envelope' }
+            - { entity: 'Gallery', icon: 'fas fa-images' }
     entities:
         # List the entity class name you want to manage
 #        - App\Entity\Program
@@ -112,3 +113,14 @@ easy_admin:
             list:
                 fields:
                     - { property: 'article' }
+#        - App\Entity\Gallery
+        Gallery:
+            class: App\Entity\Gallery
+            list:
+                fields:
+                    - { property: 'image', type: 'image', base_path: '/' }
+                    - { property: 'description' }
+            form:
+                fields:
+                    - { property: 'image', type: 'file', type_options: { data_class: null } }
+                    - { property: 'description' }
