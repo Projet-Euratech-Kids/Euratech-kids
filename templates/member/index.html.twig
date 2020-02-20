@@ -267,8 +267,9 @@
                             {% for program in programs %}
                                 {% if date().timestamp < program.startdate.timestamp %}
                                     <div class="card lg-3 col-md-5 mx-3 mb-5">
-                                        <img class="card-img-top mt-4" src="{{ asset('img/20191022_153109.jpg') }}"
-                                             alt="card photos">
+                                        {% if program.image %}
+                                            <img class="card-img-top rounded mt-4" src="{{ program.image }}" alt="card photos">
+                                        {% endif %}
                                         <h4>{{ program.category.name }}</h4>
                                         <div class="card-body">
                                             <p class="card-text">{{ program.description }}</p>

@@ -7,6 +7,7 @@ use App\Entity\Gallery;
 use App\Entity\Kids;
 use App\Entity\Program;
 use App\Entity\User;
+use App\Entity\Workshop;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -108,6 +109,18 @@ class AppFixtures extends Fixture
             $manager->persist($gallery);
             $galleries[] = $gallery;
         }
-        $manager->flush();
+
+      $workshops = [];
+            foreach ($plainCategories as $plainCategory) {
+                $workshop = new Workshop();
+                $workshop->setCategory($categories[rand(0, 2)]);
+                $workshop->setTitle($plainCategory);
+                $workshop->setDescription($faker->text);
+                $workshop->setArticle($faker->text);
+                $workshop->setImage('/uploads/images//5e4d47fa97973.jpeg');
+                $manager->persist($workshop);
+                $workshops[] = $workshop;
+            }
+      $manager->flush();
     }
 }

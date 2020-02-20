@@ -240,11 +240,11 @@
                 <div class="timeline-badge purple"><i class="fas fa-arrow-left"></i></div>
                 <div class="timeline-panel time-left" style="z-index: 5;">
                     <div class="timeline-heading">
-                        {% if program.category.image %}
-                            <img class="card-img-top rounded mt-4" src="{{ program.category.image }}" alt="card photos">
+                        {% if program.image %}
+                            <img class="card-img-top rounded mt-4" src="{{ program.image }}" alt="card photos">
                         {% endif %}
                     </div>
-                    <h4 class="timeline-title">{{ program.category.name }}</h4>
+                    <h4 class="timeline-title">{{ program.name }}</h4>
                     <div class="timeline-body">
                         <p>{{ program.description }}</p>
                         {% if program.important %}
@@ -276,7 +276,7 @@
                             {% endif %}
                             <p>{{ program.startdate|date('d-m-Y') }} {% if program.enddate %} au {{ program.enddate|date('d-m-Y') }}{% endif %}</p>
                         </div><br>
-                        {% if program.category.name != "Vacances" %}
+                        {% if program.name != "Vacances" %}
                             {% if app.user %}
                                 <a href="{{ path('member',{'id': app.user.id}) }}"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
                             {% else %}
@@ -292,12 +292,12 @@
                 <div class="timeline-badge warning"><i class="fas fa-arrow-right arrow-right"></i></div>
                 <div class="timeline-panel time-right" style="z-index: 4;">
                     <div class="timeline-heading">
-                        {% if program.category.image %}
-                            <img class="card-img-top rounded mt-4" src="{{ program.category.image }}" alt="card photos">
+                        {% if program.image %}
+                            <img class="card-img-top rounded mt-4" src="{{ program.image }}" alt="card photos">
                         {% endif %}
                     </div>
                     <div class="timeline-body">
-                        <h4 class="timeline-title">{{ program.category.name }}</h4>
+                        <h4 class="timeline-title">{{ program.name }}</h4>
                         <p>{{ program.description }}</p>
                         {% if program.important %}
                             <div id="accordion">
