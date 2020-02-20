@@ -139,4 +139,14 @@ class MemberController extends AbstractController
 
         return $this->redirectToRoute('member', ["id" => $kids->getUser()->getId()]);
     }
+
+    /**
+     * @Route("/reservation/{id}",name="reservation")
+     * @IsGranted("ROLE_USER")
+     */
+
+        public function addKidProg()
+        {
+        return $this->render('member/reservation.html.twig');
+        }
 }

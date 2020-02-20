@@ -7,6 +7,8 @@ use App\Entity\User;
 use App\Form\NewsletterFormType;
 use App\Form\ContactType;
 use App\Form\RegistrationFormType;
+use App\Form\NewsletterType;
+use App\Entity\Newsletter;
 use App\Repository\ProgramRepository;
 use App\Repository\WorkshopRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,6 +20,7 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+
 
 class IndexController extends AbstractController
 {
@@ -107,6 +110,7 @@ class IndexController extends AbstractController
                     'user' => $user,
                 ]);
             $mailer->send($email);
+          
         }
 
         return $this->render('index/index.html.twig', [
@@ -116,6 +120,7 @@ class IndexController extends AbstractController
             'registrationForm' => $form->createView(),
             'newsletterForm' => $newsletterForm->createView(),
             'contactform' => $contact->createView(),
+
         ]);
     }
     /**
@@ -133,4 +138,7 @@ class IndexController extends AbstractController
     {
         return $this->render('index/mention.html.twig');
     }
+
+    
+
 }

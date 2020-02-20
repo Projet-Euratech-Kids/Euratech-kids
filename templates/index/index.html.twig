@@ -196,12 +196,15 @@
                             <p class="card-text">{{ workshop.description|raw }}</p>
                         </div>
                         <div class="card-footer mx-auto">
+
                             <a data-toggle="modal" data-target="#workshop-{{ workshop.id }}" class="btn btn-eura">En savoir plus</a>
                         </div>
                     </div>
 
                     <!-- Modal Explorateur -->
+
                     <div class="modal fade" id="workshop-{{ workshop.id }}" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -428,6 +431,7 @@
             <div class="col-12 col-lg-5 col-md-6 mx-auto" id="newsletter">
                 <h3 class="text-warning h2">Newsletter</h3>
                 <p class="text-white">Abonnez-vous à notre newsletter pour être informé de notre actualité et de nos événements.</p>
+
                 <div class="text-white">
                     {{ form_start(newsletterForm, {'attr':{'id':'subscribe'}}) }}
                     {{ form_row(newsletterForm.mail) }}
