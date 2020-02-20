@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Kids;
-use App\Entity\Program;
 use App\Entity\User;
 use App\Form\AddKidsType;
 use App\Form\RegistrationFormType;
@@ -58,24 +57,6 @@ class MemberController extends AbstractController
             $entityManager->persist($addKids);
             $entityManager->flush();
             $this->addFlash('addkids', 'Votre enfant a bien etait ajoute.');
-
-            return $this->redirectToRoute('member', ["id" => $addKids->getUser()->getId()]);
-        }
-
-        // Add Kids Form
-
-        $addKids = new Kids();
-        $add = $this->createForm(AddKidsType::class, $addKids);
-        $add->handleRequest($request);
-
-        if($add->isSubmitted() && $add->isValid()) {
-            if (!$addKids->getUser()) {
-                $addKids->setUser($this->getUser());
-            }
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($addKids);
-            $entityManager->flush();
-            $this->addFlash('addkids','Votre enfant a bien etait ajoute.');
 
             return $this->redirectToRoute('member', ["id" => $addKids->getUser()->getId()]);
         }
