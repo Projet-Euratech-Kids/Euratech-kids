@@ -59,6 +59,11 @@ class Program
      */
     private $important;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $places;
+
     public function __construct()
     {
         $this->kids = new ArrayCollection();
@@ -185,6 +190,18 @@ class Program
       return $this;
     }
 
+
+  public function getPlaces(): ?int
+  {
+      return $this->places;
+  }
+
+  public function setPlaces(int $places): self
+  {
+      $this->places = $places;
+
+      return $this;
+  }
 
 //    public function __toString(){
 //      $this->getStartDate();

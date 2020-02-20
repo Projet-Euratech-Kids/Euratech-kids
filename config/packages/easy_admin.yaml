@@ -29,12 +29,13 @@ easy_admin:
                 fields:
                     - { property: 'name' }
                     - { property: 'description' }
-                    - { property: 'registration', type: 'App\Form\CustomDateType' }
-                    - { property: 'startdate', type: 'App\Form\CustomDateType' }
-                    - { property: 'enddate', type: 'App\Form\CustomDateType' }
-                    - { property: 'category' }
+                    - { property: 'registration', type: 'App\Form\CustomDateType', label: 'Inscription' }
+                    - { property: 'startdate', type: 'App\Form\CustomDateType', label: 'Début' }
+                    - { property: 'enddate', type: 'App\Form\CustomDateType', label: 'Fin' }
+                    - { property: 'category', label: 'Catégorie' }
+                    - { property: 'kids', label: 'Enfants' }
                     - { property: 'important', type: 'text_editor' }
-                    - { property: 'kids' }
+                    - { property: 'places', label: 'Places disponibles' }
 #                    - { property: 'image', type: 'file' }
 
 #        - App\Entity\Category
