@@ -31,6 +31,7 @@ class IndexController extends AbstractController
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param WorkshopRepository $workshopRepository
      * @param MailerInterface $mailer
+     * @param Contact $contact
      * @return RedirectResponse|Response
      * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
      */
