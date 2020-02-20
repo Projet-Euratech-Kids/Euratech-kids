@@ -25,6 +25,7 @@ easy_admin:
                     - { property: 'category', label: 'Catégorie' }
                     - { property: 'important' }
                     - { property: 'kids', label: 'Enfants' }
+                    - { property: 'places', label: 'Places disponibles' }
 #        - App\Entity\Category
         Category:
             class: App\Entity\Category

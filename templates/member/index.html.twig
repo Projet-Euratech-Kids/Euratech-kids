@@ -239,34 +239,44 @@
                         <h2 class="text-center">Les programmes à venir </h2>
                         <section id="programmes" class="mt-5 row text-center justify-content-md-around">
                             {% for program in programs %}
-                                <div class="card lg-3 col-md-5 mx-3 mb-5">
-                                    <img class="card-img-top mt-4" src="{{ asset('img/20191022_153109.jpg') }}"
-                                         alt="card photos">
-                                    <h4>{{ program.category.name }}</h4>
-                                    <div class="card-body">
-                                        <p class="card-text">{{ program.description }}</p>
-                                        <i class="far fa-calendar-alt"></i>
-                                        {% if program.registration %}
-                                            <p>Inscriptions à partir du {{ program.registration|date('d-m-Y') }}</p>
-                                        {% endif %}
-                                        <p>{{ program.startdate|date('d-m-Y') }}{% if program.enddate %} au {{ program.enddate|date('d-m-Y') }}{% endif %}</p>
-                                    </div>
-                                    <div class="card-footer">
-                                        {% if program.registration %}
-                                            {% if date().timestamp >= program.registration.timestamp %}
-                                                {% if date().timestamp < program.startdate.timestamp %}
-                                                    <button type="button" class="btn btn-eura" data-toggle="modal" data-target="#p{{ program.id }}">Réserver</button>
+                                {% if date().timestamp < program.startdate.timestamp %}
+                                    <div class="card lg-3 col-md-5 mx-3 mb-5">
+                                        <img class="card-img-top mt-4" src="{{ asset('img/20191022_153109.jpg') }}"
+                                             alt="card photos">
+                                        <h4>{{ program.category.name }}</h4>
+                                        <div class="card-body">
+                                            <p class="card-text">{{ program.description }}</p>
+                                            <i class="far fa-calendar-alt"></i>
+                                            {% if program.registration %}
+                                                <p>Inscriptions à partir du {{ program.registration|date('d-m-Y') }}</p>
+                                            {% endif %}
+                                            <p>{{ program.startdate|date('d-m-Y') }}{% if program.enddate %} au {{ program.enddate|date('d-m-Y') }}{% endif %}</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            {% if program.registration %}
+                                                {% if date().timestamp >= program.registration.timestamp %}
+                                                    {% if date().timestamp < program.startdate.timestamp %}
+                                                        {% if program.places > program.kids|length %}
+                                                            <button type="button" class="btn btn-eura" data-toggle="modal" data-target="#p{{ program.id }}">Réserver</button>
+                                                        {% else %}
+                                                            <button type="button" class="btn btn-eura" disabled>Plus de places</button>
+                                                        {% endif %}
+                                                    {% else %}
+                                                        <button type="button" class="btn btn-eura" disabled>Réservations terminées</button>
+                                                    {% endif %}
                                                 {% else %}
-                                                    <button type="button" class="btn btn-eura" disabled>Réservations terminées</button>
+                                                    <button type="button" class="btn btn-eura" disabled>Réservations non ouvertes</button>
                                                 {% endif %}
                                             {% else %}
-                                                <button type="button" class="btn btn-eura" disabled>Réservations non ouvertes</button>
+                                                {% if program.places > program.kids|length %}
+                                                    <button type="button" class="btn btn-eura" data-toggle="modal" data-target="#p{{ program.id }}">Réserver</button>
+                                                {% else %}
+                                                    <button type="button" class="btn btn-eura" disabled>Plus de places</button>
+                                                {% endif %}
                                             {% endif %}
-                                        {% else %}
-                                            <button type="button" class="btn btn-eura" data-toggle="modal" data-target="#p{{ program.id }}">Réserver</button>
-                                        {% endif %}
+                                        </div>
                                     </div>
-                                </div>
+                                {% endif %}
                             {% endfor %}
                         </section>
                     </div>

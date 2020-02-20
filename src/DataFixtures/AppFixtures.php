@@ -75,6 +75,7 @@ class AppFixtures extends Fixture
         $program->setStartDate($faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now', $timezone = 'Europe/Paris'));
         $program->setEndDate($faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now', $timezone = 'Europe/Paris'));
         $program->setCategory($categories[rand(0,2)]);
+        $program->setPlaces(rand(10,20));
         $manager->persist($program);
         $programs[] = $program;
       }
