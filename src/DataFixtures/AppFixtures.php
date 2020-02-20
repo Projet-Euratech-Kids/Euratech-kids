@@ -56,7 +56,7 @@ class AppFixtures extends Fixture
         $user = new User();
         $user->setMail($mail);
         $user->setPassword(
-          $this->passwordEncoder->encodePassword($user, 'test')
+          $this->passwordEncoder->encodePassword($user, 'testtest')
         );
         $user->setRoles($roles);
         $user->setLastname($faker->lastName);
