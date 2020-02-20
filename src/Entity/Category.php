@@ -48,6 +48,16 @@ class Category
      */
     private $image;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $minAge;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $maxAge;
+
     public function __construct()
     {
         $this->programs = new ArrayCollection();
@@ -170,5 +180,29 @@ class Category
     public function getImage()
     {
         return $this->image;
+    }
+
+    public function getMinAge(): ?int
+    {
+        return $this->minAge;
+    }
+
+    public function setMinAge(?int $minAge): self
+    {
+        $this->minAge = $minAge;
+
+        return $this;
+    }
+
+    public function getMaxAge(): ?int
+    {
+        return $this->maxAge;
+    }
+
+    public function setMaxAge(?int $maxAge): self
+    {
+        $this->maxAge = $maxAge;
+
+        return $this;
     }
 }

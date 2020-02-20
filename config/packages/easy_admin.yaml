@@ -24,6 +24,7 @@ easy_admin:
                     - { property: 'category' }
                     - { property: 'important', type: 'text_editor' }
                     - { property: 'kids' }
+                    - { property: 'places' }
 #                    - { property: 'image', type: 'image', base_path: '/' }
             form:
                 fields:
@@ -48,6 +49,8 @@ easy_admin:
                     - { property: 'slug' }
                     - { property: 'programs' }
                     - { property: 'workshops' }
+                    - { property: 'minAge' }
+                    - { property: 'maxAge' }
                     - { property: 'image', type: 'image', base_path: '/' }
             form:
                 fields:
@@ -56,6 +59,8 @@ easy_admin:
                     - { property: 'slug' }
                     - { property: 'programs' }
                     - { property: 'workshops' }
+                    - { property: 'minAge' }
+                    - { property: 'maxAge' }
                     - { property: 'image', type: 'file', type_options: { data_class: null } }
 
 #        - App\Entity\User
@@ -100,5 +105,5 @@ easy_admin:
             class: App\Entity\Newsletter
             list:
                 fields:
-                    - { property: 'article', type: 'text_editor' }
+                    - { property: 'mail' }
 #                   - { property: 'image', type: 'file'}
