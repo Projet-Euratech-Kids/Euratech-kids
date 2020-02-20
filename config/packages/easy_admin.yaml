@@ -15,27 +15,49 @@ easy_admin:
 #        - App\Entity\Program
         Program:
             class: App\Entity\Program
+            list:
+                fields:
+                    - { property: 'name' }
+                    - { property: 'description', type: 'text_editor' }
+                    - { property: 'registration' }
+                    - { property: 'startdate' }
+                    - { property: 'category' }
+                    - { property: 'important', type: 'text_editor' }
+                    - { property: 'kids' }
+#                    - { property: 'image', type: 'image', base_path: '/' }
             form:
                 fields:
-                    - { property: 'name', label: 'Nom' }
+                    - { property: 'name' }
                     - { property: 'description' }
                     - { property: 'registration', type: 'App\Form\CustomDateType', label: 'Inscription' }
                     - { property: 'startdate', type: 'App\Form\CustomDateType', label: 'Début' }
                     - { property: 'enddate', type: 'App\Form\CustomDateType', label: 'Fin' }
                     - { property: 'category', label: 'Catégorie' }
-                    - { property: 'important' }
                     - { property: 'kids', label: 'Enfants' }
+                    - { property: 'important', type: 'text_editor' }
                     - { property: 'places', label: 'Places disponibles' }
+#                    - { property: 'image', type: 'file' }
+
 #        - App\Entity\Category
         Category:
             class: App\Entity\Category
+            list:
+                fields:
+                    - { property: 'name' }
+                    - { property: 'description' }
+                    - { property: 'slug' }
+                    - { property: 'programs' }
+                    - { property: 'workshops' }
+                    - { property: 'image', type: 'image', base_path: '/' }
             form:
                 fields:
                     - { property: 'name', label: 'Nom' }
                     - { property: 'description' }
                     - { property: 'slug' }
-                    - { property: 'programs', label: 'Programmes' }
-                    - { property: 'workshops', label: 'Ateliers' }
+                    - { property: 'programs' }
+                    - { property: 'workshops' }
+                    - { property: 'image', type: 'file', type_options: { data_class: null } }
+
 #        - App\Entity\User
         User:
             class: App\Entity\User
@@ -59,12 +81,25 @@ easy_admin:
 #        - App\Entity\Workshop
         Workshop:
             class: App\Entity\Workshop
+            list:
+                fields:
+                    - { property: 'category'}
+                    - { property: 'title' }
+                    - { property: 'description', type: 'text_editor' }
+                    - { property: 'article', type: 'text_editor' }
+#                    - { property: 'image', type: 'image', base_path: '/' }
             form:
                 fields:
                     - { property: 'category', label: 'Catégorie' }
                     - { property: 'title', label: 'Titre' }
                     - { property: 'description', type: 'text_editor' }
+
                     - { property: 'article', type: 'text_editor', label: 'Détails' }
 #        - App\Entity\Newsletter
         Newsletter:
             class: App\Entity\Newsletter
+                    - { property: 'article', type: 'text_editor' }
+#                    - {property: 'image', type: 'file'}
+
+
+

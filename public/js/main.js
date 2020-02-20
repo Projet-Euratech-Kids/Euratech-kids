@@ -205,4 +205,3 @@ $("input[type=checkbox]").on( "click", function(){
      $("#mdp").attr("type","password");
   }
 });
-
