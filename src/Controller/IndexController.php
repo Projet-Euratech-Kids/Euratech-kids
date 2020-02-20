@@ -35,6 +35,7 @@ class IndexController extends AbstractController
      * @param WorkshopRepository $workshopRepository
      * @param MailerInterface $mailer
      * @param GalleryRepository $galleryRepository
+     * @param Contact $contact
      * @return RedirectResponse|Response
      * @throws TransportExceptionInterface
      */
@@ -113,14 +114,14 @@ class IndexController extends AbstractController
             $entityManager->persist($contact);
             $entityManager->flush();
             $email = (new TemplatedEmail())
-                ->from($contact->getEmail())
-                ->to('Matthieu@gmail.com')
-                ->subject('Contact Euratech-Kids de la part de ' . $contact->getName())
-                ->htmlTemplate('mail/contact.html.twig')
-                ->context([
-                    'contact' => $contact,
-                ]);
-
+                        ->from($contact->getEmail())
+                        ->to('Matthieu@gmail.com')
+                        ->subject('Contact Euratech-Kids de la part de ' . $contact->getName())
+                        ->htmlTemplate('mail/contact.html.twig')
+                        ->context([
+                            'contact' => $contact,
+                        ]);
+                
             $mailer->send($email);
         }
 
@@ -150,3 +151,4 @@ class IndexController extends AbstractController
         return $this->render('index/mention.html.twig');
     }
 }
+
