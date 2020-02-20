@@ -3,8 +3,8 @@ function myFunction() {
     // document.getElementById("cible").style.display="block";
     $('#cible').toggle('fast');
 }
-            
-            
+
+
 $(document).ready(function () {
     $(window).scroll(function(){
         var ScrollTop = parseInt($(window).scrollTop());
@@ -20,8 +20,8 @@ $(document).ready(function () {
     /* Defile to -> ancre */
     $('.nav-link').on('click', function(evt){
         evt.preventDefault();
-         var target = $(this).attr('href');
-     $('html, body').stop().animate({scrollTop: $(target).offset().top}, 1000 );
+        var target = $(this).attr('href');
+        $('html, body').stop().animate({scrollTop: $(target).offset().top}, 1000 );
     });
 });
 
@@ -132,12 +132,12 @@ $(window).resize(function() {
         $("#text-phone").show();
         $("#text-desk").hide();
     }
-   else {
-       /* Fonction pour le menu */
+    else {
+        /* Fonction pour le menu */
         function openNav() {
             $("#sideNavigation").css("width","250px");
         }
-       /* Footer */
+        /* Footer */
         $("footer").removeClass( "text-center" );
         $("footer .fab").addClass("mr-4");
         $("footer .fab").removeClass("mx-auto");
@@ -167,10 +167,10 @@ function closeNav() {
 
 /* Formulaire Message */
 $("#sendM").on("click", function(e){
-     e.preventDefault();
-     $("#ok").on("click", function(){
+    e.preventDefault();
+    $("#ok").on("click", function(){
         $("#messageSend").submit();
-     });
+    });
 });
 
 /* Formulaire Newsletter */
@@ -183,25 +183,33 @@ $("#submitNewsletter").on("click", function(e){
 
 /* Formulaire connexion */
 $("#mdp").focus(function(){
-	$("#roulette").css({
-		"-webkit-animation-name": "rotationMdp", 
-    	"-webkit-animation-duration": "2s",
-    	"transform": "rotate(180deg)"
-	});
+    $("#roulette").css({
+        "-webkit-animation-name": "rotationMdp",
+        "-webkit-animation-duration": "2s",
+        "transform": "rotate(180deg)"
+    });
 });
 
 $("#mdp").blur(function(){
-	$("#roulette").css({
-		"-webkit-animation-name": "rotationMdpBlur", 
-    	"-webkit-animation-duration": "2s",
-    	"transform": "rotate(360deg)"
-	});
+    $("#roulette").css({
+        "-webkit-animation-name": "rotationMdpBlur",
+        "-webkit-animation-duration": "2s",
+        "transform": "rotate(360deg)"
+    });
 });
 
 $("input[type=checkbox]").on( "click", function(){
-  if (this.checked == true){
-    $("#mdp").attr("type","text");
-  } else {
-     $("#mdp").attr("type","password");
-  }
+    if (this.checked == true){
+        $("#mdp").attr("type","text");
+    } else {
+        $("#mdp").attr("type","password");
+    }
 });
+
+
+/* btn hover effect */
+$(".hover").mouseleave(
+    function() {
+        $(this).removeClass("hover");
+    }
+);
