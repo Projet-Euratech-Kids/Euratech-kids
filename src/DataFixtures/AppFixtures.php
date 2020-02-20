@@ -43,6 +43,7 @@ class AppFixtures extends Fixture
         $category = new Category();
         $category->setName($plainCategory);
         $category->setSlug($this->slugger->slug($plainCategory)->lower());
+        $category->setImage('/uploads/images//5e4d47fa97973.jpeg');
         $manager->persist($category);
         $categories[] = $category;
       }
@@ -56,7 +57,7 @@ class AppFixtures extends Fixture
         $user = new User();
         $user->setMail($mail);
         $user->setPassword(
-          $this->passwordEncoder->encodePassword($user, 'test')
+          $this->passwordEncoder->encodePassword($user, 'testtest')
         );
         $user->setRoles($roles);
         $user->setLastname($faker->lastName);
@@ -75,6 +76,7 @@ class AppFixtures extends Fixture
         $program->setStartDate($faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now', $timezone = 'Europe/Paris'));
         $program->setEndDate($faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now', $timezone = 'Europe/Paris'));
         $program->setCategory($categories[rand(0,2)]);
+        $program->setPlaces(rand(10,20));
         $manager->persist($program);
         $programs[] = $program;
       }

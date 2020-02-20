@@ -43,6 +43,11 @@ class Category
      */
     private $workshops;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $image;
+
     public function __construct()
     {
         $this->programs = new ArrayCollection();
@@ -121,30 +126,31 @@ class Category
         return $this;
     }
 
-  public function __toString(){
-    return $this->getName();
-  }
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
-  /**
-   * @return Collection|Workshop[]
-   */
-  public function getWorkshops(): Collection
-  {
+    /**
+    * @return Collection|Workshop[]
+    */
+    public function getWorkshops(): Collection
+    {
       return $this->workshops;
-  }
+    }
 
-  public function addWorkshop(Workshop $workshop): self
-  {
-      if (!$this->workshops->contains($workshop)) {
-          $this->workshops[] = $workshop;
-          $workshop->setCategory($this);
-      }
+    public function addWorkshop(Workshop $workshop): self
+    {
+        if (!$this->workshops->contains($workshop)) {
+            $this->workshops[] = $workshop;
+            $workshop->setCategory($this);
+        }
 
       return $this;
-  }
+    }
 
-  public function removeWorkshop(Workshop $workshop): self
-  {
+    public function removeWorkshop(Workshop $workshop): self
+    {
       if ($this->workshops->contains($workshop)) {
           $this->workshops->removeElement($workshop);
           // set the owning side to null (unless already changed)
@@ -154,5 +160,15 @@ class Category
       }
 
       return $this;
-  }
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
 }

@@ -1,7 +1,8 @@
 /* fonction pour ajout input enfant */
 function myFunction() {
-    document.getElementById("cible").style.display="block";
-  }
+    // document.getElementById("cible").style.display="block";
+    $('#cible').toggle('fast');
+}
             
             
 $(document).ready(function () {
@@ -172,6 +173,14 @@ $("#sendM").on("click", function(e){
      });
 });
 
+/* Formulaire Newsletter */
+$("#submitNewsletter").on("click", function(e){
+    e.preventDefault();
+    $("#checked").on("click", function(){
+        $("#subscribe").submit();
+    });
+});
+
 /* Formulaire connexion */
 $("#mdp").focus(function(){
 	$("#roulette").css({
@@ -196,4 +205,3 @@ $("input[type=checkbox]").on( "click", function(){
      $("#mdp").attr("type","password");
   }
 });
-

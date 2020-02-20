@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Newsletter;
 use App\Entity\User;
+use App\Form\NewsletterFormType;
+use App\Form\ContactType;
 use App\Form\RegistrationFormType;
 use App\Form\NewsletterType;
 use App\Entity\Newsletter;
@@ -12,9 +15,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 
 class IndexController extends AbstractController
@@ -25,12 +30,16 @@ class IndexController extends AbstractController
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param WorkshopRepository $workshopRepository
+     * @param MailerInterface $mailer
      * @return RedirectResponse|Response
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
      */
     public function index(ProgramRepository $programRepository,
                           Request $request,
                           UserPasswordEncoderInterface $passwordEncoder,
-                          WorkshopRepository $workshopRepository)
+                          WorkshopRepository $workshopRepository,
+                          MailerInterface $mailer)
+
     {
       $programs = $programRepository->findAll();
       $workshops = $workshopRepository->findAll();
@@ -54,24 +63,54 @@ class IndexController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // do anything else you need here, like send an email
+            // mail
+
+            $email = (new TemplatedEmail())
+            ->from('hello@example.com')
+            ->to($user->getMail())
+            ->subject('Mail confirmation')
+            ->htmlTemplate('mail/confirmMail.html.twig')
+            ->context([
+                'user' => $user,
+            ]);
+
+            $mailer->send($email);
 
             return $this->redirectToRoute('index');
         }
 
-        //form email
 
-        $mail = new Newsletter();
-        $new = $this->createForm(NewsletterType::class, $mail);
-        $new->handleRequest($request);
+      // Form Newsletter
+        $newsletter = new Newsletter();
+        $newsletterForm = $this->createForm(NewsletterFormType::class, $newsletter);
+        $newsletterForm->handleRequest($request);
 
-        if ($new->isSubmitted() ) {
+        if ($newsletterForm->isSubmitted() && $newsletterForm->isValid()) {
 
-            $entityManager = $this->getDoctrine()->getManager();
+          $entityManager = $this->getDoctrine()->getManager();
+          $entityManager->persist($newsletter);
+          $entityManager->flush();
 
-            $entityManager->persist($mail);
 
-			$entityManager->flush();
+          return $this->redirectToRoute('index');
+        }
+
+        //Contact Form
+
+        $contact = $this->createForm(ContactType::class);
+        $contact->handleRequest($request);
+
+        if ($contact->isSubmitted() && $contact->isValid()) {
+            $email = (new TemplatedEmail())
+                ->from('hello@example.com')
+                ->to($user->getMail())
+                ->subject('Mail confirmation')
+                ->htmlTemplate('mail/confirmMail.html.twig')
+                ->context([
+                    'user' => $user,
+                ]);
+            $mailer->send($email);
+          
         }
 
         return $this->render('index/index.html.twig', [
@@ -79,7 +118,9 @@ class IndexController extends AbstractController
             'programs' => $programs,
             'workshops' => $workshops,
             'registrationForm' => $form->createView(),
-            'newsletter' => $new->createView(),
+            'newsletterForm' => $newsletterForm->createView(),
+            'contactform' => $contact->createView(),
+
         ]);
     }
     /**

@@ -59,6 +59,11 @@ class Program
      */
     private $important;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $places;
+
     public function __construct()
     {
         $this->kids = new ArrayCollection();
@@ -141,46 +146,59 @@ class Program
         return $this;
     }
 
-  public function __toString(){
+    public function __toString(){
     return $this->getName();
-  }
+    }
 
-  /**
-   * @return Collection|Kids[]
-   */
-  public function getKids(): Collection
-  {
+    /**
+    * @return Collection|Kids[]
+    */
+    public function getKids(): Collection
+    {
       return $this->kids;
-  }
+    }
 
-  public function addKid(Kids $kid): self
-  {
+    public function addKid(Kids $kid): self
+    {
       if (!$this->kids->contains($kid)) {
           $this->kids[] = $kid;
           $kid->addProgram($this);
       }
 
       return $this;
-  }
+    }
 
-  public function removeKid(Kids $kid): self
-  {
+    public function removeKid(Kids $kid): self
+    {
       if ($this->kids->contains($kid)) {
           $this->kids->removeElement($kid);
           $kid->removeProgram($this);
       }
 
       return $this;
-  }
+    }
 
-  public function getImportant(): ?string
-  {
+    public function getImportant(): ?string
+    {
       return $this->important;
+    }
+
+    public function setImportant(?string $important): self
+    {
+      $this->important = $important;
+
+      return $this;
+    }
+
+
+  public function getPlaces(): ?int
+  {
+      return $this->places;
   }
 
-  public function setImportant(?string $important): self
+  public function setPlaces(int $places): self
   {
-      $this->important = $important;
+      $this->places = $places;
 
       return $this;
   }
