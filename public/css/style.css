@@ -219,7 +219,7 @@ left: -2px;
 width: 0;
 height: 0;
 background: transparent;
-border: 2px solid transparent;
+border: 3px solid transparent;
 }
 
 h2:after{
@@ -430,10 +430,10 @@ animation-delay: 1s;
     margin-top: 5px;
 }
 .time-right:hover {
-    box-shadow: -15px 0 30px -15px #f0ad4e !important;
+    box-shadow: 5px 0 35px -15px #f0ad4e !important;
 }
 .time-left:hover {
-    box-shadow: 5px 0 35px -15px #9C4E95 !important;
+    box-shadow: 5px 0 25px -15px #9C4E95 !important;
 }
 /* section 4 separator */
 #separatorImg {
@@ -448,6 +448,16 @@ animation-delay: 1s;
 
 /* section 5 Ecole */
 
+.jumbotron h3:after{
+    display: block;
+    content: '';
+    border-bottom: solid 3px #f0ad4e;  
+    transform: scaleX(0);  
+    transition: transform 500ms ease-in-out;
+}
+.jumbotron h3:hover:after {
+     transform: scaleX(1); 
+}
 
 
 /* section 6 galerie d'image */
@@ -469,6 +479,10 @@ animation-delay: 1s;
     background-attachment: fixed;
     position: relative;
     text-shadow: 1px 1px 1px black;
+}
+#separatorImgNewsletter button {
+    color: white !important;
+    font-weight: bold;
 }
 
 .caption{
@@ -502,6 +516,9 @@ animation-delay: 1s;
 #contact:hover {
     background-color: rgba(219, 243, 245, 0.70);
 }
+#contact button {
+    font-weight: bold;
+}
 
 /* footer */
 #eura{
@@ -512,6 +529,45 @@ animation-delay: 1s;
 }
 footer i:hover{
     color: red !important;
+}
+
+
+/* effect btn */
+
+.effect {
+    border: none;
+    display: inline-block;
+    outline: none;
+    position: relative;
+}
+.effect:before, .effect:after {
+    border-color: transparent;
+    -webkit-transition: all 0.25s;
+    transition: all 0.25s;
+    border-style: solid;
+    border-width: 0;
+    content: "";
+    height: 24px;
+    position: absolute;
+    width: 24px;
+}
+.effect:before {
+    border-color: #f0ad4e;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    right: -5px;
+    top: -5px;
+}
+.effect:after {
+    border-bottom-width: 2px;
+    border-color: #f0ad4e;
+    border-left-width: 2px;
+    bottom: -5px;
+    left: -5px;
+}
+.effect:hover:before, .effect.hover:before, .effect:hover:after, .effect.hover:after {
+    height: 100%;
+    width: 100%;
 }
 
 /* media */
