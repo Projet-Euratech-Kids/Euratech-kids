@@ -2,30 +2,25 @@
 
 namespace App\Form;
 
-use App\Entity\Program;
+use App\Entity\Newsletter;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProgramType extends AbstractType
+class NewsletterFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-//            ->add('name')
-//            ->add('description')
-//            ->add('registration')
-//            ->add('startdate')
-//            ->add('enddate')
-//            ->add('category')
-            ->add('kids')
+          ->add('mail', EmailType::class, ['label' => 'Adresse Email'])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Program::class,
+            'data_class' => Newsletter::class,
         ]);
     }
 }

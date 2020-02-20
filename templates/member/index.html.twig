@@ -15,7 +15,7 @@
 
         <div class="button ml-3 mr-5">
         <button class="btn btn-outline-eura dropdown-toggle btn-n" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ app.user.lastname }}
+            {{ app.user.firstname }} {{ app.user.lastname }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {% if is_granted('ROLE_ADMIN') %}
@@ -36,7 +36,7 @@
                         <div id="buttons" class="py-3 text-right">
                             {% if app.user %}
                                 <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ app.user.lastname }}
+                                    {{ app.user.firstname }} {{ app.user.lastname }}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     {% if is_granted('ROLE_ADMIN') %}
@@ -76,6 +76,8 @@
                                     {{ form_start(modifMember) }}
                                     {{ form_row(modifMember.mail) }}
                                     {{ form_row(modifMember.lastname) }}
+                                    {{ form_row(modifMember.firstname) }}
+                                    {{ form_row(modifMember.phone, {'attr': {'pattern': '[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}'}}) }}
                                     {{ form_row(modifMember.plainPassword) }}
                                     {{ form_row(modifMember.agreeTerms) }}
 
@@ -85,7 +87,6 @@
                                 
                                     <h2>Mes enfants </h2>
 
-                                    </form>
                                     <div class="table-responsive">
                                         <table class="table" id="tableau">
 
@@ -151,11 +152,19 @@
                                         </table>
                                     </div>
                                     <div class="contenu">
-                                        <button class="btn btn-eura text-center mb-3" type="submit"
-                                                onclick="fAddText()"/>
-                                        <i class="fas fa-plus"></i></button>
+
+                                        <button class="btn btn-eura text-center mb-3" onclick="myFunction()" type="submit">
+                                        <i class="fas fa-plus "></i></button>
+
                                         <br/>
-                                        <div id="Cible">
+                                        <div id="cible" class="flip">
+                                            {{ form_start(addkids) }}
+                                            {{ form_row(addkids.name) }}
+                                            <div class="d-flex justify-content-center">
+                                                {{ form_row(addkids.birthday) }}
+                                            </div>
+                                                <button class="btn btn-outline-eura">Ajouter</button>
+                                            {{ form_end(addkids) }}
                                         </div>
                                     </div>
                                 </div>
@@ -170,13 +179,12 @@
                                 <h2>Vos prochains ateliers</h2><br/>
                                 <div class="table-responsive">
                                     <table class="table" id="tablmob">
-                                        {% for kid in kids %}
-                                            {% if kid.user == app.user %}
+                                        {% for kid in app.user.kids %}
                                                 {% if kid.programs is not empty %}
                                                     {% for p in kid.programs %}
                                                         <tbody>
                                                         <tr>
-                                                            <th scope="row">prénom</th>
+                                                            <th scope="row">Prénom</th>
                                                             <td>{{ kid.name }}</td>
                                                         </tr>
                                                         <tr>
@@ -190,14 +198,12 @@
                                                         <tr>
                                                             <th class="table-light" scope="row">Annuler</th>
                                                             <td class="table-light">
-                                                                <button class="btn btn-eura text-center" href="#"><i
-                                                                            class="fas fa-eraser"></i></a>
+                                                                <a href="{{ path('cancel', {p_id: p.id, k_id: kid.id}) }}"><button class="btn btn-eura text-center"><i class="fas fa-eraser"></i></button></a>
                                                             </td>
                                                         </tr>
                                                         </tbody>
                                                     {% endfor %}
                                                 {% endif %}
-                                            {% endif %}
                                         {% endfor %}
                                     </table>
                                 </div>
@@ -218,8 +224,7 @@
                                                         <td>{{ p.name }}</td>
                                                         <td>{{ p.startdate|date('d-m-Y') }}</td>
                                                         <td>
-                                                            <button class="btn btn-eura text-center" href="#"><i
-                                                                        class="fas fa-eraser"></i></a>
+                                                            <a href="{{ path('cancel', {p_id: p.id, k_id: kid.id}) }}"><button class="btn btn-eura text-center"><i class="fas fa-eraser"></i></button></a>
                                                         </td>
                                                     </tr>
                                                 {% endfor %}
@@ -242,28 +247,38 @@
                                         <p class="card-text">{{ program.description }}</p>
                                         <i class="far fa-calendar-alt"></i>
                                         {% if program.registration %}
-                                            <p>{{ program.registration|date('d-m-Y') }}</p>
+                                            <p>Inscriptions à partir du {{ program.registration|date('d-m-Y') }}</p>
                                         {% endif %}
                                         <p>{{ program.startdate|date('d-m-Y') }}{% if program.enddate %} au {{ program.enddate|date('d-m-Y') }}{% endif %}</p>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="button" class="btn btn-eura" data-toggle="modal"
-                                                data-target="#p{{ program.id }}">
-                                            Réserver
-                                        </button>
+                                        {% if program.registration %}
+                                            {% if date().timestamp >= program.registration.timestamp %}
+                                                {% if date().timestamp < program.startdate.timestamp %}
+                                                    <button type="button" class="btn btn-eura" data-toggle="modal" data-target="#p{{ program.id }}">Réserver</button>
+                                                {% else %}
+                                                    <button type="button" class="btn btn-eura" disabled>Réservations terminées</button>
+                                                {% endif %}
+                                            {% else %}
+                                                <button type="button" class="btn btn-eura" disabled>Réservations non ouvertes</button>
+                                            {% endif %}
+                                        {% else %}
+                                            <button type="button" class="btn btn-eura" data-toggle="modal" data-target="#p{{ program.id }}">Réserver</button>
+                                        {% endif %}
                                     </div>
                                 </div>
-                            {% endfor %}    
-                            </div>
+                            {% endfor %}
+                        </section>
+                    </div>
                             
-                            {% for program in programs %}
-                            <!-- Modal Programme:{{ program.id }} -->
+                    {% for program in programs %}
+                        <!-- Modal Programme:{{ program.id }} -->
                         <div class="container">
                             <div class="modal fade" id="p{{ program.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalScrollableTitle">Reserver pour {{ program.name }}</h5>
+                                            <h5 class="modal-title" id="exampleModalScrollableTitle">Reserver pour id {{ program.id }}</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -272,28 +287,22 @@
                                             <div class="form-check text-left">
                                                 {% for kid in app.user.kids %}
                                                     {% if program not in kid.programs %}
-                                                        <input class="form-check-input" type="checkbox" id="gridCheck">
-                                                        <label class="form-check-label" for="gridCheck">
-                                                            {{ kid.name }}
-                                                        </label>
-                                                        <br />
+                                                        <p><a href="{{ path('booking', {p_id: program.id, k_id: kid.id}) }}">{{ kid.name }}</a></p>
                                                     {% endif %}
                                                 {% endfor %}
-                                                </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-eura">Valider</button>
-                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-eura">Valider</button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>     
-                                <!-- Fin - Modal Programme:{{ program.id }} -->
-                            {% endfor %}
-                        </section>
-                    </div>
+                            </div>
+                        </div>
+                        <!-- Fin - Modal Programme:{{ program.id }} -->
+                    {% endfor %}
                     </div>
                 </div>
-        </div>
+            </div>
     </div>
 {% endblock %}

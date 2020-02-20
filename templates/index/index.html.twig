@@ -28,13 +28,13 @@
         <div class="button ml-3 mr-5" id="buttons-h">
             {% if app.user %}
                 <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ app.user.lastname }}
+                    {{ app.user.firstname }} {{ app.user.lastname }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     {% if is_granted('ROLE_ADMIN') %}
                         <a class="dropdown-item" href="{{ path('easyadmin') }}">Administrer</a>
                     {% endif %}
-                    <a class="dropdown-item" href="{{ path('member',{'lastname': app.user.lastname}) }}">Réservations</a>
+                    <a class="dropdown-item" href="{{ path('member',{'id': app.user.id}) }}">Réservations</a>
                     <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
                 </div>
             {% else %}
@@ -50,13 +50,13 @@
         <div id="buttons" class="py-3 text-right">
             {% if app.user %}
                 <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ app.user.lastname }}
+                    {{ app.user.firstname }} {{ app.user.lastname }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     {% if is_granted('ROLE_ADMIN') %}
                         <a class="dropdown-item" href="{{ path('easyadmin') }}">Administrer</a>
                     {% endif %}
-                    <a class="dropdown-item" href="{{ path('member',{'lastname': app.user.lastname}) }}">Réservations</a>
+                    <a class="dropdown-item" href="{{ path('member',{'id': app.user.id}) }}">Réservations</a>
                     <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
                 </div>
             {% else %}
@@ -186,12 +186,12 @@
                 {% for workshop in workshops %}
                     <div class="card border-0 mx-auto col-lg-3 mb-4">
                         <div class="card-title mt-2">
-                            <h3 class="text-eura pt-3 text-center">{{ workshop.title }}</h3>
+                            <h3 class="pt-3 text-center">{{ workshop.title }}</h3>
                         </div>
                         {#                    {% if workshop.image %}#}
                         <img class="card-img-top rounded mt-4" src="{{asset('img/20191022_153109.jpg')}}" alt="card photos">
                         {#                    {% endif %}#}
-                        <h4 class="pt-3">{{ workshop.category }}</h4>
+                        <h4 class="pt-3 text-center">{{ workshop.category }}</h4>
                         <div class="card-body">
                             <p class="card-text">{{ workshop.description|raw }}</p>
                         </div>
@@ -272,7 +272,7 @@
                         </div><br>
                         {% if program.category.name != "Vacances" %}
                             {% if app.user %}
-                                <a href="{{ path('member',{'lastname': app.user.lastname}) }}"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
+                                <a href="{{ path('member',{'id': app.user.id}) }}"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
                             {% else %}
                                 <a data-toggle="modal" data-target="#connexion"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
                             {% endif %}
@@ -318,7 +318,7 @@
                         </div><br>
                         {% if program.category.name != "Vacances" %}
                             {% if app.user %}
-                                <a href="{{ path('member',{'lastname': app.user.lastname}) }}"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
+                                <a href="{{ path('member',{'id': app.user.id}) }}"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
                             {% else %}
                                 <a data-toggle="modal" data-target="#connexion"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
                             {% endif %}
@@ -354,7 +354,7 @@
             <hr class="my-4">
             <p class="text-center">Durée : 1 journée avec possibilité de déjeuner sur place (prévoir un pique-nique). 1/2 journée matin ou après-midi.</p>
             <div class="text-center">
-                <a class="btn btn-eura btn-lg" href="#" role="button">Demander votre devis</a>
+                <a class="nav-link btn btn-eura btn-lg" href="#contact" role="button">Demander votre devis</a>
             </div>
         </div>
     </section>
@@ -424,13 +424,12 @@
             <div class="col-12 col-lg-5 col-md-6 mx-auto" id="newsletter">
                 <h2 class="text-warning">Newsletter</h2>
                 <p class="text-white">Abonnez-vous à notre newsletter pour être informé de notre actualité et de nos événements.</p>
-                <form>
-                    <div class="form-group">
-                        <label for="email" class="text-white">Adresse mail</label>
-                        <input type="email" class="form-control" name="email">
-                        <button type="" id="submitNewsletter" class="btn btn-eura mt-3">M'abonner</button>
-                    </div>
-                </form>
+                <div class="text-white">
+                    {{ form_start(newsletterForm, {'attr':{'id':'subscribe'}}) }}
+                    {{ form_row(newsletterForm.mail) }}
+                    <button type="submit" id="submitNewsletter" class="btn btn-eura mt-3" data-toggle="modal" data-target="#sub">M'abonner</button>
+                    {{ form_end(newsletterForm) }}
+                </div>
             </div>
         </div>
     </section>
@@ -489,6 +488,32 @@
                 </div>
             </div>
             <!-- Fin - Modal Send -->
+
+            <!-- Modal Subscribe -->
+            <div class="modal fade" id="sub" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <img class="img-fluid" src="{{asset('img/undraw_confirmation_2uy0.png')}}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="text-center">Inscription Confirmée !</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="checked" type="button" class="btn btn-eura btn-block mx-5" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin - Modal Subscribe -->
 
             <!-- <div class="col-12 col-lg-4 mx-auto py-5">
                 <h2>Newsletter</h2>

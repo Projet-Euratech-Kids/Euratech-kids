@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Newsletter;
 use App\Entity\User;
+use App\Form\NewsletterFormType;
 use App\Form\RegistrationFormType;
 use App\Repository\ProgramRepository;
 use App\Repository\WorkshopRepository;
@@ -71,11 +73,27 @@ class IndexController extends AbstractController
             return $this->redirectToRoute('index');
         }
 
+      // Form Newsletter
+        $newsletter = new Newsletter();
+        $newsletterForm = $this->createForm(NewsletterFormType::class, $newsletter);
+        $newsletterForm->handleRequest($request);
+
+        if ($newsletterForm->isSubmitted() && $newsletterForm->isValid()) {
+
+          $entityManager = $this->getDoctrine()->getManager();
+          $entityManager->persist($newsletter);
+          $entityManager->flush();
+
+
+          return $this->redirectToRoute('index');
+        }
+
         return $this->render('index/index.html.twig', [
             'controller_name' => 'IndexController',
             'programs' => $programs,
             'workshops' => $workshops,
             'registrationForm' => $form->createView(),
+            'newsletterForm' => $newsletterForm->createView(),
         ]);
     }
     /**
