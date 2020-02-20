@@ -234,6 +234,7 @@
         <!-- Timeline -->
         <ul class="timeline mx-lg-5 mx-3">
             {% for program in programs %}
+                 {% if date().timestamp < program.startdate.timestamp %}
                 {% if((loop.index)%2 != 0) %}
             <li>
                 <div class="timeline-badge purple"><i class="fas fa-arrow-left"></i></div>
@@ -333,6 +334,7 @@
                     </div>
                 </div>
             </li>
+            {% endif %}
             {% endif %}
             {% endfor %}
         </ul>
