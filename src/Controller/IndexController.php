@@ -4,17 +4,20 @@ namespace App\Controller;
 
 use App\Entity\Newsletter;
 use App\Entity\Contact;
+use App\Entity\Gallery;
 use App\Entity\User;
 use App\Form\NewsletterFormType;
 use App\Form\ContactType;
 use App\Form\RegistrationFormType;
 use App\Form\NewsletterType;
+use App\Repository\GalleryRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\WorkshopRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,21 +34,23 @@ class IndexController extends AbstractController
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param WorkshopRepository $workshopRepository
      * @param MailerInterface $mailer
+     * @param GalleryRepository $galleryRepository
      * @return RedirectResponse|Response
-     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
+     * @throws TransportExceptionInterface
      */
     public function index(ProgramRepository $programRepository,
                           Request $request,
                           UserPasswordEncoderInterface $passwordEncoder,
                           WorkshopRepository $workshopRepository,
                           MailerInterface $mailer,
-                          Contact $contact)
+                          GalleryRepository $galleryRepository)
 
     {
-      $programs = $programRepository->findAll();
-      $workshops = $workshopRepository->findAll();
+        $programs = $programRepository->findAll();
+        $workshops = $workshopRepository->findAll();
+        $gallery = $galleryRepository->findAll();
 
-      // Form Inscription
+        // Form Inscription
 
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -67,13 +72,13 @@ class IndexController extends AbstractController
             // mail
 
             $email = (new TemplatedEmail())
-            ->from('hello@example.com')
-            ->to($user->getMail())
-            ->subject('Mail confirmation')
-            ->htmlTemplate('mail/confirmMail.html.twig')
-            ->context([
-                'user' => $user,
-            ]);
+                ->from('hello@example.com')
+                ->to($user->getMail())
+                ->subject('Mail confirmation')
+                ->htmlTemplate('mail/confirmMail.html.twig')
+                ->context([
+                    'user' => $user,
+                ]);
 
             $mailer->send($email);
 
@@ -81,45 +86,52 @@ class IndexController extends AbstractController
         }
 
 
-      // Form Newsletter
+        // Form Newsletter
         $newsletter = new Newsletter();
         $newsletterForm = $this->createForm(NewsletterFormType::class, $newsletter);
         $newsletterForm->handleRequest($request);
 
         if ($newsletterForm->isSubmitted() && $newsletterForm->isValid()) {
 
-          $entityManager = $this->getDoctrine()->getManager();
-          $entityManager->persist($newsletter);
-          $entityManager->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($newsletter);
+            $entityManager->flush();
 
 
-          return $this->redirectToRoute('index');
+            return $this->redirectToRoute('index');
         }
 
         //Contact Form
 
         $contact = new Contact();
-        $contact = $this->createForm(ContactType::class);
-        $contact->handleRequest($request);
+        $contactform = $this->createForm(ContactType::class, $contact);
+        $contactform->handleRequest($request);
 
-        if ($contact->isSubmitted() && $contact->isValid()) {
+        if ($contactform->isSubmitted() && $contactform->isValid()) {
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($contact);
+            $entityManager->flush();
             $email = (new TemplatedEmail())
                 ->from($contact->getEmail())
                 ->to('Matthieu@gmail.com')
                 ->subject('Contact Euratech-Kids de la part de ' . $contact->getName())
-                ->htmlTemplate('mail/contact.html.twig');
+                ->htmlTemplate('mail/contact.html.twig')
+                ->context([
+                    'contact' => $contact,
+                ]);
+
+            $mailer->send($email);
         }
-        
-        /*$mailer->send($email); */
 
         return $this->render('index/index.html.twig', [
             'controller_name' => 'IndexController',
             'programs' => $programs,
             'workshops' => $workshops,
+            'gallery' => $gallery,
             'registrationForm' => $form->createView(),
             'newsletterForm' => $newsletterForm->createView(),
-            'contactform' => $contact->createView(),
-
+            'contactform' => $contactform->createView(),
         ]);
     }
     /**
@@ -129,7 +141,7 @@ class IndexController extends AbstractController
     {
         return $this->render('index/condition.html.twig');
     }
-    
+
     /**
      * @Route("/mention", name="mention")
      */
@@ -137,7 +149,4 @@ class IndexController extends AbstractController
     {
         return $this->render('index/mention.html.twig');
     }
-
-    
-
 }
