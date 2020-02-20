@@ -18,7 +18,6 @@ class ImagesService
         $path = $this->kernel->getProjectDir().'/public/' . $uploadDirectory;
         $imageName = uniqid() . '.' . $image->guessExtension();
         $image->move($path, $imageName);
-        dump($imageName);
         return '/'. $uploadDirectory. '/' . $imageName;
 
     }

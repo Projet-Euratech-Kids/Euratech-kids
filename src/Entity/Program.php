@@ -59,11 +59,6 @@ class Program
      */
     private $important;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $image;
-
     public function __construct()
     {
         $this->kids = new ArrayCollection();
@@ -190,15 +185,6 @@ class Program
       return $this;
     }
 
-    public function setImage($image)
-    {
-        $this->image = $image;
-    }
-
-    public function getImage()
-    {
-        return $this->image;
-    }
 
 //    public function __toString(){
 //      $this->getStartDate();
