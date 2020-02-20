@@ -107,10 +107,17 @@ class IndexController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($contact);
             $entityManager->flush();
-
+            $email = (new TemplatedEmail())
+                        ->from($contact->getEmail())
+                        ->to('Matthieu@gmail.com')
+                        ->subject('Contact Euratech-Kids de la part de ' . $contact->getName())
+                        ->htmlTemplate('mail/contact.html.twig')
+                        ->context([
+                            'contact' => $contact,
+                        ]);
+                
+            $mailer->send($email);
         }
-        
-        /*$mailer->send($email); */
 
         return $this->render('index/index.html.twig', [
             'controller_name' => 'IndexController',
@@ -119,7 +126,6 @@ class IndexController extends AbstractController
             'registrationForm' => $form->createView(),
             'newsletterForm' => $newsletterForm->createView(),
             'contactform' => $contactform->createView(),
-
         ]);
     }
     /**
@@ -137,7 +143,4 @@ class IndexController extends AbstractController
     {
         return $this->render('index/mention.html.twig');
     }
-
-    
-
 }
