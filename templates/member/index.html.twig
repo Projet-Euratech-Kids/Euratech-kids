@@ -13,52 +13,52 @@
 
         {% if app.user %}
 
-        <div class="button ml-3 mr-5">
-        <button class="btn btn-outline-eura dropdown-toggle btn-n" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ app.user.firstname }} {{ app.user.lastname }}
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            {% if is_granted('ROLE_ADMIN') %}
-                <a class="dropdown-item" href="{{ path('easyadmin') }}">Administrer</a>
-            {% endif %}
-            <a class="dropdown-item" href="{{ path('index') }}">Accueil</a>
-            <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
-        </div>
-        </div>
+            <div class="button ml-3 mr-5">
+                <button class="btn btn-outline-eura dropdown-toggle btn-n" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ app.user.firstname }} {{ app.user.lastname }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="dropdown-item" href="{{ path('easyadmin') }}">Administrer</a>
+                    {% endif %}
+                    <a class="dropdown-item" href="{{ path('index') }}">Accueil</a>
+                    <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
+                </div>
+            </div>
 
         {% endif %}
     </header>
 
     <div class="container-fluid" id="top">
-            <div class="row mb-5">
-                <div class="container-fluid position">
-                    <div class="d-flex flex-row-reverse">
-                        <div id="buttons" class="py-3 text-right">
-                            {% if app.user %}
-                                <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ app.user.firstname }} {{ app.user.lastname }}
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                        <a class="dropdown-item" href="{{ path('easyadmin') }}">Administrer</a>
-                                    {% endif %}
-                                    <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
-                                </div>
-                            {% else %}
-                                <button class="btn btn-eura btn-sm mr-3" data-toggle="modal" data-target="#connexion">Connexion</button>
-                                <button class="btn btn-eura btn-sm mr-3" data-toggle="modal" data-target="#inscription">Inscription</button>
-                            {% endif %}
-                        </div>
+        <div class="row mb-5">
+            <div class="container-fluid position">
+                <div class="d-flex flex-row-reverse">
+                    <div id="buttons" class="py-3 text-right">
+                        {% if app.user %}
+                            <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ app.user.firstname }} {{ app.user.lastname }}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a class="dropdown-item" href="{{ path('easyadmin') }}">Administrer</a>
+                                {% endif %}
+                                <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
+                            </div>
+                        {% else %}
+                            <button class="btn btn-eura btn-sm mr-3" data-toggle="modal" data-target="#connexion">Connexion</button>
+                            <button class="btn btn-eura btn-sm mr-3" data-toggle="modal" data-target="#inscription">Inscription</button>
+                        {% endif %}
                     </div>
+                </div>
                 <div class="container">
                     <div class="col-md-12 pr-0 pl-0 text-white text-center mb-5">
                         <div class="card border-0 m-0" id="top-image">
                             <img class="card-img" src="{{ asset('img/20191022_153109.jpg') }}" alt="enfant parent">
                         </div>
                     </div>
-        
+
                     <!-- collapse modif -->
-                    
+
                     <div class="accordion container mx-auto pt-5" id="accordionExample">
                         <div class="card text-center col-md-12">
                             <div class="card-title" id="headingOne">
@@ -82,9 +82,9 @@
                                     {{ form_row(modifMember.agreeTerms) }}
 
 
-                                <button class="btn btn-eura">Modifier</button>
-                                {{ form_end(modifMember) }}
-                                
+                                    <button class="btn btn-eura">Modifier</button>
+                                    {{ form_end(modifMember) }}
+
                                     <h2>Mes enfants </h2>
 
                                     <div class="table-responsive">
@@ -181,7 +181,7 @@
                                     <div class="contenu">
 
                                         <button class="btn btn-eura text-center mb-3" onclick="myFunction()" type="submit">
-                                        <i class="fas fa-plus "></i></button>
+                                            <i class="fas fa-plus "></i></button>
 
                                         <br/>
                                         <div id="cible" class="flip">
@@ -190,7 +190,7 @@
                                             <div class="d-flex justify-content-center">
                                                 {{ form_row(addkids.birthday) }}
                                             </div>
-                                                <button class="btn btn-outline-eura">Ajouter</button>
+                                            <button class="btn btn-outline-eura">Ajouter</button>
                                             {{ form_end(addkids) }}
                                         </div>
                                     </div>
@@ -207,30 +207,32 @@
                                 <div class="table-responsive">
                                     <table class="table" id="tablmob">
                                         {% for kid in app.user.kids %}
-                                                {% if kid.programs is not empty %}
-                                                    {% for p in kid.programs %}
-                                                        <tbody>
-                                                        <tr>
-                                                            <th scope="row">Prénom</th>
-                                                            <td>{{ kid.name }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">Reservation</th>
-                                                            <td>{{ p.name }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">Date</th>
-                                                            <td>{{ p.startdate|date('d-m-Y') }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th class="table-light" scope="row">Annuler</th>
-                                                            <td class="table-light">
-                                                                <a href="#"><button class="btn btn-eura text-center"><i class="fas fa-eraser"></i></button></a>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    {% endfor %}
-                                                {% endif %}
+
+                                            {% if kid.programs is not empty %}
+                                                {% for p in kid.programs %}
+                                                    <tbody>
+                                                    <tr>
+                                                        <th scope="row">Prénom</th>
+                                                        <td>{{ kid.name }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Reservation</th>
+                                                        <td>{{ p.name }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Date</th>
+                                                        <td>{{ p.startdate|date('d-m-Y') }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="table-light" scope="row">Annuler</th>
+                                                        <td class="table-light">
+                                                            <a href="{{ path('cancel', {p_id: p.id, k_id: kid.id}) }}"><button class="btn btn-eura text-center"><i class="fas fa-eraser"></i></button></a>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                {% endfor %}
+                                            {% endif %}
+
                                         {% endfor %}
                                     </table>
                                 </div>
@@ -244,18 +246,20 @@
                                     </tr>
                                     </thead>
                                     {% for kid in app.user.kids %}
-                                            {% if kid.programs is not empty %}
-                                                {% for p in kid.programs %}
-                                                    <tr>
-                                                        <td>{{ kid.name }}</td>
-                                                        <td>{{ p.name }}</td>
-                                                        <td>{{ p.startdate|date('d-m-Y') }}</td>
-                                                        <td>
-                                                            <a href="#"><button class="btn btn-eura text-center"><i class="fas fa-eraser"></i></button></a>
-                                                        </td>
-                                                    </tr>
-                                                {% endfor %}
-                                            {% endif %}
+
+                                        {% if kid.programs is not empty %}
+                                            {% for p in kid.programs %}
+                                                <tr>
+                                                    <td>{{ kid.name }}</td>
+                                                    <td>{{ p.name }}</td>
+                                                    <td>{{ p.startdate|date('d-m-Y') }}</td>
+                                                    <td>
+                                                        <a href="{{ path('cancel', {p_id: p.id, k_id: kid.id}) }}"><button class="btn btn-eura text-center"><i class="fas fa-eraser"></i></button></a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% endif %}
+
                                     {% endfor %}
                                 </table>
                             </div>
@@ -297,7 +301,7 @@
                             {% endfor %}
                         </section>
                     </div>
-                            
+
                     {% for program in programs %}
                         <!-- Modal Programme:{{ program.id }} -->
                         <div class="container">
@@ -314,17 +318,15 @@
                                             <div class="form-check text-left">
                                                 {% for kid in app.user.kids %}
                                                     {% if program not in kid.programs %}
-                                                        <input class="form-check-input" type="checkbox" id="gridCheck">
-                                                        <label class="form-check-label" for="gridCheck">
-                                                            {{ kid.name }}
-                                                        </label>
-                                                        <br />
+                                                        <p><a href="{{ path('booking', {p_id: program.id, k_id: kid.id}) }}">{{ kid.name }}</a></p>
                                                     {% endif %}
                                                 {% endfor %}
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-eura">Valider</button>
+
+                                            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Fermer</button>
+
                                         </div>
                                     </div>
                                 </div>
@@ -332,8 +334,10 @@
                         </div>
                         <!-- Fin - Modal Programme:{{ program.id }} -->
                     {% endfor %}
-                    </div>
+
                 </div>
             </div>
+        </div>
+
     </div>
 {% endblock %}
