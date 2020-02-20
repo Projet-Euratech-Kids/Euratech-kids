@@ -38,8 +38,13 @@
                     <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
                 </div>
             {% else %}
+<<<<<<< HEAD
             <a class="btn btn-outline-eura btn-sm mr-3" data-toggle="modal" data-target="#connexion">Connexion</a>
             <a class="btn btn-eura btn-sm mr-3" data-toggle="modal" data-target="#inscription">Inscription</a>
+=======
+            <a class="btn btn-outline-eura btn-sm mr-3 effect" data-toggle="modal" data-target="#connexion">Connexion</a>
+            <a class="btn btn-outline-eura btn-sm mr-3 effect" data-toggle="modal" data-target="#inscription">Inscription</a>
+>>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
             {% endif %}
         </div>
     </header>
@@ -49,7 +54,11 @@
 
         <div id="buttons" class="py-3 text-right">
             {% if app.user %}
+<<<<<<< HEAD
                 <button class="btn btn-outline-eura dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+=======
+                <button class="btn btn-outline-eura dropdown-toggle effect" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+>>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
                     {{ app.user.firstname }} {{ app.user.lastname }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -60,8 +69,13 @@
                     <a class="dropdown-item" href="{{ path('logout') }}">Se déconnecter</a>
                 </div>
             {% else %}
+<<<<<<< HEAD
                 <button class="btn btn-eura btn-sm mr-3" data-toggle="modal" data-target="#connexion">Connexion</button>
                 <button class="btn btn-eura btn-sm mr-3" data-toggle="modal" data-target="#inscription">Inscription</button>
+=======
+                <button class="btn btn-outline-eura btn-sm mr-3 effect" data-toggle="modal" data-target="#connexion">Connexion</button>
+                <button class="btn btn-outline-eura btn-sm mr-3 effect" data-toggle="modal" data-target="#inscription">Inscription</button>
+>>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
             {% endif %}
         </div>
 
@@ -79,7 +93,11 @@
             </div>
         </div>
         <div id="text-phone" class="text-center pt-4">
+<<<<<<< HEAD
             <h2 class="mb-3">Initiez vos enfants au monde du numérique</h2>
+=======
+            <h3 class="mb-3 h2">Initiez vos enfants au monde du numérique</h3>
+>>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
             <p class="">EuraTechnologies renforce son programme d’accompagnement des plus jeunes avec EURATECH’KIDS pour donner aux enfants le goût de la programmation et les projeter dans le futur.</p>
         </div>
 
@@ -115,8 +133,13 @@
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     </div>
                     <div class="modal-footer">
+<<<<<<< HEAD
                         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Fermer</button>
                         <button type="submit" class="btn btn-eura">Se connecter</button>
+=======
+                        <button type="button" class="btn btn-outline-eura mr-3 effect" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-outline-eura effect">Se connecter</button>
+>>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
                     </div>
                 </form>
             </div>
@@ -147,8 +170,13 @@
                     </div>
 
                     <div class="modal-footer">
+<<<<<<< HEAD
                         <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fermer</button>
                         <button type="submit" class="btn btn-eura">S'inscrire</button>
+=======
+                        <button type="button" class="btn btn-outline-eura mr-3 effect" data-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-outline-eura effect">S'inscrire</button>
+>>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
                     </div>
 
                         {{ form_end(registrationForm) }}
@@ -196,12 +224,23 @@
                             <p class="card-text">{{ workshop.description|raw }}</p>
                         </div>
                         <div class="card-footer mx-auto">
+<<<<<<< HEAD
                             <a data-toggle="modal" data-target="#workshop-{{ workshop.id }}" class="btn btn-eura">En savoir plus</a>
+=======
+
+                            <a data-toggle="modal" data-target="#workshop-{{ workshop.id }}" class="btn btn-outline-eura effect">En savoir plus</a>
+>>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
                         </div>
                     </div>
 
                     <!-- Modal Explorateur -->
+<<<<<<< HEAD
                     <div class="modal fade" id="workshop-{{ workshop.id }}" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+=======
+
+                    <div class="modal fade" id="workshop-{{ workshop.id }}" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+>>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -231,6 +270,10 @@
         <!-- Timeline -->
         <ul class="timeline mx-lg-5 mx-3">
             {% for program in programs %}
+<<<<<<< HEAD
+=======
+                 {% if date().timestamp < program.startdate.timestamp %}
+>>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
                 {% if((loop.index)%2 != 0) %}
             <li>
                 <div class="timeline-badge purple"><i class="fas fa-arrow-left"></i></div>
@@ -274,9 +317,15 @@
                         </div><br>
                         {% if program.category.name != "Vacances" %}
                             {% if app.user %}
+<<<<<<< HEAD
                                 <a href="{{ path('member',{'id': app.user.id}) }}"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
                             {% else %}
                                 <a data-toggle="modal" data-target="#connexion"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
+=======
+                                <a href="{{ path('member',{'id': app.user.id}) }}"><button class="btn btn-outline-eura btn-lg mr-3 effect">Réserver ce cours</button></a>
+                            {% else %}
+                                <a data-toggle="modal" data-target="#connexion"><button class="btn btn-outline-eura btn-lg mr-3 effect">Réserver ce cours</button></a>
+>>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
                             {% endif %}
                         {% endif %}
                     </div>
@@ -322,15 +371,25 @@
                         </div><br>
                         {% if program.category.name != "Vacances" %}
                             {% if app.user %}
+<<<<<<< HEAD
                                 <a href="{{ path('member',{'id': app.user.id}) }}"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
                             {% else %}
                                 <a data-toggle="modal" data-target="#connexion"><button class="btn btn-eura btn-lg mr-3">Réserver ce cours</button></a>
+=======
+                                <a href="{{ path('member',{'id': app.user.id}) }}"><button class="btn btn-outline-eura btn-lg mr-3 effect">Réserver ce cours</button></a>
+                            {% else %}
+                                <a data-toggle="modal" data-target="#connexion"><button class="btn btn-outline-eura btn-lg mr-3 effect">Réserver ce cours</button></a>
+>>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
                             {% endif %}
                         {% endif %}
                     </div>
                 </div>
             </li>
             {% endif %}
+<<<<<<< HEAD
+=======
+            {% endif %}
+>>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
             {% endfor %}
         </ul>
         <!-- Timeline -->
@@ -358,12 +417,17 @@
             <hr class="my-4">
             <p class="text-center">Durée : 1 journée avec possibilité de déjeuner sur place (prévoir un pique-nique). 1/2 journée matin ou après-midi.</p>
             <div class="text-center">
+<<<<<<< HEAD
                 <a class="nav-link btn btn-eura btn-lg" href="#contact" role="button">Demander votre devis</a>
+=======
+                <a class="nav-link btn btn-outline-eura btn-lg effect" href="#contact" role="button">Demander votre devis</a>
+>>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
             </div>
         </div>
     </section>
 
     <!-- Galerie d'image -->
+<<<<<<< HEAD
     <h2 id="galery-link" class="text-center mt-5">Galerie d'images</h2>
     <!-- Galerie Ordinateur -->
     <section id="galery" class="container mt-5 galery-desk">
@@ -392,6 +456,19 @@
             <div class="col-md-3">
                 <img src="{{asset('img/20191022_153109.jpg')}}" class="rounded" alt="#">
             </div>
+=======
+    <h3 id="galery-link" class="text-center mt-5 h2">Galerie d'images</h3>
+    <!-- Galerie Ordinateur -->
+    <section id="gallery" class="container mt-5 galery-desk">
+        <div class="row mx-3">
+            {% for gallery in gallery %}
+                <div class="col-md-3 mb-3">
+                    {% if gallery %}
+                        <img class="card-img-top rounded mt-4" src="{{ gallery.image }}" alt="card photos">
+                    {% endif %}
+                </div>
+            {% endfor %}
+>>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
         </div>
     </section>
     <!-- Fin - Galerie Ordinateur -->
@@ -428,10 +505,18 @@
             <div class="col-12 col-lg-5 col-md-6 mx-auto" id="newsletter">
                 <h3 class="text-warning h2">Newsletter</h3>
                 <p class="text-white">Abonnez-vous à notre newsletter pour être informé de notre actualité et de nos événements.</p>
+<<<<<<< HEAD
                 <div class="text-white">
                     {{ form_start(newsletterForm, {'attr':{'id':'subscribe'}}) }}
                     {{ form_row(newsletterForm.mail) }}
                     <button type="submit" id="submitNewsletter" class="btn btn-eura mt-3" data-toggle="modal" data-target="#sub">M'abonner</button>
+=======
+
+                <div class="text-white">
+                    {{ form_start(newsletterForm, {'attr':{'id':'subscribe'}}) }}
+                    {{ form_row(newsletterForm.mail) }}
+                    <button type="submit" id="submitNewsletter" class="btn btn-outline-eura mt-3 effect" data-toggle="modal" data-target="#sub">M'abonner</button>
+>>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
                     {{ form_end(newsletterForm) }}
                 </div>
             </div>
@@ -447,9 +532,15 @@
                 {{ form_start(contactform) }}
                 {{ form_row(contactform.email, {'attr':{  'required' : 'required'}}) }}
                 {{ form_row(contactform.name, {'attr':{  'required' : 'required'}}) }}
+<<<<<<< HEAD
                 {{ form_row(contactform.tel, {'attr': {'pattern': '[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}', 'required' : 'required' }}) }}
                 {{ form_row(contactform.message, {'attr':{  'required' : 'required'}}) }}
                 <button class="btn btn-eura btn-block mb-3">Envoyer</button>
+=======
+                {{ form_row(contactform.phone, {'attr': {'pattern': '[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}', 'required' : 'required' }}) }}
+                {{ form_row(contactform.message, {'attr':{  'required' : 'required'}}) }}
+                <button class="btn btn-outline-eura btn-block mb-3 effect">Envoyer</button>
+>>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
                 {{ form_end(contactform) }}
             </div>
 
@@ -472,7 +563,11 @@
                             </div>
                         </div>
                         <div class="modal-footer">
+<<<<<<< HEAD
                             <button id="ok" type="button" class="btn btn-eura btn-block mx-5" data-dismiss="modal">OK</button>
+=======
+                            <button id="ok" type="button" class="btn btn-outline-eura btn-block mx-5 effect" data-dismiss="modal">OK</button>
+>>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
                         </div>
                     </div>
                 </div>
@@ -498,7 +593,11 @@
                             </div>
                         </div>
                         <div class="modal-footer">
+<<<<<<< HEAD
                             <button id="checked" type="button" class="btn btn-eura btn-block mx-5" data-dismiss="modal">OK</button>
+=======
+                            <button id="checked" type="button" class="btn btn-outline-eura btn-block mx-5 effect" data-dismiss="modal">OK</button>
+>>>>>>> 4ed9620d1bd7e629cfce583e2b573a971c7f9c6f
                         </div>
                     </div>
                 </div>
