@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Newsletter;
 use App\Entity\Contact;
+use App\Entity\Gallery;
 use App\Entity\User;
 use App\Form\NewsletterFormType;
 use App\Form\ContactType;
 use App\Form\RegistrationFormType;
 use App\Repository\ProgramRepository;
 use App\Repository\WorkshopRepository;
+use App\Repository\GalleryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,11 +38,13 @@ class IndexController extends AbstractController
                         Request $request,
                         UserPasswordEncoderInterface $passwordEncoder,
                         WorkshopRepository $workshopRepository,
-                        MailerInterface $mailer)
+                        MailerInterface $mailer,
+                        GalleryRepository $galleryRepository)
 
   {
     $programs = $programRepository->findAll();
     $workshops = $workshopRepository->findAll();
+    $gallery = $galleryRepository->findAll();
 
     // Form Inscription
 
@@ -120,6 +124,7 @@ class IndexController extends AbstractController
       'controller_name' => 'IndexController',
       'programs' => $programs,
       'workshops' => $workshops,
+      'gallery' => $gallery,
       'registrationForm' => $form->createView(),
       'newsletterForm' => $newsletterForm->createView(),
       'contactform' => $contactform->createView(),

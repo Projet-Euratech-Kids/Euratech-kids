@@ -91,7 +91,6 @@
                                             <tr>
                                                 <th scope="col">Prenom</th>
                                                 <th scope="col">Date de naissance</th>
-                                                <th scope="col">Modifier</th>
                                                 <th scope="col">Supprimer</th>
                                             </tr>
                                             </thead>
@@ -100,37 +99,6 @@
                                                 <tr>
                                                     <td scope="col">{{ kid.name }}</td>
                                                     <td scope="col">{{ kid.birthday|date("d/m/Y") }}</td>
-                                                    <td scope="col">
-                                                        <button type="button" class="btn btn-eura text-center" data-toggle="modal" data-target="#k{{ kid.id}}"><i
-                                                                    class="fas fa-user-edit"></i></button>
-
-                                                        <!-- Modal modif kid-->
-                                                    <div class="modal fade" id="k{{ kid.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLongTitle">Modifier</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                            </div>
-                                                    <div class="modal-body">
-                                                        <div class="container">        
-                                                            <label>Nom</label>
-                                                            <input type="text" value="{{ kid.name }}"></br>
-                                                            <label>Date de naisance</label>
-                                                            <input type="text" value="{{ kid.birthday|date("d/m/Y") }}">
-                                                            </div>
-                                                        </div>    
-                                                            <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">fermer</button>
-                                                            <button type="button" class="btn btn-eura">Sauvegarder</button>
-                                                            </div>
-                                                        </div>
-                                                        </div>
-                                                    </div>    
-                                                        <!-- Fin Modal modif kid-->
-                                                    </td>
                                                     <td scope="col">
                                                         <form method="post"
                                                               action="{{ path('del_kid',{'id': kid.id}) }}"
@@ -156,13 +124,6 @@
                                                 <tr class="thead-light">
                                                     <th scope="row">Date de naissance</th>
                                                     <td>{{ kid.birthday|date("d/m/Y") }}</td>
-                                                </tr>
-                                                <tr class="thead-light">
-                                                    <th scope="row">Modifier</th>
-                                                    <td>
-                                                        <button type="button" class="btn btn-eura text-center"><i
-                                                                    class="fas fa-user-edit"></i></button>
-                                                    </td>
                                                 </tr>
                                                 <tr class="thead-light">
                                                     <th scope="row">Supprimer</th>
@@ -267,7 +228,7 @@
                             {% for program in programs %}
                                 {% if date().timestamp < program.startdate.timestamp %}
                                     <div class="card lg-3 col-md-5 mx-3 mb-5">
-                                        <img class="card-img-top mt-4" src="{{ asset('img/20191022_153109.jpg') }}"
+                                        <img class="card-img-top mt-4" src="{{ program.category.image }}"
                                              alt="card photos">
                                         <h4>{{ program.category.name }}</h4>
                                         <div class="card-body">

@@ -10,6 +10,7 @@ easy_admin:
             - { entity: 'Kids', label: 'Enfants', icon: 'fas fa-child' }
             - { entity: 'Workshop', label: 'Ateliers', icon: 'fas fa-puzzle-piece' }
             - { entity: 'Newsletter', icon: 'fas fa-envelope' }
+            - { entity: 'Gallery', icon: 'fas fa-images' }
     entities:
         # List the entity class name you want to manage
 #        - App\Entity\Program
@@ -62,27 +63,39 @@ easy_admin:
                     - { property: 'minAge' }
                     - { property: 'maxAge' }
                     - { property: 'image', type: 'file', type_options: { data_class: null } }
-
 #        - App\Entity\User
         User:
             class: App\Entity\User
+            list:
+                fields:
+                    - { property: 'lastname', label: 'Nom' }
+                    - { property: 'firstname', label: 'Prenom' }
+                    - { property: 'mail', label: 'Email' }
+                    - { property: 'kids', label: 'Enfant(s)' }
+                    - { property: 'phone', label: 'Telephone' }
             form:
                 fields:
-                    - { property: 'mail' }
-                    - { property: 'password' }
-                    - { property: 'kids' }
-                    - { property: 'lastname' }
-                    - { property: 'firstname' }
-                    - { property: 'phone' }
+                    - { property: 'mail', label: 'Email' }
+                    - { property: 'password', label: 'Mot de passe' }
+                    - { property: 'kids', label: 'Enfant(s)' }
+                    - { property: 'lastname', label: 'Nom' }
+                    - { property: 'firstname', label: 'Prenom' }
+                    - { property: 'phone', label: 'Telephone' }
 #        - App\Entity\Kids
         Kids:
             class: App\Entity\Kids
+            list:
+                fields:
+                    - { property: 'name', label: 'Prénom' }
+                    - { property: 'user', label: 'Parent' }
+                    - { property: 'birthday', label: 'Date de naissance' }
+                    - { property: 'programs', label: 'Programmes' }
             form:
                 fields:
-                    - { property: 'name' }
-                    - { property: 'user' }
-                    - { property: 'birthday' }
-                    - { property: 'programs' }
+                    - { property: 'name', label: 'Prénom' }
+                    - { property: 'user', label: 'Parent' }
+                    - { property: 'birthday', label: 'Date de naissance' }
+                    - { property: 'programs', label: 'Programmes' }
 #        - App\Entity\Workshop
         Workshop:
             class: App\Entity\Workshop
@@ -106,4 +119,14 @@ easy_admin:
             list:
                 fields:
                     - { property: 'mail' }
-#                   - { property: 'image', type: 'file'}
+#        - App\Entity\Gallery
+        Gallery:
+            class: App\Entity\Gallery
+            list:
+                fields:
+                    - { property: 'image', type: 'image', base_path: '/' }
+                    - { property: 'description' }
+            form:
+                fields:
+                    - { property: 'image', type: 'file', type_options: { data_class: null } }
+                    - { property: 'description' }
