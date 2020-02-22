@@ -34,7 +34,10 @@ class PostImageSubscriber implements EventSubscriberInterface
     $result = $event->getSubject();
     $method = $event->getArgument('request')->getMethod();
 
-    if ((! $result instanceof Program && ! $result instanceof Workshop && ! $result instanceof Gallery && ! $result instanceof Category) || $method !== Request::METHOD_POST) {
+//    if ((! $result instanceof Program && ! $result instanceof Workshop && ! $result instanceof Gallery && ! $result instanceof Category) || $method !== Request::METHOD_POST) {
+//      return;
+//    }
+    if (( ! $result instanceof Gallery && ! $result instanceof Category) || $method !== Request::METHOD_POST) {
       return;
     }
 
@@ -48,7 +51,10 @@ class PostImageSubscriber implements EventSubscriberInterface
     $result = $event->getSubject();
     $method = $event->getArgument('request')->getMethod();
 
-    if ((! $result instanceof Program && ! $result instanceof Workshop && ! $result instanceof Gallery && ! $result instanceof Category) || $method !== Request::METHOD_POST) {
+//    if ((! $result instanceof Program && ! $result instanceof Workshop && ! $result instanceof Gallery && ! $result instanceof Category) || $method !== Request::METHOD_POST) {
+//      return;
+//    }
+    if (( ! $result instanceof Gallery && ! $result instanceof Category) || $method !== Request::METHOD_POST) {
       return;
     }
     if ($result->getImage() instanceof UploadedFile) {
