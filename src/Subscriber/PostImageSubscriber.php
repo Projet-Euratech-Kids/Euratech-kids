@@ -30,6 +30,7 @@ class PostImageSubscriber implements EventSubscriberInterface
     );
   }
 
+<<<<<<< HEAD
   function createImage(GenericEvent $event) {
     $result = $event->getSubject();
     $method = $event->getArgument('request')->getMethod();
@@ -40,6 +41,11 @@ class PostImageSubscriber implements EventSubscriberInterface
     if (( ! $result instanceof Gallery && ! $result instanceof Category) || $method !== Request::METHOD_POST) {
       return;
     }
+=======
+        if ((! $result instanceof Program && ! $result instanceof Workshop && ! $result instanceof Gallery && ! $result instanceof Category) || $method !== Request::METHOD_POST) {
+            return;
+        }
+>>>>>>> ed40e5f091c93102c45f30dd492269ce2cfc18bc
 
     if ($result->getImage() instanceof UploadedFile) {
       $url = $this->imagesService->saveToDisk($result->getImage());
@@ -51,6 +57,7 @@ class PostImageSubscriber implements EventSubscriberInterface
     $result = $event->getSubject();
     $method = $event->getArgument('request')->getMethod();
 
+<<<<<<< HEAD
 //    if ((! $result instanceof Program && ! $result instanceof Workshop && ! $result instanceof Gallery && ! $result instanceof Category) || $method !== Request::METHOD_POST) {
 //      return;
 //    }
@@ -60,6 +67,15 @@ class PostImageSubscriber implements EventSubscriberInterface
     if ($result->getImage() instanceof UploadedFile) {
       $url = $this->imagesService->saveToDisk($result->getImage());
       $result->setImage($url);
+=======
+        if ((! $result instanceof Program && ! $result instanceof Workshop && ! $result instanceof Gallery && ! $result instanceof Category) || $method !== Request::METHOD_POST) {
+            return;
+        }
+        if ($result->getImage() instanceof UploadedFile) {
+            $url = $this->imagesService->saveToDisk($result->getImage());
+            $result->setImage($url);
+        }
+>>>>>>> ed40e5f091c93102c45f30dd492269ce2cfc18bc
     }
   }
 }

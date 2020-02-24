@@ -226,6 +226,7 @@
                         <h3 class="text-center h2">Les programmes à venir </h3>
                         <section id="programmes" class="mt-5 row text-center justify-content-md-around">
                             {% for program in programs %}
+<<<<<<< HEAD
                                 {% if date().timestamp < program.startdate.timestamp %}
                                     <div class="card lg-3 col-md-5 mx-3 mb-5">
                                         <img class="card-img-top mt-4" src="{{ program.category.image }}"
@@ -245,24 +246,47 @@
                                                     {% if date().timestamp < program.startdate.timestamp %}
                                                         {% if program.places > program.kids|length %}
                                                             <button type="button" class="btn btn-eura" data-toggle="modal" data-target="#p{{ program.id }}">Réserver</button>
+=======
+                                {% if program.category.name != "Vacances" %}
+                                    {% if date().timestamp < program.startdate.timestamp %}
+                                        <div class="card lg-3 col-md-5 mx-3 mb-5">
+                                            <img class="card-img-top mt-4" src="{{ asset('img/20191022_153109.jpg') }}"
+                                                alt="card photos">
+                                            <h4>{{ program.category.name }}</h4>
+                                            <div class="card-body">
+                                                <p class="card-text">{{ program.description }}</p>
+                                                <i class="far fa-calendar-alt"></i>
+                                                {% if program.registration %}
+                                                    <p>Inscriptions à partir du {{ program.registration|date('d-m-Y') }}</p>
+                                                {% endif %}
+                                                <p>{{ program.startdate|date('d-m-Y') }}{% if program.enddate %} au {{ program.enddate|date('d-m-Y') }}{% endif %}</p>
+                                            </div>
+                                            <div class="card-footer">
+                                                {% if program.registration %}
+                                                    {% if date().timestamp >= program.registration.timestamp %}
+                                                        {% if date().timestamp < program.startdate.timestamp %}
+                                                            {% if program.places > program.kids|length %}
+                                                                <button type="button" class="btn btn-eura" data-toggle="modal" data-target="#p{{ program.id }}">Réserver</button>
+                                                            {% else %}
+                                                                <button type="button" class="btn btn-eura" disabled>Plus de places</button>
+                                                            {% endif %}
+>>>>>>> ed40e5f091c93102c45f30dd492269ce2cfc18bc
                                                         {% else %}
-                                                            <button type="button" class="btn btn-eura" disabled>Plus de places</button>
+                                                            <button type="button" class="btn btn-eura" disabled>Réservations terminées</button>
                                                         {% endif %}
                                                     {% else %}
-                                                        <button type="button" class="btn btn-eura" disabled>Réservations terminées</button>
+                                                        <button type="button" class="btn btn-eura" disabled>Réservations non ouvertes</button>
                                                     {% endif %}
                                                 {% else %}
-                                                    <button type="button" class="btn btn-eura" disabled>Réservations non ouvertes</button>
+                                                    {% if program.places > program.kids|length %}
+                                                        <button type="button" class="btn btn-eura" data-toggle="modal" data-target="#p{{ program.id }}">Réserver</button>
+                                                    {% else %}
+                                                        <button type="button" class="btn btn-eura" disabled>Plus de places</button>
+                                                    {% endif %}
                                                 {% endif %}
-                                            {% else %}
-                                                {% if program.places > program.kids|length %}
-                                                    <button type="button" class="btn btn-eura" data-toggle="modal" data-target="#p{{ program.id }}">Réserver</button>
-                                                {% else %}
-                                                    <button type="button" class="btn btn-eura" disabled>Plus de places</button>
-                                                {% endif %}
-                                            {% endif %}
+                                            </div>
                                         </div>
-                                    </div>
+                                    {% endif %}
                                 {% endif %}
                             {% endfor %}
                         </section>
@@ -283,7 +307,11 @@
                                             <div class="form-check text-left">
                                                 {% for kid in app.user.kids %}
                                                     {% if program not in kid.programs %}
+<<<<<<< HEAD
                                                     {% set age = ((date().timestamp - kid.birthday.timestamp)/31536000)|round(0,'floor')  %}
+=======
+                                                    {% set age = (date().timestamp - kid.birthday.timestamp)/31536000|round(0,'floor') %}
+>>>>>>> ed40e5f091c93102c45f30dd492269ce2cfc18bc
                                                         {% if age >= program.category.minAge %}
                                                             {% if age <= program.category.maxAge %}
                                                                 <p><a href="{{ path('booking', {p_id: program.id, k_id: kid.id}) }}">{{ kid.name }}</a></p>

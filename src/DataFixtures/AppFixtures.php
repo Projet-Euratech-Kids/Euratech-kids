@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
+use App\Entity\Gallery;
 use App\Entity\Kids;
 use App\Entity\Program;
 use App\Entity\User;
@@ -77,6 +78,7 @@ class AppFixtures extends Fixture
         $program->setEndDate($faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now', $timezone = 'Europe/Paris'));
         $program->setCategory($categories[rand(0,2)]);
         $program->setPlaces(rand(10,20));
+        $program->setImage('/uploads/images//5e4d47fa97973.jpeg');
         $manager->persist($program);
         $programs[] = $program;
       }
@@ -98,6 +100,14 @@ class AppFixtures extends Fixture
         $kids[] = $kid;
       }
 
+      $galleries = [];
+        for ($i = 1; $i <= 10; $i++) {
+            $gallery = new Gallery();
+            $gallery->setImage('/uploads/images//5e4d47fa97973.jpeg');
+            $gallery->setDescription('image '.$i);
+            $manager->persist($gallery);
+            $galleries[] = $gallery;
+        }
         $manager->flush();
     }
 }

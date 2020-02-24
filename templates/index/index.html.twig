@@ -215,7 +215,7 @@
                                 </div>
                                 <div class="modal-body text-left">
                                     <p>
-                                        <span class="text-eura font-weight-bold"Détail des cycles :</span> {{ workshop.article|raw }}
+                                        <span class="text-eura font-weight-bold">Détail des cycles :</span> {{ workshop.article|raw }}
                                     </p>
                                 </div>
                             </div>
@@ -232,8 +232,10 @@
     <section id="planning">
         <h3 class="text-center mt-5 mb-4 h2">Planning</h3>
         <!-- Timeline -->
-        <ul class="timeline mx-lg-5 mx-3">
+        
+        <ul class="timeline mx-lg-5 mx-3">    
             {% for program in programs %}
+<<<<<<< HEAD
                 {% if date().timestamp < program.startdate.timestamp %}
                     {% if((loop.index)%2 != 0) %}
                         <li>
@@ -263,6 +265,35 @@
                                                     </div>
                                                 </div>
                                             </div>
+=======
+            {% if program %}
+                 {% if date().timestamp < program.startdate.timestamp %}
+                {% if((loop.index)%2 != 0) %}
+            <li>
+                <div class="timeline-badge purple"><i class="fas fa-arrow-left"></i></div>
+                <div class="timeline-panel time-left" style="z-index: 5;">
+                    <div class="timeline-heading">
+                        {% if program.category.image %}
+                            <img class="card-img-top rounded mt-4" src="{{ program.category.image }}" alt="card photos">
+                        {% endif %}
+                    </div>
+                    <h4 class="timeline-title">{{ program.category.name }}</h4>
+                    <div class="timeline-body">
+                        <p>{{ program.description|raw }}</p>
+                        {% if program.important %}
+                            <div id="accordion">
+                                <div>
+                                    <div id="headingOne">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                Important
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <p>{{ program.important|raw }}</p>
+>>>>>>> ed40e5f091c93102c45f30dd492269ce2cfc18bc
                                         </div>
                                     {% endif %}
                                     <br />
@@ -289,6 +320,7 @@
                                     {% endif %}
                                 </div>
                             </div>
+<<<<<<< HEAD
                         </li>
                     {% endif %}
                     {% if((loop.index)%2 == 0) %}
@@ -319,6 +351,56 @@
                                                     </div>
                                                 </div>
                                             </div>
+=======
+                        {% endif %}
+                        <br />
+                        <!-- fin modal important -->
+                        <!--Les activités proposées au Learning District sont financées par la Ville de Lille c’est pourquoi elles sont réservées aux habitants de Lille, Lomme et Hellemmes.<br />
+                        Pour vous inscrire, nous vous demanderons donc un justificatif de domicile.Si vous habitez à Lille, Lomme ou Hellemmes, vous pouvez inscrire vos enfants et nous vous transférons les documents à remplir et à nous retourner.<br />
+                        Si toute les places ne sont pas réservées par des Lillois, Lommois et Hellemmois nous reviendrons vers ceux en aillant fait la demande par email.</p> -->
+                        <div class="date">
+                            {% if program.registration %}
+                            <p>Inscriptions à partir du {{ program.registration|date('d-m-Y') }}<br /></p>
+                            {% endif %}
+                            <p>{{ program.startdate|date('d-m-Y') }} {% if program.enddate %} au {{ program.enddate|date('d-m-Y') }}{% endif %}</p>
+                        </div><br>
+                        {% if program.category.name != "Vacances" %}
+                            {% if app.user %}
+                                <a href="{{ path('member',{'id': app.user.id}) }}"><button class="btn btn-outline-eura btn-lg mr-3 effect">Réserver ce cours</button></a>
+                            {% else %}
+                                <a data-toggle="modal" data-target="#connexion"><button class="btn btn-outline-eura btn-lg mr-3 effect">Réserver ce cours</button></a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
+            {% endif %}
+            {% if((loop.index)%2 == 0) %}
+            <li class="timeline-inverted right">
+                <div class="timeline-badge warning"><i class="fas fa-arrow-right arrow-right"></i></div>
+                <div class="timeline-panel time-right" style="z-index: 4;">
+                    <div class="timeline-heading">
+                        {% if program.category.image %}
+                            <img class="card-img-top rounded mt-4" src="{{ program.category.image }}" alt="card photos">
+                        {% endif %}
+                    </div>
+                    <div class="timeline-body">
+                        <h4 class="timeline-title">{{ program.category.name }}</h4>
+                        <p>{{ program.description|raw }}</p>
+                        {% if program.important %}
+                            <div id="accordion">
+                                <div>
+                                    <div id="headingOne">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                Important
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <p>{{ program.important|raw }}</p>
+>>>>>>> ed40e5f091c93102c45f30dd492269ce2cfc18bc
                                         </div>
                                     {% endif %}
                                     <br />
@@ -345,12 +427,39 @@
                                     {% endif %}
                                 </div>
                             </div>
+<<<<<<< HEAD
                         </li>
                     {% endif %}
                 {% endif %}
+=======
+                        {% endif %}
+                        <br />
+                        <div class="date">
+                            {% if program.registration %}
+                                <p>Inscriptions à partir du {{ program.registration|date('d-m-Y') }}<br /></p>
+                            {% endif %}
+                            <p>{{ program.startdate|date('d-m-Y') }} {% if program.enddate %} au {{ program.enddate|date('d-m-Y') }}{% endif %}</p>
+                        </div><br>
+                        {% if program.category.name != "Vacances" %}
+                            {% if app.user %}
+                                <a href="{{ path('member',{'id': app.user.id}) }}"><button class="btn btn-outline-eura btn-lg mr-3 effect">Réserver ce cours</button></a>
+                            {% else %}
+                                <a data-toggle="modal" data-target="#connexion"><button class="btn btn-outline-eura btn-lg mr-3 effect">Réserver ce cours</button></a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
+            {% endif %} 
+            {% endif %}
+                    {% else %}
+            <p>rien</p>
+        {% endif %}
+>>>>>>> ed40e5f091c93102c45f30dd492269ce2cfc18bc
             {% endfor %}
         </ul>
-        <!-- Timeline -->
+
+        <!-- Timeline --> 
     </section>
 
     <!-- Image de séparation -->
@@ -400,11 +509,19 @@
                 {% for img in gallery %}
                     {% if (loop.index) == 1 %}
                         <div class="carousel-item active">
+<<<<<<< HEAD
                             <img src="{{ img.image }}" class="rounded" alt="#">
                         </div>
                     {% else %}
                         <div class="carousel-item">
                             <img src="{{ img.image }}" class="rounded" alt="#">
+=======
+                            <img src="{{ img.image }}" class="rounded w-100" alt="#">
+                        </div>
+                    {% else %}
+                        <div class="carousel-item">
+                            <img src="{{ img.image }}" class="rounded w-100" alt="#">
+>>>>>>> ed40e5f091c93102c45f30dd492269ce2cfc18bc
                         </div>
                     {% endif %}
                 {% endfor %}

@@ -461,11 +461,11 @@ h2:after{
 
 
 /* section 6 galerie d'image */
-#galery img {
+#gallery img {
     width: 100%;
     transition: .5s;
 }
-#galery img:hover{
+#gallery img:hover{
     transform: scale(1.1);
 }
 
