@@ -14,7 +14,7 @@ class AddKidsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, ['label' => 'Prénom'])
+            ->add('name', TextType::class, ['label' => 'Prenom'])
             ->add('birthday',DateType::class, [
               'label' => 'Date de naissance',
               'format' => 'dd-MM-yyyy',
