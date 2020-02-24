@@ -233,7 +233,7 @@
                                                 alt="card photos">
                                             <h4>{{ program.category.name }}</h4>
                                             <div class="card-body">
-                                                <p class="card-text">{{ program.description }}</p>
+                                                <p class="card-text">{{ program.description|raw }}</p>
                                                 <i class="far fa-calendar-alt"></i>
                                                 {% if program.registration %}
                                                     <p>Inscriptions à partir du {{ program.registration|date('d-m-Y') }}</p>
